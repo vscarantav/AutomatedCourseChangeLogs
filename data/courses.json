@@ -1,0 +1,9 @@
+{
+  "courses": [
+    {
+      "id": "12345",
+      "name": "Example Course",
+      "url": "https://byui.instructure.com/courses/12345"
+    }
+  ]
+}

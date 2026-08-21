@@ -1,0 +1,6 @@
+.env
+data/state.json
+exports/
+reports/
+__pycache__/
+*.pyc
