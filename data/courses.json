@@ -1,9 +1,1005 @@
 {
   "courses": [
     {
-      "id": "12345",
-      "name": "Example Course",
-      "url": "https://byui.instructure.com/courses/12345"
+      "course_code": "ACCTG180",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/21537",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "ACCTG180-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "ART125",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/376",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "ART130",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/380",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "ART230",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/519",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "ART235",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/526",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "BUS105",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/309",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS105-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS115",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/348",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS115-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS116",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/301",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "BUS117",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/307",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "BUS118",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/313",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "BUS119",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/317",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "BUS129",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/316",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "BUS180",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/311",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS180-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS240",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/318",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "BUS301",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/355",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS301-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS321",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/356",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS321-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS374",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/549",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS374-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS375",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/388",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS375-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS380",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/366",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS380-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS410",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/513",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "BUS410-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "CHILD210",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/330",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "CHILD400",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/4370",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "COMM150",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/373",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "COMM150-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "CSE110",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/295",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE110-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE111",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/290",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE111-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE210",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/291",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE210-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE212",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/315",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE212-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE270",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/4378",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE270-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE300",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/325",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE300-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE310",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/310",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE310-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE325",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/344",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE325-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE340",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/345",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE340-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE341",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/293",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE341-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE370",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/319",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE370-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE499",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/516",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "CSE499-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "ECON100",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/383",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "ECON100-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "FAML100",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/335",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FAML160",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/324",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FAML300",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/329",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FAML320/220",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/305",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FAML360",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/322",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FAML400",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/530",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FAML420",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/389",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FAML445",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/520",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FAML460",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/390",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FCS160",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/359",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "FCS160-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "FCS340",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/384",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "FHGEN101",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN120",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/320",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN130",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/306",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN241",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/336",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN242",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/323",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN340",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/574",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN350",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN352",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/331",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN411",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/577",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FHGEN499R",
+      "language": "English",
+      "course_designer": "Adam L.",
+      "course_url": "https://byupw.instructure.com/courses/578",
+      "designer_email": "lloyda@byui.edu"
+    },
+    {
+      "course_code": "FIN300",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/391",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "FIN300-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "FIN301",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/360",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "FIN301-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "GE103",
+      "language": "English",
+      "course_designer": "Adriana A.",
+      "course_url": "https://byupw.instructure.com/courses/377",
+      "designer_email": "albaa@byui.edu"
+    },
+    {
+      "course_code": "GESCI110",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/363",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "GESCI110-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "GS170",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/381",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "GS170-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "GS497",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/392",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "HUM110",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/350",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "HUM110-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "ITM111",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/369",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "ITM111-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "MATH108X",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/354",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "MATH108X-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "MATH124",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/393",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "MKT120",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/385",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "MKT120-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "MKT351",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/589",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "MKT351-PT",
+      "language": "Portuguese",
+      "course_designer": "Adam V.",
+      "course_url": "",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "NURS105",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/292",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "OSH310",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/294",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PEACE101",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/367",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "PEACE101-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "PSYCH111",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/522",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "PUBH105",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH132",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/364",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "PUBH132-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "PUBH220",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH250",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH370",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/333",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH381",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/308",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH390",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/304",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH391",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/386",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH399",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/371",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH401",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/368",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH420",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/365",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH440",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/378",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH460",
+      "language": "English",
+      "course_designer": "Heidi E.",
+      "course_url": "https://byupw.instructure.com/courses/523",
+      "designer_email": "eganh@byui.edu"
+    },
+    {
+      "course_code": "PUBH472",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/374",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "PUBH480",
+      "language": "English",
+      "course_designer": "Adam V.",
+      "course_url": "https://byupw.instructure.com/courses/510",
+      "designer_email": "vorderstrassea@byui.edu"
+    },
+    {
+      "course_code": "SCM361",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/514",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "SCM361-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "TESOL101",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/314",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "TESOL102",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/334",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "TESOL103",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/338",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "TESOL104",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/598",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "TESOL105",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/599",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD130",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/351",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD130-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD131",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/382",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD131-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD231",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/387",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD231-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD330",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/357",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD330-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD430",
+      "language": "English",
+      "course_designer": "Jen H.",
+      "course_url": "https://byupw.instructure.com/courses/515",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WDD430-PT",
+      "language": "Portuguese",
+      "course_designer": "Jen H.",
+      "course_url": "",
+      "designer_email": "hunterj@byui.edu"
+    },
+    {
+      "course_code": "WRIT101",
+      "language": "English",
+      "course_designer": "Ashley S.",
+      "course_url": "https://byupw.instructure.com/courses/379",
+      "designer_email": "smithas@byui.edu"
+    },
+    {
+      "course_code": "WRIT101-PT",
+      "language": "Portuguese",
+      "course_designer": "Ashley S.",
+      "course_url": "",
+      "designer_email": "smithas@byui.edu"
     }
   ]
 }

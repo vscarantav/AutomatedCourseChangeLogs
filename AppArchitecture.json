@@ -36,7 +36,7 @@
       {
         "name": "Email Notifier (emailer.py)",
         "role": "Worker",
-        "description": "Reads the generated HTML report and emails it as an attachment to the configured list of shareholders using SMTP or an email API, providing a summary in the email body."
+        "description": "Zips the generated personalized HTML reports and emails them as attachments directly to the respective course designers using SMTP. Includes support for a TEST_EMAIL override."
       },
       {
         "name": "Task Scheduler Setup (scheduler_setup.ps1)",
@@ -68,7 +68,7 @@
     "trigger": "Executes on Windows Logon. The main script includes wrapper logic that ensures the heavy lifting only runs if it hasn't run successfully yet for the current calendar week.",
     "processing": "Iterates through all courses sequentially, downloading and unzipping their IMSCC.",
     "comparison": "Finds the immediate previous export folder for each course. If none exists, treats all files as 'new'. Otherwise, runs a recursive directory diff.",
-    "reporting": "Consolidates all course diffs into a single interactive HTML document with collapsible tabs, semantic labeling, and rich rendering of additions/deletions.",
-    "delivery": "Sends the HTML document as an email attachment (to bypass email client JS restrictions) to the shareholder list."
+    "reporting": "Consolidates all course diffs into interactive HTML documents. Generates a Master report and personalized, pre-filtered HTML reports for each unique Course Designer.",
+    "delivery": "Zips the personalized HTML documents and sends them as email attachments directly to the course designers, with an optional TEST_EMAIL override for safe testing."
   }
 }

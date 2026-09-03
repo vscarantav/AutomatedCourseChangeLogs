@@ -7,9 +7,10 @@ def load_config(root_dir: str):
     load_dotenv(os.path.join(root_dir, '.env'))
     
     config = {
-        "outlook_email": os.getenv("OUTLOOK_EMAIL"),
-        "outlook_password": os.getenv("OUTLOOK_PASSWORD"),
+        "smtp_email": os.getenv("SMTP_EMAIL", os.getenv("OUTLOOK_EMAIL")),
+        "smtp_password": os.getenv("SMTP_PASSWORD", os.getenv("OUTLOOK_PASSWORD")),
         "shareholders_emails": [e.strip() for e in os.getenv("SHAREHOLDERS_EMAILS", "").split(",") if e.strip()],
+        "test_email": os.getenv("TEST_EMAIL"),
         "courses": []
     }
     

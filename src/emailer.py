@@ -2,13 +2,18 @@ import smtplib
 from email.message import EmailMessage
 import os
 
-def send_report(subject: str, html_content: str, report_path: str, config: dict):
+def send_report(subject: str, html_content: str, report_path: str, config: dict, recipient_email: str = None):
     """
-    Sends the HTML report via Outlook SMTP as an attachment, with a brief summary in the body.
+    Sends the HTML report via SMTP as an attachment, with a brief summary in the body.
     """
-    sender_email = config.get("outlook_email")
-    sender_password = config.get("outlook_password")
-    recipients = config.get("shareholders_emails")
+    sender_email = config.get("smtp_email")
+    sender_password = config.get("smtp_password")
+    
+    # If a specific recipient is provided, use it. Otherwise, fallback to the list of shareholders
+    if recipient_email:
+        recipients = [recipient_email]
+    else:
+        recipients = config.get("shareholders_emails", [])
     
     if not sender_email or not sender_password or not recipients:
         print("Email configuration is incomplete. Skipping email notification.")
@@ -19,19 +24,31 @@ def send_report(subject: str, html_content: str, report_path: str, config: dict)
     msg['From'] = sender_email
     msg['To'] = ", ".join(recipients)
     
-    body = f"Hello,\n\nThe Canvas course change logs for the week are attached. Please download and open the attached HTML file in your web browser to view the interactive dashboard and detailed diffs.\n\nBest,\nAutomated Course Change Logs Bot"
+    body = f"Hello,\n\nThe Canvas course change logs for the week are attached. Please download and open the attached HTML file in your web browser to view the interactive dashboard and detailed diffs.\n\nBest,\nVinicius Tavares"
     msg.set_content(body)
     
-    # Attach the HTML file
+    # Zip and attach the HTML file to bypass strict enterprise email filters
     if os.path.exists(report_path):
-        with open(report_path, 'rb') as f:
+        import zipfile
+        zip_path = report_path.replace('.html', '.zip')
+        
+        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            zipf.write(report_path, os.path.basename(report_path))
+            
+        with open(zip_path, 'rb') as f:
             file_data = f.read()
-            msg.add_attachment(file_data, maintype='text', subtype='html', filename=os.path.basename(report_path))
+            msg.add_attachment(file_data, maintype='application', subtype='zip', filename=os.path.basename(zip_path))
+            
+        # Clean up the zip file after reading
+        try:
+            os.remove(zip_path)
+        except Exception:
+            pass
     
     print(f"Sending email to {recipients}...")
     try:
-        # Outlook SMTP settings
-        with smtplib.SMTP('smtp-mail.outlook.com', 587) as server:
+        # Gmail SMTP settings
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
             server.starttls()
             server.login(sender_email, sender_password)
             server.send_message(msg)

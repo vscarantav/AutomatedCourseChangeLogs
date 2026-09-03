@@ -4,3 +4,5 @@ exports/
 reports/
 __pycache__/
 *.pyc
+
+all_course_history/
