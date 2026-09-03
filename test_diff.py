@@ -28,7 +28,7 @@ def run_test():
         return
     
     print("\nGenerating Diff Data...")
-    course_data = generate_diff_data(old_extract_dir, new_extract_dir, "Test Course (12345)")
+    course_data = generate_diff_data(old_extract_dir, new_extract_dir, "Writing in Professional Contexts (English Master)")
     
     print("Generating HTML Report...")
     # Generate HTML report

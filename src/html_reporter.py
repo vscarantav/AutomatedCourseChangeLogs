@@ -37,6 +37,17 @@ def generate_html_report(year_week: str, courses_data: list):
     logs_html = ""
     for c in courses_data:
         logs_html += f"<div class='course-section'><h2>{c['course_name']}</h2>"
+        
+        streak = c.get("zero_changes_streak", 0)
+        if streak >= 5:
+            logs_html += f"""
+            <div style="background: rgba(255, 152, 0, 0.1); border-left: 4px solid #ff9800; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px;">
+                <strong style="color: #ff9800;">⚠️ Maintenance Recommendation:</strong> This course has had zero changes for {streak} consecutive weeks. Designers are recommended to check standard pages and resources to ensure course material is being actively maintained.
+            </div>
+            """
+        elif streak > 0:
+            logs_html += f"<p style='color: var(--text-muted); font-size: 0.9rem; margin-top: -10px;'><em>No changes for {streak} consecutive weeks.</em></p>"
+
         if c.get("is_new"):
             logs_html += "<p><em>No previous export found. All files considered new.</em></p></div>"
             continue
@@ -75,8 +86,12 @@ def generate_html_report(year_week: str, courses_data: list):
                     </div>
                 """
                 if item["diff_lines"]:
+                    ai_html = ""
+                    if item.get("ai_summary"):
+                        ai_html = f"<div class='ai-summary' style='background: rgba(187, 134, 252, 0.1); border-left: 3px solid var(--accent); padding: 0.8rem; margin-top: 0.5rem; font-size: 0.9rem; border-radius: 4px;'><strong>AI Summary:</strong> {item['ai_summary']}</div>"
+                    
                     # Default to display: none for a compact list
-                    logs_html += "<div class='diff-views-container' style='display: none; padding-top: 1rem;'>"
+                    logs_html += f"<div class='diff-views-container' style='display: none; padding-top: 1rem;'>{ai_html}"
                     
                     # Rendered View
                     logs_html += "<div class='rendered-diff'>"

@@ -73,7 +73,7 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
         
     dcmp = filecmp.dircmp(old_dir, new_dir)
     
-    def add_change(file_path, status, diff_lines=None, labels=None):
+    def add_change(file_path, status, diff_lines=None, labels=None, ai_summary=""):
         normalized = file_path.replace('\\', '/')
         
         category = "other"
@@ -99,7 +99,8 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
             "file_path": file_path,
             "status": status,
             "labels": labels or [],
-            "diff_lines": diff_lines or []
+            "diff_lines": diff_lines or [],
+            "ai_summary": ai_summary
         })
         data["has_changes"] = True
             
@@ -158,6 +159,11 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
                         continue
                         
                     labels = get_semantic_labels(diff)
+                    
+                    from ai_summarizer import summarize_change
+                    page_content = "\n".join(lines2)
+                    ai_summary = summarize_change(page_content, diff, name)
+                    
                     # Trim extremely long diffs for display
                     if len(diff) > 30:
                         diff_lines = diff[:30]
@@ -168,12 +174,42 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
                 except Exception:
                     pass
             
-            add_change(file_path, status, diff_lines, labels)
+            add_change(file_path, status, diff_lines, labels, ai_summary=locals().get('ai_summary', ''))
                 
         for sub_dir, sub_cmp in cmp_obj.subdirs.items():
             process_dircmp(sub_cmp, os.path.join(current_path, sub_dir))
 
     process_dircmp(dcmp)
+    
+    # State tracking
+    export_base = os.path.dirname(os.path.dirname(new_dir))
+    state_file = os.path.join(export_base, 'state.json')
+    
+    zero_changes_streak = 0
+    if os.path.exists(state_file):
+        try:
+            import json
+            with open(state_file, 'r') as f:
+                state = json.load(f)
+                zero_changes_streak = state.get('zero_changes_streak', 0)
+        except Exception:
+            pass
+            
+    if data["has_changes"]:
+        zero_changes_streak = 0
+    else:
+        if not data["is_new"]:
+            zero_changes_streak += 1
+            
+    data["zero_changes_streak"] = zero_changes_streak
+    
+    try:
+        import json
+        with open(state_file, 'w') as f:
+            json.dump({'zero_changes_streak': zero_changes_streak}, f)
+    except Exception:
+        pass
+        
     return data
 
 def generate_diff(old_dir: str, new_dir: str, course_id: str):

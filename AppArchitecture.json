@@ -53,13 +53,15 @@
     }
   },
   "agentInstructions": [
-    "Do not use any AI integrations for text generation or analysis. Use pure algorithmic diffs.",
+    "Integrate the Gemini API to analyze the full page context alongside the raw diff to generate human-readable descriptions of the changes.",
     "Ensure strict modularity. Each worker must have clear input and output interfaces and should not depend tightly on other workers.",
     "Use robust error handling for the web scraping module, as Canvas UI might be slow or change slightly.",
     "The IMSCC (which is a ZIP format) extraction should handle large files safely.",
     "The diff generation should compare file hashes and structures. For text-based files (XML/HTML), generate line-by-line diffs if modified.",
     "The diff generation should categorize changes by Canvas component (Pages, Quizzes, Assignments) and append semantic labels (e.g., [Content Change], [Grading Rule], [Date/Restriction]) based on keywords in the diff lines for future data analysis.",
-    "All configuration (URLs, emails, credentials) must be read from environment variables or a secure local configuration file."
+    "The system must track the consecutive number of weeks a course has had zero changes via persistent state.",
+    "If a course has had zero changes for 5 or more consecutive weeks, the HTML report must display a prominent recommendation for the designer to check standard pages/resources to help maintain the course.",
+    "All configuration (URLs, emails, credentials, API keys) must be read from environment variables or a secure local configuration file."
   ],
   "expectedBehaviors": {
     "trigger": "Executes on Windows Logon. The main script includes wrapper logic that ensures the heavy lifting only runs if it hasn't run successfully yet for the current calendar week.",
