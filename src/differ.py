@@ -133,7 +133,22 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
                         lineterm=''
                     ))
                     
+                    def is_diff_meaningful(d_lines, f_name):
+                        if f_name.endswith('imsmanifest.xml'):
+                            for line in d_lines:
+                                if line.startswith('+') or line.startswith('-'):
+                                    if line.startswith('+++') or line.startswith('---'):
+                                        continue
+                                    text = line[1:].strip()
+                                    if not re.match(r'^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?$', text):
+                                        return True
+                            return False
+                        return True
+                    
                     if diff:
+                        if not is_diff_meaningful(diff, name):
+                            continue
+                            
                         labels = get_semantic_labels(diff)
                         # Trim extremely long diffs for display
                         if len(diff) > 30:
