@@ -1,9 +1,10 @@
 import smtplib
 from email.message import EmailMessage
+import os
 
-def send_report(subject: str, markdown_content: str, config: dict):
+def send_report(subject: str, html_content: str, report_path: str, config: dict):
     """
-    Sends the markdown report via Outlook SMTP.
+    Sends the HTML report via Outlook SMTP as an attachment, with a brief summary in the body.
     """
     sender_email = config.get("outlook_email")
     sender_password = config.get("outlook_password")
@@ -18,8 +19,14 @@ def send_report(subject: str, markdown_content: str, config: dict):
     msg['From'] = sender_email
     msg['To'] = ", ".join(recipients)
     
-    # Simple plain text email, though markdown is quite readable
-    msg.set_content(markdown_content)
+    body = f"Hello,\n\nThe Canvas course change logs for the week are attached. Please download and open the attached HTML file in your web browser to view the interactive dashboard and detailed diffs.\n\nBest,\nAutomated Course Change Logs Bot"
+    msg.set_content(body)
+    
+    # Attach the HTML file
+    if os.path.exists(report_path):
+        with open(report_path, 'rb') as f:
+            file_data = f.read()
+            msg.add_attachment(file_data, maintype='text', subtype='html', filename=os.path.basename(report_path))
     
     print(f"Sending email to {recipients}...")
     try:

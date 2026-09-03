@@ -1,6 +1,7 @@
 import os
 import filecmp
 import difflib
+import re
 from bs4 import BeautifulSoup
 
 def _get_xml_text_content(file_path):
@@ -8,61 +9,114 @@ def _get_xml_text_content(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             soup = BeautifulSoup(f.read(), 'lxml-xml' if file_path.endswith('.xml') else 'html.parser')
-            # Extract meaningful text, ignoring scripts and styles which might contain noisy auto-generated data
             for script in soup(["script", "style"]):
                 script.extract()
-            # Get text and split into lines
             return soup.get_text(separator='\n').splitlines()
     except Exception:
-        # Fallback to reading lines directly if parsing fails
         with open(file_path, 'r', encoding='utf-8') as f:
             return f.readlines()
 
-def generate_diff(old_dir: str, new_dir: str, course_id: str):
-    """
-    Compares two directories recursively and returns a markdown string of the differences.
-    Prioritizes wiki_content (Pages) and course_settings.
-    """
-    if not old_dir or not os.path.exists(old_dir):
-        return f"## Course {course_id}\n\n*No previous export found. All files are considered new.*\n"
-        
-    md_lines = [f"## Course {course_id}\n"]
+def get_semantic_labels(diff_lines):
+    """Parses diff lines to assign semantic labels."""
+    labels = set()
+    for line in diff_lines:
+        if line.startswith('+') or line.startswith('-'):
+            if line.startswith('+++') or line.startswith('---'):
+                continue
+            text = line[1:].lower()
+            
+            # Content Change
+            if re.search(r'<[p|span|div|a|h\d][^>]*>|&[a-z]+;', text) or (re.search(r'\w{4,}', text) and not re.search(r'^\s*[{}"\',:_-]+\s*$', text) and 'require_lockdown_browser' not in text):
+                labels.add("Content Change")
+            
+            # Grading Rule
+            if 'points_possible' in text or 'grading_type' in text or 'rubric' in text or 'weight' in text:
+                labels.add("Grading Rule")
+                
+            # Date/Restriction
+            if 'due_at' in text or 'unlock_at' in text or 'lock_at' in text or 'require_lockdown_browser' in text:
+                labels.add("Date/Restriction")
+                
+            # Metadata/System
+            if 'last_modified' in text or 'id="' in text or 'identifier="' in text:
+                labels.add("Metadata/System")
+                
+    if not labels:
+        labels.add("Metadata/System")
     
-    dcmp = filecmp.dircmp(old_dir, new_dir)
-    
-    changes = {
-        "wiki_content": [],
-        "course_settings": [],
-        "other": []
+    return sorted(list(labels))
+
+def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
+    """
+    Compares two directories recursively and returns a structured dictionary of differences.
+    """
+    data = {
+        "course_name": course_id,
+        "is_new": False,
+        "has_changes": False,
+        "categories": {
+            "manifest": [],
+            "assignments": [],
+            "pages": [],
+            "quizzes_banks": [],
+            "course_settings": [],
+            "rubrics": [],
+            "discussions": [],
+            "files_media": [],
+            "other": []
+        }
     }
     
-    def add_change(file_path, change_text):
-        # Normalize path separators for checking
+    if not old_dir or not os.path.exists(old_dir):
+        data["is_new"] = True
+        return data
+        
+    dcmp = filecmp.dircmp(old_dir, new_dir)
+    
+    def add_change(file_path, status, diff_lines=None, labels=None):
         normalized = file_path.replace('\\', '/')
-        if "wiki_content" in normalized:
-            changes["wiki_content"].append(change_text)
+        
+        category = "other"
+        if normalized == "imsmanifest.xml":
+            category = "manifest"
+        elif "wiki_content" in normalized:
+            category = "pages"
+        elif "non_cc_assessments" in normalized or normalized.endswith("assessment_meta.xml") or normalized.endswith("assessment_qti.xml"):
+            category = "quizzes_banks"
+        elif normalized == "course_settings/rubrics.xml":
+            category = "rubrics"
         elif "course_settings" in normalized:
-            changes["course_settings"].append(change_text)
+            category = "course_settings"
+        elif "discussion_topics" in normalized:
+            category = "discussions"
+        elif "web_resources" in normalized:
+            category = "files_media"
         else:
-            changes["other"].append(change_text)
+            if re.match(r'^[a-f0-9]{32}', normalized) or "assignment" in normalized:
+                category = "assignments"
+                
+        data["categories"][category].append({
+            "file_path": file_path,
+            "status": status,
+            "labels": labels or [],
+            "diff_lines": diff_lines or []
+        })
+        data["has_changes"] = True
             
     def process_dircmp(cmp_obj, current_path=""):
-        # Files only in new
         for name in cmp_obj.right_only:
-            file_path = os.path.join(current_path, name)
-            add_change(file_path, f"- **Added**: `{file_path}`")
+            add_change(os.path.join(current_path, name), "Added")
             
-        # Files only in old
         for name in cmp_obj.left_only:
-            file_path = os.path.join(current_path, name)
-            add_change(file_path, f"- **Deleted**: `{file_path}`")
+            add_change(os.path.join(current_path, name), "Deleted")
             
-        # Files changed
         for name in cmp_obj.diff_files:
             file_path = os.path.join(current_path, name)
+            diff_lines = []
+            labels = []
+            status = "Modified (Binary/Metadata)"
             
-            diff_text = []
-            if name.endswith(('.xml', '.html', '.txt')):
+            if name.endswith(('.xml', '.html', '.txt', '.qti')):
                 old_file = os.path.join(cmp_obj.left, name)
                 new_file = os.path.join(cmp_obj.right, name)
                 
@@ -80,49 +134,63 @@ def generate_diff(old_dir: str, new_dir: str, course_id: str):
                     ))
                     
                     if diff:
-                        diff_text.append(f"- **Modified**: `{file_path}`")
-                        diff_text.append("  ```diff")
-                        for line in diff[:30]:
-                            diff_text.append("  " + line)
+                        labels = get_semantic_labels(diff)
+                        # Trim extremely long diffs for display
                         if len(diff) > 30:
-                            diff_text.append("  ... (diff truncated)")
-                        diff_text.append("  ```")
+                            diff_lines = diff[:30]
+                            diff_lines.append("... (diff truncated)")
+                        else:
+                            diff_lines = diff
+                        status = "Modified"
                 except Exception:
                     pass
             
-            if diff_text:
-                add_change(file_path, "\n".join(diff_text))
-            else:
-                # Binary or noisy file change with no meaningful text content change
-                add_change(file_path, f"- **Modified (Binary/Metadata)**: `{file_path}`")
+            add_change(file_path, status, diff_lines, labels)
                 
-        # Recursively process subdirectories
         for sub_dir, sub_cmp in cmp_obj.subdirs.items():
             process_dircmp(sub_cmp, os.path.join(current_path, sub_dir))
 
     process_dircmp(dcmp)
+    return data
+
+def generate_diff(old_dir: str, new_dir: str, course_id: str):
+    """
+    Legacy wrapper for markdown output. Not used if using HTML reporter, 
+    but kept for backwards compatibility.
+    """
+    data = generate_diff_data(old_dir, new_dir, course_id)
+    if data["is_new"]:
+        return f"## Course {course_id}\n\n*No previous export found. All files are considered new.*\n"
+        
+    md_lines = [f"## Course {course_id}\n"]
     
-    has_changes = False
+    category_titles = {
+        "manifest": "Manifest (Modules)",
+        "assignments": "Assignments",
+        "pages": "Pages",
+        "quizzes_banks": "Quizzes & Question Banks",
+        "course_settings": "Course Settings",
+        "rubrics": "Rubrics",
+        "discussions": "Discussions",
+        "files_media": "Files & Media",
+        "other": "Other Files"
+    }
     
-    if changes["wiki_content"]:
-        md_lines.append("### Pages (wiki_content)")
-        md_lines.extend(changes["wiki_content"])
-        md_lines.append("")
-        has_changes = True
+    for key, title in category_titles.items():
+        items = data["categories"][key]
+        if items:
+            md_lines.append(f"### {title}")
+            for item in items:
+                labels_str = f" **[{']['.join(item['labels'])}]**" if item['labels'] else ""
+                md_lines.append(f"- **{item['status']}**: `{item['file_path']}`{labels_str}")
+                if item['diff_lines']:
+                    md_lines.append("  ```diff")
+                    for line in item['diff_lines']:
+                        md_lines.append("  " + line)
+                    md_lines.append("  ```")
+            md_lines.append("")
         
-    if changes["course_settings"]:
-        md_lines.append("### Course Settings")
-        md_lines.extend(changes["course_settings"])
-        md_lines.append("")
-        has_changes = True
-        
-    if changes["other"]:
-        md_lines.append("### Other Files")
-        md_lines.extend(changes["other"])
-        md_lines.append("")
-        has_changes = True
-        
-    if not has_changes:
+    if not data["has_changes"]:
         md_lines.append("*No meaningful content changes detected this week.*\n")
         
     return "\n".join(md_lines)

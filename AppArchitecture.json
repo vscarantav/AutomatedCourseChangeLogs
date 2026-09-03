@@ -1,6 +1,6 @@
 {
   "projectName": "Automated Course Change Logs",
-  "description": "An automated system to track weekly changes in Canvas courses by downloading IMSCC exports, comparing them against previous versions, and emailing a markdown diff report to stakeholders.",
+  "description": "An automated system to track weekly changes in Canvas courses by downloading IMSCC exports, comparing them against previous versions, and emailing an interactive HTML diff report to stakeholders.",
   "appArchitecture": {
     "modules": [
       {
@@ -26,12 +26,17 @@
       {
         "name": "Diff Generator (differ.py)",
         "role": "Worker",
-        "description": "Compares the current week's extracted files against the previous week's files. Generates a formatted markdown report highlighting additions, deletions, and modifications."
+        "description": "Compares the current week's extracted files against the previous week's files. Generates a structured dictionary containing categorized diffs (Assignments, Pages, Settings, etc.) and semantic tags (Content Changes, Grading Rules, Dates)."
+      },
+      {
+        "name": "HTML Reporter (html_reporter.py)",
+        "role": "Worker",
+        "description": "Consumes the data from differ.py to generate a beautiful, interactive HTML presentation. Includes a Dashboard tab and a Raw Logs tab. The logs feature collapsible categories and individual files, with a toggle to switch between a rich Canvas-like rendered view and a raw code diff view."
       },
       {
         "name": "Email Notifier (emailer.py)",
         "role": "Worker",
-        "description": "Reads the generated markdown diff and emails it to the configured list of shareholders using SMTP or an email API."
+        "description": "Reads the generated HTML report and emails it as an attachment to the configured list of shareholders using SMTP or an email API, providing a summary in the email body."
       },
       {
         "name": "Task Scheduler Setup (scheduler_setup.ps1)",
@@ -53,13 +58,14 @@
     "Use robust error handling for the web scraping module, as Canvas UI might be slow or change slightly.",
     "The IMSCC (which is a ZIP format) extraction should handle large files safely.",
     "The diff generation should compare file hashes and structures. For text-based files (XML/HTML), generate line-by-line diffs if modified.",
+    "The diff generation should categorize changes by Canvas component (Pages, Quizzes, Assignments) and append semantic labels (e.g., [Content Change], [Grading Rule], [Date/Restriction]) based on keywords in the diff lines for future data analysis.",
     "All configuration (URLs, emails, credentials) must be read from environment variables or a secure local configuration file."
   ],
   "expectedBehaviors": {
     "trigger": "Executes on Windows Logon. The main script includes wrapper logic that ensures the heavy lifting only runs if it hasn't run successfully yet for the current calendar week.",
     "processing": "Iterates through all courses sequentially, downloading and unzipping their IMSCC.",
     "comparison": "Finds the immediate previous export folder for each course. If none exists, treats all files as 'new'. Otherwise, runs a recursive directory diff.",
-    "reporting": "Consolidates all course diffs into a single Markdown document.",
-    "delivery": "Sends the markdown document (and optionally renders it to HTML for the email body) to the shareholder list."
+    "reporting": "Consolidates all course diffs into a single interactive HTML document with collapsible tabs, semantic labeling, and rich rendering of additions/deletions.",
+    "delivery": "Sends the HTML document as an email attachment (to bypass email client JS restrictions) to the shareholder list."
   }
 }
