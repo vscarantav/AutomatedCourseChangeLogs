@@ -62,7 +62,7 @@ def generate_html_report(year_week: str, courses_data: list):
                 continue
                 
             logs_html += f"""
-            <div class="accordion">
+            <div class="accordion" data-category="{cat_key}">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <span>{cat_title} ({len(items)} changes)</span>
                     <span class="icon">▼</span>
@@ -166,8 +166,9 @@ def generate_html_report(year_week: str, courses_data: list):
     .metric-label { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
     
     .category-stats { background: var(--surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); }
-    .cat-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
-    .cat-row:last-child { border: none; }
+    .cat-row { display: flex; justify-content: space-between; padding: 0.8rem 0.5rem; border-bottom: 1px solid var(--border); border-radius: 4px; }
+    .cat-row:last-child { border-bottom: none; }
+    .cat-row:hover { background: rgba(255, 255, 255, 0.05); }
     
     /* Logs */
     .course-section { margin-bottom: 3rem; }
@@ -234,6 +235,21 @@ def generate_html_report(year_week: str, courses_data: list):
             if (icon) icon.textContent = '▲';
         }
     }
+    function openCategory(catKey) {
+        switchTab('logs');
+        document.querySelectorAll('.accordion').forEach(acc => {
+            const content = acc.querySelector('.accordion-content');
+            const icon = acc.querySelector('.icon');
+            if (acc.getAttribute('data-category') === catKey) {
+                content.style.display = 'block';
+                if(icon) icon.textContent = '▲';
+            } else {
+                content.style.display = 'none';
+                if(icon) icon.textContent = '▼';
+            }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     """
     
     # Dashboard HTML
@@ -253,13 +269,7 @@ def generate_html_report(year_week: str, courses_data: list):
         </div>
     </div>
     
-    <h2>Changes by Category</h2>
-    <div class="category-stats">
     """
-    for k, title in category_titles.items():
-        val = total_changes_by_category.get(k, 0)
-        dashboard_html += f"<div class='cat-row'><span>{title}</span><strong>{val}</strong></div>"
-    dashboard_html += "</div>"
     
     # Course Insights Section
     insights_html = ""
@@ -277,7 +287,16 @@ def generate_html_report(year_week: str, courses_data: list):
             """
             
     if insights_html:
-        dashboard_html += "<h2 style='margin-top: 3rem;'>Course Insights</h2>" + insights_html
+        dashboard_html += "<h2>Course Insights</h2>" + insights_html
+
+    dashboard_html += """
+    <h2 style='margin-top: 3rem;'>Changes by Category</h2>
+    <div class="category-stats">
+    """
+    for k, title in category_titles.items():
+        val = total_changes_by_category.get(k, 0)
+        dashboard_html += f"<div class='cat-row' onclick=\"openCategory('{k}')\" style=\"cursor: pointer;\"><span>{title}</span><strong>{val}</strong></div>"
+    dashboard_html += "</div>"
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
