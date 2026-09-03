@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="gbbfbce9fd04cb3b3b72bdf69616e4eb4" title="W04 Quiz: Knowledge Check">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>2</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+      <section ident="g8a882b35bf225df881c82cf035a46dcd" title="W04 Level 1">
+        <selection_ordering>
+          <selection>
+            <sourcebank_ref>g8898636b9b668187d47d29b33d9bcf0a</sourcebank_ref>
+            <selection_number>5</selection_number>
+            <selection_extension>
+              <points_per_item>1.0</points_per_item>
+            </selection_extension>
+          </selection>
+        </selection_ordering>
+      </section>
+    </section>
+  </assessment>
+</questestinterop>

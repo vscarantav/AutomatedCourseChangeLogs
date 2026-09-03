@@ -54,6 +54,7 @@
   },
   "agentInstructions": [
     "Integrate the Gemini API to analyze the full page context alongside the raw diff to generate human-readable descriptions of the changes.",
+    "Aggregate all file-level AI summaries for a course and prompt the AI to generate a high-level course summary and an impact/significance ranking (Low/Medium/High) evaluating the significance to the designer and the impact on the student. Display this on the Dashboard.",
     "Ensure strict modularity. Each worker must have clear input and output interfaces and should not depend tightly on other workers.",
     "Use robust error handling for the web scraping module, as Canvas UI might be slow or change slightly.",
     "The IMSCC (which is a ZIP format) extraction should handle large files safely.",

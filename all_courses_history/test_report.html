@@ -76,17 +76,7 @@
     
     .label { font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 12px; border: 1px solid var(--text-muted); color: var(--text-muted); background: rgba(255,255,255,0.05); }
     
-    /* Rendered View */
-    .rendered-diff {
-        background: var(--surface); padding: 1.5rem; border-radius: 6px;
-        font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.6;
-        border: 1px solid var(--border);
-    }
-    .rendered-add { background: var(--add-bg); color: var(--add-text); padding: 0.2rem 0.5rem; border-radius: 4px; margin: 0.2rem 0; }
-    .rendered-remove { background: var(--rem-bg); color: var(--rem-text); padding: 0.2rem 0.5rem; border-radius: 4px; text-decoration: line-through; margin: 0.2rem 0; }
-    .rendered-context { color: var(--text); padding: 0.2rem 0.5rem; }
-
-    /* Raw View */
+    /* Diff View */
     .diff-block {
         background: #000; padding: 1rem; border-radius: 6px; overflow-x: auto;
         font-family: monospace; font-size: 0.85rem; line-height: 1.4; margin: 0;
@@ -107,9 +97,6 @@
                 <button onclick="switchTab('logs')">Raw Logs</button>
             </div>
         </div>
-        <div class="nav-actions">
-            <button onclick="toggleDiffView(this)" id="view-toggle-btn">See Raw Changes</button>
-        </div>
     </nav>
     <div class="container">
         <div id="dashboard" class="tab-content active">
@@ -120,25 +107,61 @@
             <div class="metric-label">Courses Scanned</div>
         </div>
         <div class="metric-card">
-            <div class="metric-value">0</div>
+            <div class="metric-value">1</div>
             <div class="metric-label">Courses w/ Changes</div>
         </div>
         <div class="metric-card">
-            <div class="metric-value">0</div>
+            <div class="metric-value">2</div>
             <div class="metric-label">Total Files Modified</div>
         </div>
     </div>
     
     <h2>Changes by Category</h2>
     <div class="category-stats">
-    <div class='cat-row'><span>Manifest (Modules)</span><strong>0</strong></div><div class='cat-row'><span>Assignments</span><strong>0</strong></div><div class='cat-row'><span>Pages</span><strong>0</strong></div><div class='cat-row'><span>Quizzes & Question Banks</span><strong>0</strong></div><div class='cat-row'><span>Course Settings</span><strong>0</strong></div><div class='cat-row'><span>Rubrics</span><strong>0</strong></div><div class='cat-row'><span>Discussions</span><strong>0</strong></div><div class='cat-row'><span>Files & Media</span><strong>0</strong></div><div class='cat-row'><span>Other Files</span><strong>0</strong></div></div>
+    <div class='cat-row'><span>Manifest (Modules)</span><strong>0</strong></div><div class='cat-row'><span>Assignments</span><strong>1</strong></div><div class='cat-row'><span>Pages</span><strong>0</strong></div><div class='cat-row'><span>Quizzes & Question Banks</span><strong>0</strong></div><div class='cat-row'><span>Course Settings</span><strong>0</strong></div><div class='cat-row'><span>Rubrics</span><strong>1</strong></div><div class='cat-row'><span>Discussions</span><strong>0</strong></div><div class='cat-row'><span>Files & Media</span><strong>0</strong></div><div class='cat-row'><span>Other Files</span><strong>0</strong></div></div>
         </div>
         <div id="logs" class="tab-content">
             <div class='course-section'><h2>Writing in Professional Contexts (English Master)</h2>
-            <div style="background: rgba(255, 152, 0, 0.1); border-left: 4px solid #ff9800; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px;">
-                <strong style="color: #ff9800;">⚠️ Maintenance Recommendation:</strong> This course has had zero changes for 5 consecutive weeks. Designers are recommended to check standard pages and resources to ensure course material is being actively maintained.
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>Assignments (1 changes)</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="accordion-content">
+            
+                <div class="file-item">
+                    <div class="file-header" onclick="toggleFile(this)" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: rgba(255,255,255,0.02); border-radius: 4px;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+                            <span class="status status-modified">Modified</span>
+                            <span class="file-path">gc47628369e8f6502eeacf6521ceb339a/assignment_settings.xml</span>
+                            <span class='label label-content-change'>Content Change</span><span class='label label-grading-rule'>Grading Rule</span>
+                        </div>
+                        <span class="file-icon" style="color: var(--text-muted); font-size: 0.8rem;">▼</span>
+                    </div>
+                <div class='diff-views-container' style='display: none; padding-top: 1rem;'><div class='ai-summary' style='background: rgba(187, 134, 252, 0.1); border-left: 3px solid var(--accent); padding: 0.8rem; margin-top: 0.5rem; font-size: 0.9rem; border-radius: 4px;'><strong>AI Summary:</strong> The assignment's rubric has been enabled for grading, meaning scores selected in the rubric will now automatically calculate and apply to the student's grade.</div><pre class='diff-block'><div class='diff-meta'>--- Previous</div><div class='diff-meta'>+++ Current</div><div class='diff-chunk'>@@ -8,5 +8,5 @@</div><div class='diff-context'> &lt;module_locked&gt;false&lt;/module_locked&gt;</div><div class='diff-context'> &lt;workflow_state&gt;published&lt;/workflow_state&gt;</div><div class='diff-remove'>-&lt;rubric_use_for_grading&gt;false&lt;/rubric_use_for_grading&gt;</div><div class='diff-add'>+&lt;rubric_use_for_grading&gt;true&lt;/rubric_use_for_grading&gt;</div><div class='diff-context'> &lt;rubric_hide_points&gt;false&lt;/rubric_hide_points&gt;</div><div class='diff-context'> &lt;rubric_hide_outcome_results&gt;false&lt;/rubric_hide_outcome_results&gt;</div></pre></div></div>
+                </div>
             </div>
-            <p><em>No meaningful content changes detected this week.</em></p></div>
+            
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>Rubrics (1 changes)</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="accordion-content">
+            
+                <div class="file-item">
+                    <div class="file-header" onclick="toggleFile(this)" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: rgba(255,255,255,0.02); border-radius: 4px;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+                            <span class="status status-modified">Modified</span>
+                            <span class="file-path">course_settings/rubrics.xml</span>
+                            <span class='label label-content-change'>Content Change</span><span class='label label-grading-rule'>Grading Rule</span><span class='label label-metadata-system'>Metadata/System</span>
+                        </div>
+                        <span class="file-icon" style="color: var(--text-muted); font-size: 0.8rem;">▼</span>
+                    </div>
+                <div class='diff-views-container' style='display: none; padding-top: 1rem;'><div class='ai-summary' style='background: rgba(187, 134, 252, 0.1); border-left: 3px solid var(--accent); padding: 0.8rem; margin-top: 0.5rem; font-size: 0.9rem; border-radius: 4px;'><strong>AI Summary:</strong> A new 12-point grading rubric was added for the "W02: AI Prompt Comparison Activity" assignment, assessing students on their two AI prompts, a written reflection, and writing mechanics.</div><pre class='diff-block'><div class='diff-meta'>--- Previous</div><div class='diff-meta'>+++ Current</div><div class='diff-chunk'>@@ -3073,3 +3073,155 @@</div><div class='diff-context'> &lt;/criteria&gt;</div><div class='diff-context'> &lt;/rubric&gt;</div><div class='diff-add'>+&lt;rubric identifier="gc724c6ad4ef24fe8094b84f0cd9332c2"&gt;</div><div class='diff-add'>+&lt;read_only&gt;false&lt;/read_only&gt;</div><div class='diff-add'>+&lt;title&gt;W02: AI Prompt Comparison Activity&lt;/title&gt;</div><div class='diff-add'>+&lt;reusable&gt;false&lt;/reusable&gt;</div><div class='diff-add'>+&lt;public&gt;false&lt;/public&gt;</div><div class='diff-add'>+&lt;points_possible&gt;12.0&lt;/points_possible&gt;</div><div class='diff-add'>+&lt;hide_score_total&gt;false&lt;/hide_score_total&gt;</div><div class='diff-add'>+&lt;free_form_criterion_comments&gt;false&lt;/free_form_criterion_comments&gt;</div><div class='diff-add'>+&lt;rating_order&gt;descending&lt;/rating_order&gt;</div><div class='diff-add'>+&lt;criteria&gt;</div><div class='diff-add'>+&lt;criterion&gt;</div><div class='diff-add'>+&lt;criterion_id&gt;_5207&lt;/criterion_id&gt;</div><div class='diff-add'>+&lt;points&gt;1.0&lt;/points&gt;</div><div class='diff-add'>+&lt;description&gt;Prompt 1 Provided&lt;/description&gt;</div><div class='diff-add'>+&lt;ratings&gt;</div><div class='diff-add'>+&lt;rating&gt;</div><div class='diff-add'>+&lt;description&gt;Mastery&lt;/description&gt;</div><div class='diff-add'>+&lt;points&gt;1.0&lt;/points&gt;</div><div class='diff-add'>+&lt;criterion_id&gt;_5207&lt;/criterion_id&gt;</div><div class='diff-add'>+&lt;long_description&gt;Prompt one is clearly labeled and present. The prompt is brief and lacks detail, consistent with a weak prompt.&lt;/long_description&gt;</div><div class='diff-add'>+&lt;id&gt;blank&lt;/id&gt;</div><div class='diff-add'>+&lt;/rating&gt;</div><div class='diff-add'>+&lt;rating&gt;</div><div class='diff-add'>+&lt;description&gt;Proficient&lt;/description&gt;</div><div class='diff-add'>+&lt;points&gt;0.5&lt;/points&gt;</div><div class='diff-context'>... (diff truncated)</div></pre></div></div>
+                </div>
+            </div>
+            </div>
         </div>
     </div>
     <script>
@@ -171,12 +194,6 @@
             content.style.display = 'block';
             if (icon) icon.textContent = '▲';
         }
-    }
-    function toggleDiffView(btn) {
-        const isRaw = btn.textContent === "See Rendered View";
-        btn.textContent = isRaw ? "See Raw Changes" : "See Rendered View";
-        document.querySelectorAll('.rendered-diff').forEach(el => el.style.display = isRaw ? 'block' : 'none');
-        document.querySelectorAll('.diff-block').forEach(el => el.style.display = isRaw ? 'none' : 'block');
     }
     </script>
 </body>

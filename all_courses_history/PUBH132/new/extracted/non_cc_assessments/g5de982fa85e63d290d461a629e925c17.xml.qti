@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="g5de982fa85e63d290d461a629e925c17" title="W01 Quiz: Course Overview">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>2</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+      <item ident="g54297bcf9942d7b92d18dad99bcabaec" title="Graders">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>3684,4768</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>gf47b767d37e06559ff801f2d253307ba</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;span&gt;Who grades the work you submit?&lt;/span&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="3684">
+                <material>
+                  <mattext texttype="text/plain">Your instructor</mattext>
+                </material>
+              </response_label>
+              <response_label ident="4768">
+                <material>
+                  <mattext texttype="text/plain">Certified graders</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">4768</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="g969486478dbbd58d1ec4e7902e4128b1" title="Late Work">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>true_false_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>4486,779</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>g2bb5866e4ee07ff47ff015c57f56c7a1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;p&gt;&lt;span&gt;If you do not submit an activity or graded quiz by the due date, the activity or quiz will automatically be given a score of zero. Submitting work late may still earn you points, as long as it is within 7 days of the due date or before the end of the term in week 6-7.&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="4486">
+                <material>
+                  <mattext texttype="text/plain">True</mattext>
+                </material>
+              </response_label>
+              <response_label ident="779">
+                <material>
+                  <mattext texttype="text/plain">False</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">4486</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="g62476b37990befb7a06af21718921cbb" title="Exercise">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>3006,3556</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>gf47b767d37e06559ff801f2d253307ba</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;span data-olk-copy-source="MessageBody"&gt;I will begin exercising in week 2.&lt;/span&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="3006">
+                <material>
+                  <mattext texttype="text/plain">Yes</mattext>
+                </material>
+              </response_label>
+              <response_label ident="3556">
+                <material>
+                  <mattext texttype="text/plain">No</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">3006</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="ge0126d11eb98d4f8601706da3996dedd" title="WhatsApp">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>3484,5285,8149,9976</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>gf47b767d37e06559ff801f2d253307ba</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;p&gt;&lt;span data-olk-copy-source="MessageBody"&gt;Starting in week 2, you will participate in a weekly WhatsApp discussion. Which of the following statements are true?&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="3484">
+                <material>
+                  <mattext texttype="text/plain">The WhatsApp discussion questions are found in the WhatsApp PUBH 132 announcements.</mattext>
+                </material>
+              </response_label>
+              <response_label ident="5285">
+                <material>
+                  <mattext texttype="text/plain">During week 2-6, include a screenshot of your WhatsApp post in the word document (30 point assignment).</mattext>
+                </material>
+              </response_label>
+              <response_label ident="8149">
+                <material>
+                  <mattext texttype="text/plain">Wait to submit your 30 point assignments until you have participated in the WhatsApp discussion for that specific week.</mattext>
+                </material>
+              </response_label>
+              <response_label ident="9976">
+                <material>
+                  <mattext texttype="text/plain">All answers are correct.</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">9976</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="g8b1c12e4f51c41487b0067511f28560e" title="Grading Rubric">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>1064,6355</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>ge210225595841e231e7a614a7434a4cc</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;p&gt;This course helps me strengthen my personal health and wellness. I will review the grading rubric before submitting activities to ensure my responses are personalized, specific, and based on my own experiences.&lt;/p&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="1064">
+                <material>
+                  <mattext texttype="text/plain">Yes</mattext>
+                </material>
+              </response_label>
+              <response_label ident="6355">
+                <material>
+                  <mattext texttype="text/plain">No</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <varequal respident="response1">6355</varequal>
+            </conditionvar>
+            <displayfeedback feedbacktype="Response" linkrefid="6355_fb"/>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">1064</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="6355_fb">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">The focus of activities in this class is your personal health and wellness. We want to hear your voice and ideas in your answers.&amp;nbsp;</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+      <item ident="g2e1a4f85c735cf9d0b23a2c2fce6d8f6" title="Academic Honesty">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>473,291</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>gf47b767d37e06559ff801f2d253307ba</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;div class="byui tesol101"&gt;
+&lt;div style="border: 6px solid #376070; padding: 5px;"&gt;
+&lt;div style="float: right; color: #fae5c3; font-size: 26px; margin-left: 5px; padding: 5px; background-color: #286177;"&gt;Honor&lt;/div&gt;
+&lt;h2&gt;Academic Honesty&lt;/h2&gt;
+&lt;p&gt;Students taking courses through BYU-Idaho are expected to follow BYU-Idaho's &lt;a class="inline_disabled" href="https://www.byui.edu/student-honor-office/academic-honesty" target="_blank"&gt;Academic Honesty policy.&lt;/a&gt; This includes avoiding plagiarism, fabrication or falsification, cheating, academic misconduct, and unauthorized uploading or sharing. BYU-Idaho takes academic honesty seriously and violations of the Academic Honesty Policy may result in consequences up to and including suspension or expulsion from the university.&amp;nbsp;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;span&gt;I read the &lt;a class="inline_disabled" href="https://www.byui.edu/student-honor-office/academic-honesty" target="_blank"&gt;Academic Honesty policy&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="473">
+                <material>
+                  <mattext texttype="text/plain">Yes</mattext>
+                </material>
+              </response_label>
+              <response_label ident="291">
+                <material>
+                  <mattext texttype="text/plain">No</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">473</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="g7eb075337f2e15c46edc1234f77cf152" title="Honor Code">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>2490,7976</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>ge6b23237d5915354ce181cd5ab92fefd</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;p&gt;I can use Grammarly or artificial intelligence tools such as ChatGPT, Google Gemini, Claude, or Microsoft Copilot in activities &lt;em&gt;only as instructed&lt;/em&gt;.&amp;nbsp; I understand that if I use these tools inappropriately, my name will be reported to the Honor Code Office within the Wellness Department at BYU‑Pathway.&lt;/p&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="2490">
+                <material>
+                  <mattext texttype="text/plain">Yes</mattext>
+                </material>
+              </response_label>
+              <response_label ident="7976">
+                <material>
+                  <mattext texttype="text/plain">No</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <varequal respident="response1">2490</varequal>
+            </conditionvar>
+            <displayfeedback feedbacktype="Response" linkrefid="2490_fb"/>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <varequal respident="response1">7976</varequal>
+            </conditionvar>
+            <displayfeedback feedbacktype="Response" linkrefid="7976_fb"/>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">2490</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="2490_fb">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Google and Microsoft Docs have grammar and spelling check. Do not use Grammarly or artificial intelligence tools to improve your writing. We want to hear your voice and ideas.</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+        <itemfeedback ident="7976_fb">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Google and Microsoft Docs have grammar and spelling check. Do not use Grammarly or artificial intelligence tools to improve your writing. We want to hear your voice and ideas.</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+      <item ident="g6fda373354d7f49b53ebebe1abc6427c" title="Assignment Submission">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>9388,5923</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>ged23097e86c591f5c601337834f30d67</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;p&gt;I understand activities must be submitted as a Microsoft Word Document or video in this course. If I submit answers in the assignment comments, a grade of zero will be assigned.&lt;/p&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="9388">
+                <material>
+                  <mattext texttype="text/plain">Yes</mattext>
+                </material>
+              </response_label>
+              <response_label ident="5923">
+                <material>
+                  <mattext texttype="text/plain">No</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <varequal respident="response1">5923</varequal>
+            </conditionvar>
+            <displayfeedback feedbacktype="Response" linkrefid="5923_fb"/>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">9388</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="5923_fb">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">&lt;p&gt;One assignment each week is submitted as a Microsoft Word Document and a different assignment each week is submitted as a video.&lt;/p&gt;</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+      <item ident="g86f3bb44b463f1d90f223331be0f0e0d" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>true_false_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.0</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>6345,4476</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>g0c8e19b5eaa98f7809b551d571ed9fd8</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;div&gt;&lt;p&gt;All activity questions should be answered in&lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;strong&gt;your own words and show personalization&lt;/strong&gt;. This course focuses on your personal health and wellness. Answers should be specific to&lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;strong&gt;you&lt;/strong&gt;. We want to know of&lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;strong&gt;your&lt;/strong&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;ideas and personal experiences.&lt;/p&gt;&lt;/div&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="6345">
+                <material>
+                  <mattext texttype="text/plain">True</mattext>
+                </material>
+              </response_label>
+              <response_label ident="4476">
+                <material>
+                  <mattext texttype="text/plain">False</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <varequal respident="response1">4476</varequal>
+            </conditionvar>
+            <displayfeedback feedbacktype="Response" linkrefid="4476_fb"/>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">6345</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="4476_fb">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">&lt;h3 id="section-7"&gt;AI Policy&lt;/h3&gt;
+&lt;p&gt;&lt;span&gt;We are not interested in developing artificial intelligence (AI) in this class. We are focused on developing&amp;nbsp;&lt;/span&gt;&lt;strong&gt;your&lt;/strong&gt;&lt;span&gt;&amp;nbsp;intelligence,&amp;nbsp;&lt;/span&gt;&lt;strong&gt;your&lt;/strong&gt;&lt;span&gt;&amp;nbsp;critical thinking, and&amp;nbsp;&lt;/span&gt;&lt;strong&gt;your&lt;/strong&gt;&lt;span&gt;&amp;nbsp;teaching skills.&lt;/span&gt;&lt;/p&gt;</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+    </section>
+  </assessment>
+</questestinterop>

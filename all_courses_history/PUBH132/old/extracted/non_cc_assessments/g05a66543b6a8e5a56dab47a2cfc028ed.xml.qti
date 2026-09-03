@@ -1,0 +1,3072 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <objectbank ident="g05a66543b6a8e5a56dab47a2cfc028ed">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>bank_title</fieldlabel>
+        <fieldentry>PUBH132 W03 QUESTIONS</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>bank_type</fieldlabel>
+        <fieldentry>Course</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>bank_context_uuid</fieldlabel>
+        <fieldentry>2jWaxFox38LB7WT42lLlhps6FVWEzpqbHuqYZE4f</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>bank_state</fieldlabel>
+        <fieldentry>active</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <item ident="g04a521386ea72428d50228ad594e72cb" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>5521,1758,9194,7963</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW8228940 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW8228940 BCX8" data-ccp-charstyle="citation-1826" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;b90ceecd-35bb-5313-a133-7a7fc8ecc088|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1826&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1826&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt;What is the physical feeling experienced from the body's physiological response to an internal or external stimulus?&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW8228940 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="5521">
+              <material>
+                <mattext texttype="text/plain">Stress</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1758">
+              <material>
+                <mattext texttype="text/plain">Relaxation</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9194">
+              <material>
+                <mattext texttype="text/plain">Euphoria</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7963">
+              <material>
+                <mattext texttype="text/plain">Numbness</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1758</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1758_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">9194</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="9194_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">7963</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="7963_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">5521</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="1758_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="NormalTextRun SCXW68787646 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Relaxation is the opposite of stress, &lt;/span&gt;&lt;span class="NormalTextRun SCXW68787646 BCX8" data-ccp-parastyle="Normal (Web)"&gt;representing&lt;/span&gt;&lt;span class="NormalTextRun SCXW68787646 BCX8" data-ccp-parastyle="Normal (Web)"&gt; a state of reduced physiological arousal.&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="9194_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW68787646 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW68787646 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Euphoria is an intense feeling of happiness or excitement, which is a positive emotional state, not the physiological response defining stress.&lt;/span&gt;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="7963_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW183313566 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW183313566 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Numbness is a lack of sensation or feeling, which does not define the body's physiological response to a stimulus as stress does.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW183313566 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="ga05d7216c374780663d99bab9b10e567" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>5941,919,1406,42</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW255569124 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW255569124 BCX8" data-ccp-charstyle="citation-1825" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;de2beebe-2179-504d-9f54-d17fd7951424|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1825&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1825&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt;What is another common name for the body's stress response?&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW255569124 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="5941">
+              <material>
+                <mattext texttype="text/plain">Fight or Flight response</mattext>
+              </material>
+            </response_label>
+            <response_label ident="919">
+              <material>
+                <mattext texttype="text/plain">Rest and Digest response</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1406">
+              <material>
+                <mattext texttype="text/plain">Freeze and Observe response</mattext>
+              </material>
+            </response_label>
+            <response_label ident="42">
+              <material>
+                <mattext texttype="text/plain">Calm and Collect response</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">919</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="919_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1406</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1406_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">42</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="42_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">5941</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="919_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="NormalTextRun SCXW180238911 BCX8" data-ccp-parastyle="Normal (Web)"&gt;The "Rest and Digest" response refers to the parasympathetic nervous system, which &lt;/span&gt;&lt;span class="NormalTextRun SCXW180238911 BCX8" data-ccp-parastyle="Normal (Web)"&gt;is responsible for&lt;/span&gt;&lt;span class="NormalTextRun SCXW180238911 BCX8" data-ccp-parastyle="Normal (Web)"&gt; calming the body and conserving energy, directly opposing the stress response. &lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="1406_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="NormalTextRun SCXW180238911 BCX8" data-ccp-parastyle="Normal (Web)"&gt;While "freeze" can be a &lt;/span&gt;&lt;span class="NormalTextRun SCXW180238911 BCX8" data-ccp-parastyle="Normal (Web)"&gt;component&lt;/span&gt;&lt;span class="NormalTextRun SCXW180238911 BCX8" data-ccp-parastyle="Normal (Web)"&gt; of a threat response, "Fight or Flight" is the specific and widely recognized term for the overall physiological preparation for perceived danger.&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="42_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW35097852 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW35097852 BCX8" data-ccp-parastyle="Normal (Web)"&gt; This phrase describes a state of tranquility and composure, which is the opposite of the body's activated stress response.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW35097852 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="gf0aec36d2fe06718d972686cf6f2c7d7" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>1838,6413,1195,9299</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW163537347 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW163537347 BCX8" data-ccp-charstyle="citation-1824" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;197ae612-ba6c-5ef8-b882-14b64b1ec5d6|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1824&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1824&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt;When the brain interprets a warning signal as a threat, what substance is sent into the bloodstream from the adrenal glands?&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW163537347 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="1838">
+              <material>
+                <mattext texttype="text/plain">Epinephrine</mattext>
+              </material>
+            </response_label>
+            <response_label ident="6413">
+              <material>
+                <mattext texttype="text/plain">Insulin</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1195">
+              <material>
+                <mattext texttype="text/plain">Dopamine</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9299">
+              <material>
+                <mattext texttype="text/plain">Serotonin</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">6413</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="6413_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1195</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1195_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">9299</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="9299_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">1838</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="6413_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW4263745 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW4263745 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Insulin is a hormone produced by the pancreas that regulates blood sugar levels and is not primarily involved in the immediate physiological stress response.&lt;/span&gt;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="1195_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW4263745 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW4263745 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Dopamine is a neurotransmitter associated with pleasure, reward, and motivation, and while important for brain function, it is not the primary substance released from adrenal glands during an acute stress response.&lt;/span&gt;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="9299_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW142760456 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW142760456 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Serotonin is a neurotransmitter that influences mood, sleep, and digestion. It is not the main substance released from the adrenal glands in response to an immediate threat.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW142760456 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="gece824b58e8ccc0ecd15b0e0b93a9017" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>6930,5171,4126,8831</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW131289868 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW131289868 BCX8" data-ccp-charstyle="citation-1823" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;664be346-ba9a-5e32-8d81-8318824a332e|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1823&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1823&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt;What type of stress is considered useful because it allows the body to produce faster reactions and heightened senses?&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW131289868 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="6930">
+              <material>
+                <mattext texttype="text/plain">Eustress</mattext>
+              </material>
+            </response_label>
+            <response_label ident="5171">
+              <material>
+                <mattext texttype="text/plain">Distress</mattext>
+              </material>
+            </response_label>
+            <response_label ident="4126">
+              <material>
+                <mattext texttype="text/plain">Chronic stress</mattext>
+              </material>
+            </response_label>
+            <response_label ident="8831">
+              <material>
+                <mattext texttype="text/plain">Acute stress</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">5171</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="5171_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">4126</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="4126_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">8831</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="8831_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">6930</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="5171_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW35144725 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW35144725 BCX8" data-ccp-charstyle="citation-1822" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;962b256a-240e-5d62-80c0-0d5940a0afa2|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1822&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1822&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt; Distress refers to the negative and harmful effects of stress on the body and mind, which is the opposite of useful stress&lt;/span&gt;&lt;span class="NormalTextRun SCXW35144725 BCX8" data-ccp-parastyle="Normal (Web)"&gt;.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW35144725 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="4126_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW96881898 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW96881898 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Chronic stress is prolonged stress that can lead to serious health problems over time. &lt;/span&gt;&lt;span class="NormalTextRun SCXW96881898 BCX8" data-ccp-charstyle="citation-1821" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;86c5ca85-e2e3-5372-bb2d-c82bf6cfa407|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1821&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1821&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt;It is not inherently useful and can be detrimental&lt;/span&gt;&lt;span class="NormalTextRun SCXW96881898 BCX8" data-ccp-parastyle="Normal (Web)"&gt;.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW96881898 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="8831_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW220766298 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW220766298 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Acute stress is short-term stress, but this term does not specifically &lt;/span&gt;&lt;span class="NormalTextRun SCXW220766298 BCX8" data-ccp-parastyle="Normal (Web)"&gt;indicate&lt;/span&gt;&lt;span class="NormalTextRun SCXW220766298 BCX8" data-ccp-parastyle="Normal (Web)"&gt; whether the stress is useful or harmful. "Eustress" precisely defines the useful form of stress.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW220766298 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="gb2e80c5bc7f5fa0087eafdc036e9b041" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>3341,3623,7841,7650</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW177478046 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW177478046 BCX8" data-ccp-charstyle="citation-1820" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;966d0b4a-b8a6-5068-bd3a-1f341e9701ed|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1820&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1820&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt;What term describes the negative effects of continuous stress that can lead to health problems?&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW177478046 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="3341">
+              <material>
+                <mattext texttype="text/plain">Distress</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3623">
+              <material>
+                <mattext texttype="text/plain">Eustress</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7841">
+              <material>
+                <mattext texttype="text/plain">Homeostasis</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7650">
+              <material>
+                <mattext texttype="text/plain">Adaptation</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3623</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3623_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">7841</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="7841_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">7650</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="7650_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">3341</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="3623_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW216424313 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW216424313 BCX8" data-ccp-charstyle="citation-1819" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;7f6d8b26-7572-5936-a4d9-4f07a03f9dda|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1819&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1819&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt;Eustress is considered positive or useful stress that can enhance performance and focus&lt;/span&gt;&lt;span class="NormalTextRun SCXW216424313 BCX8" data-ccp-parastyle="Normal (Web)"&gt;. It does not describe &lt;/span&gt;&lt;span class="NormalTextRun ContextualSpellingAndGrammarErrorV2Themed SCXW216424313 BCX8" data-ccp-parastyle="Normal (Web)"&gt;negative&lt;/span&gt;&lt;span class="NormalTextRun SCXW216424313 BCX8" data-ccp-parastyle="Normal (Web)"&gt; effects.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW216424313 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="7841_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW173694095 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW173694095 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Homeostasis is the body's ability to &lt;/span&gt;&lt;span class="NormalTextRun SCXW173694095 BCX8" data-ccp-parastyle="Normal (Web)"&gt;maintain&lt;/span&gt;&lt;span class="NormalTextRun SCXW173694095 BCX8" data-ccp-parastyle="Normal (Web)"&gt; a stable internal environment, a state the body tries to return to after stress. &lt;/span&gt;&lt;span class="NormalTextRun SCXW173694095 BCX8" data-ccp-charstyle="citation-1818" data-ccp-charstyle-defn="{&amp;quot;ObjectId&amp;quot;:&amp;quot;a92a6167-3732-565d-a917-5460eb758ce3|1&amp;quot;,&amp;quot;ClassId&amp;quot;:1073872969,&amp;quot;Properties&amp;quot;:[201342446,&amp;quot;1&amp;quot;,201342447,&amp;quot;5&amp;quot;,201342448,&amp;quot;1&amp;quot;,201342449,&amp;quot;1&amp;quot;,469777841,&amp;quot;Aptos&amp;quot;,469777842,&amp;quot;&amp;quot;,469777843,&amp;quot;Aptos&amp;quot;,469777844,&amp;quot;Aptos&amp;quot;,201341986,&amp;quot;1&amp;quot;,469769226,&amp;quot;Aptos&amp;quot;,268442635,&amp;quot;24&amp;quot;,469775450,&amp;quot;citation-1818&amp;quot;,201340122,&amp;quot;1&amp;quot;,134233614,&amp;quot;true&amp;quot;,469778129,&amp;quot;citation-1818&amp;quot;,335572020,&amp;quot;1&amp;quot;,469778324,&amp;quot;Default Paragraph Font&amp;quot;]}"&gt;It is not a term for the negative effects of stress&lt;/span&gt;&lt;span class="NormalTextRun SCXW173694095 BCX8" data-ccp-parastyle="Normal (Web)"&gt;.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW173694095 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="7650_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW24594408 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW24594408 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Adaptation is the process of adjusting to new conditions or environments. It is not a term specifically used to describe the negative health consequences of ongoing stress.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW24594408 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g17e237ede0ce1ce8cdfe380ea7dcf36c" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>4541,2626,7679,9443</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW53774272 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW53774272 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What type of stressors include events such as death, divorce, or job loss?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW53774272 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="4541">
+              <material>
+                <mattext texttype="text/plain">Circumstantial stressors</mattext>
+              </material>
+            </response_label>
+            <response_label ident="2626">
+              <material>
+                <mattext texttype="text/plain">Physical stressors</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7679">
+              <material>
+                <mattext texttype="text/plain">Psychological stressors</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9443">
+              <material>
+                <mattext texttype="text/plain">Environmental stressors</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">2626</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="2626_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">7679</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="7679_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">9443</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="9443_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">4541</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="2626_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW163657904 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW163657904 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Physical stressors refer to direct demands on the body, such as extreme temperatures or strenuous exercise, not life events like death or divorce.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW163657904 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="7679_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW23305216 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW23305216 BCX8" data-ccp-parastyle="Normal (Web)"&gt;While death, divorce, or job loss certainly have psychological impacts, "circumstantial stressors" is the more precise term used in the content to categorize these external life events.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW23305216 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="9443_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW177267730 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW177267730 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Environmental stressors are factors in the immediate surroundings, such as pollution, noise, or overcrowding, rather than significant life changes.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW177267730 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g693895c7648a6c1bf9f1110a0570559d" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>9483,5003,2072,8867</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW107855955 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW107855955 BCX8" data-ccp-parastyle="Normal (Web)"&gt; How many hours of sleep are &lt;/span&gt;&lt;span class="NormalTextRun SCXW107855955 BCX8" data-ccp-parastyle="Normal (Web)"&gt;generally recommended&lt;/span&gt;&lt;span class="NormalTextRun SCXW107855955 BCX8" data-ccp-parastyle="Normal (Web)"&gt; for adults each night?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW107855955 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="9483">
+              <material>
+                <mattext texttype="text/plain">7-9 hours</mattext>
+              </material>
+            </response_label>
+            <response_label ident="5003">
+              <material>
+                <mattext texttype="text/plain">4-6 hours</mattext>
+              </material>
+            </response_label>
+            <response_label ident="2072">
+              <material>
+                <mattext texttype="text/plain">10-12 hours</mattext>
+              </material>
+            </response_label>
+            <response_label ident="8867">
+              <material>
+                <mattext texttype="text/plain">5-7 hours</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">5003</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="5003_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">2072</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="2072_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">8867</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="8867_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">9483</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="5003_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW195849047 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW195849047 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Sleeping only 4-6 hours is &lt;/span&gt;&lt;span class="NormalTextRun SCXW195849047 BCX8" data-ccp-parastyle="Normal (Web)"&gt;generally considered&lt;/span&gt;&lt;span class="NormalTextRun SCXW195849047 BCX8" data-ccp-parastyle="Normal (Web)"&gt; insufficient for adults and can lead to significant sleep deprivation and its associated negative health effects.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW195849047 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="2072_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW253512498 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW253512498 BCX8" data-ccp-parastyle="Normal (Web)"&gt; While some individuals may have higher sleep needs, sleeping 10-12 hours is typically more than the recommended range for the majority of adults.&lt;/span&gt;&lt;span class="NormalTextRun SCXW253512498 BCX8" data-ccp-parastyle="Normal (Web)"&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW253512498 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="8867_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW98987794 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW98987794 BCX8" data-ccp-parastyle="Normal (Web)"&gt;This range falls below the &lt;/span&gt;&lt;span class="NormalTextRun SCXW98987794 BCX8" data-ccp-parastyle="Normal (Web)"&gt;optimal&lt;/span&gt;&lt;span class="NormalTextRun SCXW98987794 BCX8" data-ccp-parastyle="Normal (Web)"&gt; amount for many adults, with the recommended range extending up to 9 hours for &lt;/span&gt;&lt;span class="NormalTextRun SCXW98987794 BCX8" data-ccp-parastyle="Normal (Web)"&gt;optimal&lt;/span&gt;&lt;span class="NormalTextRun SCXW98987794 BCX8" data-ccp-parastyle="Normal (Web)"&gt; health benefits.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW98987794 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g69ba77ca93f69fc0c4e3be5f6bb12ca4" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>1605,7310,1714,8247</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW63988897 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW63988897 BCX8" data-ccp-parastyle="Normal (Web)"&gt;From what source does blue light often interfere with the body's natural sleep-wake cycle?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW63988897 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="1605">
+              <material>
+                <mattext texttype="text/plain">Electronic devices</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7310">
+              <material>
+                <mattext texttype="text/plain">Incandescent bulbs</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1714">
+              <material>
+                <mattext texttype="text/plain">Natural sunlight</mattext>
+              </material>
+            </response_label>
+            <response_label ident="8247">
+              <material>
+                <mattext texttype="text/plain">Candles</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">7310</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="7310_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1714</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1714_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">8247</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="8247_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">1605</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="7310_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW10857426 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW10857426 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Incandescent bulbs produce a warmer, yellowish light and do not emit significant amounts of blue light that are known to disrupt the sleep-wake cycle.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW10857426 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="1714_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW100557714 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW100557714 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Natural sunlight does &lt;/span&gt;&lt;span class="NormalTextRun SCXW100557714 BCX8" data-ccp-parastyle="Normal (Web)"&gt;contain&lt;/span&gt;&lt;span class="NormalTextRun SCXW100557714 BCX8" data-ccp-parastyle="Normal (Web)"&gt; blue light, which is beneficial during the day to regulate circadian rhythms, but the question refers to a source that interferes with sleep when used at night.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW100557714 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="8247_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW190004244 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW190004244 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Candles produce a very warm, dim light with negligible blue light emission and do not interfere with the sleep-wake cycle.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW190004244 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g90137d016c90267183bccbbfe8901bf8" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>543,3280,7391,3428</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW4937843 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW4937843 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What stress management technique involves tensing and relaxing different muscle groups throughout the body?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW4937843 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="543">
+              <material>
+                <mattext texttype="text/plain">Progressive relaxation</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3280">
+              <material>
+                <mattext texttype="text/plain">Meditation</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7391">
+              <material>
+                <mattext texttype="text/plain">Biofeedback</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3428">
+              <material>
+                <mattext texttype="text/plain">Aerobic exercise</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3280</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3280_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">7391</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="7391_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3428</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3428_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">543</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="3280_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW235030896 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW235030896 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Meditation typically involves focused attention or mindfulness, often on breathing or a mantra, rather than systematic tension and relaxation of muscle groups.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW235030896 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="7391_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW110348460 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW110348460 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Biofeedback is a technique that uses electronic sensors to provide real-time information about physiological processes, allowing individuals to gain conscious control over them. It is &lt;/span&gt;&lt;span class="NormalTextRun SCXW110348460 BCX8" data-ccp-parastyle="Normal (Web)"&gt;not the same as&lt;/span&gt;&lt;span class="NormalTextRun SCXW110348460 BCX8" data-ccp-parastyle="Normal (Web)"&gt; systematic muscle tension and relaxation.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW110348460 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="3428_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW213211811 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW213211811 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Aerobic exercise is physical activity that raises heart rate and breathing, strengthening the cardiovascular system. While it can reduce stress, it is not defined by tensing and relaxing muscle groups.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW213211811 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g0adb8778eb63ab0b55f6cb643a67d9f3" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>3437,6964,1576,5523</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW84148893 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW84148893 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What stress management technique involves focusing the mind on a particular object, thought, or activity to achieve a state of relaxation and mental clarity, sometimes called visualization or guided imagery?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW84148893 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:360,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="3437">
+              <material>
+                <mattext texttype="text/plain">Meditation</mattext>
+              </material>
+            </response_label>
+            <response_label ident="6964">
+              <material>
+                <mattext texttype="text/plain">Journaling</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1576">
+              <material>
+                <mattext texttype="text/plain">Deep breathing</mattext>
+              </material>
+            </response_label>
+            <response_label ident="5523">
+              <material>
+                <mattext texttype="text/plain">Yoga</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">6964</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="6964_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1576</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1576_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">5523</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="5523_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">3437</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="6964_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW215505953 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW215505953 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Journaling is the practice of writing down thoughts and feelings, which can be therapeutic but does not typically involve the focused mental concentration characteristic of meditation.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW215505953 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="1576_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW121280984 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW121280984 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Deep breathing is a specific technique often used &lt;/span&gt;&lt;/span&gt;&lt;span class="TextRun SCXW121280984 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW121280984 BCX8" data-ccp-parastyle="Normal (Web)"&gt;within&lt;/span&gt;&lt;/span&gt;&lt;span class="TextRun SCXW121280984 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW121280984 BCX8" data-ccp-parastyle="Normal (Web)"&gt; meditation to promote relaxation, but it is not synonymous with the broader practice of meditation.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW121280984 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="5523_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW129453866 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW129453866 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Yoga combines physical postures, breathing exercises, &lt;/span&gt;&lt;span class="NormalTextRun ContextualSpellingAndGrammarErrorV2Themed SCXW129453866 BCX8" data-ccp-parastyle="Normal (Web)"&gt;and meditation, but&lt;/span&gt;&lt;span class="NormalTextRun SCXW129453866 BCX8" data-ccp-parastyle="Normal (Web)"&gt; meditation itself specifically refers to the mental focusing aspect, not the physical postures.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW129453866 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g5d026776475891b2bb17df796672bef8" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>7543,3658,5171,1799</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW40643706 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW40643706 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Which of the following is a common symptom of sleep deprivation?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW40643706 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="7543">
+              <material>
+                <mattext texttype="text/plain">Irritability</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3658">
+              <material>
+                <mattext texttype="text/plain">Increased energy</mattext>
+              </material>
+            </response_label>
+            <response_label ident="5171">
+              <material>
+                <mattext texttype="text/plain">Enhanced focus</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1799">
+              <material>
+                <mattext texttype="text/plain">Improved mood</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3658</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3658_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">5171</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="5171_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1799</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1799_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">7543</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="3658_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW224231285 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW224231285 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Sleep deprivation leads to decreased energy and fatigue, not an increase in energy.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW224231285 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="5171_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW57618621 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW57618621 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Lack of sufficient sleep typically impairs cognitive functions, including concentration and focus, rather than enhancing them.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW57618621 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="1799_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW23249770 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW23249770 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Sleep deprivation is commonly associated with negative mood states, including irritability, mood swings, and feelings of depression, not an improved mood.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW23249770 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g111d1fc1cf88eca3a54c065ca8d13847" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>2744,9831,4226,4797</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW42938619 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW42938619 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What are described as mental health conditions that involve excessive and persistent worry and fear?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW42938619 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="2744">
+              <material>
+                <mattext texttype="text/plain">Anxiety disorders</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9831">
+              <material>
+                <mattext texttype="text/plain">Mood disorders</mattext>
+              </material>
+            </response_label>
+            <response_label ident="4226">
+              <material>
+                <mattext texttype="text/plain">Psychotic disorders</mattext>
+              </material>
+            </response_label>
+            <response_label ident="4797">
+              <material>
+                <mattext texttype="text/plain">Personality disorders</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">9831</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="9831_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">4226</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="4226_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">4797</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="4797_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">2744</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="9831_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW158355333 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW158355333 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Mood disorders, such as depression or bipolar disorder, primarily affect a person's emotional state or mood, not necessarily excessive and persistent &lt;/span&gt;&lt;span class="NormalTextRun SCXW158355333 BCX8" data-ccp-parastyle="Normal (Web)"&gt;worry&lt;/span&gt;&lt;span class="NormalTextRun SCXW158355333 BCX8" data-ccp-parastyle="Normal (Web)"&gt; and fear.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW158355333 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="4226_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW210982851 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW210982851 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Psychotic disorders, like schizophrenia, involve a break from reality, often characterized by hallucinations or delusions, which are distinct from anxiety.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW210982851 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="4797_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW236947533 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW236947533 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Personality disorders involve long-standing, inflexible patterns of thinking, feeling, and behaving that deviate from cultural expectations, which is a different category from anxiety.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW236947533 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g93cf9ef9119bbad79906e2df0b3d460f" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>9177,5369,7702,8297</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW110717821 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW110717821 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What anxiety disorder is characterized by chronic, excessive worrying about everyday events and activities, often without a specific focus?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW110717821 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="9177">
+              <material>
+                <mattext texttype="text/plain">Generalized Anxiety Disorder (GAD)</mattext>
+              </material>
+            </response_label>
+            <response_label ident="5369">
+              <material>
+                <mattext texttype="text/plain">Panic Disorder</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7702">
+              <material>
+                <mattext texttype="text/plain">Obsessive-Compulsive Disorder (OCD)</mattext>
+              </material>
+            </response_label>
+            <response_label ident="8297">
+              <material>
+                <mattext texttype="text/plain">Specific Phobia</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">5369</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="5369_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">7702</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="7702_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">8297</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="8297_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">9177</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="5369_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW47770021 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW47770021 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Panic disorder is characterized by recurrent, unexpected panic attacks and persistent worry about having more attacks, not a chronic, generalized worry about everyday events.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW47770021 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="7702_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW44419660 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW44419660 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Obsessive-Compulsive Disorder involves intrusive, unwanted thoughts (obsessions) and repetitive behaviors (compulsions) performed to alleviate anxiety, which is distinct from generalized worry.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW44419660 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:720,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="8297_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW223803518 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW223803518 BCX8" data-ccp-parastyle="Normal (Web)"&gt;A s&lt;/span&gt;&lt;span class="NormalTextRun SCXW223803518 BCX8" data-ccp-parastyle="Normal (Web)"&gt;p&lt;/span&gt;&lt;span class="NormalTextRun SCXW223803518 BCX8" data-ccp-parastyle="Normal (Web)"&gt;ecific phobia is an intense and irrational fear of a particular object or situation (e.g., fear of heights, spiders), not a broad, generalized worrying about daily life.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW223803518 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559685&amp;quot;:1440,&amp;quot;335559740&amp;quot;:240,&amp;quot;335559991&amp;quot;:720}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g6b3c50fa2be76b515ef0ef569108ed20" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>779,3882,457,4917</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW258642349 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW258642349 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What type of anxiety disorder is characterized by an intense, irrational fear of a particular object or situation?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW258642349 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="779">
+              <material>
+                <mattext texttype="text/plain">Specific phobia</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3882">
+              <material>
+                <mattext texttype="text/plain">Generalized Anxiety Disorder (GAD)</mattext>
+              </material>
+            </response_label>
+            <response_label ident="457">
+              <material>
+                <mattext texttype="text/plain">Social Anxiety Disorder</mattext>
+              </material>
+            </response_label>
+            <response_label ident="4917">
+              <material>
+                <mattext texttype="text/plain">Post-Traumatic Stress Disorder (PTSD)</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3882</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3882_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">457</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="457_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">4917</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="4917_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">779</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="3882_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW32337087 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW32337087 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Generalized Anxiety Disorder (GAD) involves chronic and excessive worry about various everyday events, rather than an intense fear focused on one specific object or situation.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW32337087 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="457_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW58064631 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW58064631 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Social Anxiety Disorder is characterized by a significant fear of social situations, such as public speaking or meeting new people, not an irrational fear of a specific object or non-social situation.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW58064631 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="4917_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW112180763 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW112180763 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Post-Traumatic Stress Disorder (PTSD) develops after experiencing or &lt;/span&gt;&lt;span class="NormalTextRun SCXW112180763 BCX8" data-ccp-parastyle="Normal (Web)"&gt;witnessing&lt;/span&gt;&lt;span class="NormalTextRun SCXW112180763 BCX8" data-ccp-parastyle="Normal (Web)"&gt; a terrifying event and involves symptoms like flashbacks and avoidance, which are distinct from an irrational fear of a particular object or situation.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW112180763 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="gccbba223530841141c6929e886723284" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>6445,3637,9619,3579</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW161460174 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW161460174 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What anxiety disorder is characterized by recurrent, unexpected panic attacks and persistent worry about having more attacks?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW161460174 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="6445">
+              <material>
+                <mattext texttype="text/plain">Panic disorder</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3637">
+              <material>
+                <mattext texttype="text/plain">Obsessive-Compulsive Disorder (OCD)</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9619">
+              <material>
+                <mattext texttype="text/plain">Specific Phobia</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3579">
+              <material>
+                <mattext texttype="text/plain">Major Depressive Disorder</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3637</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3637_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">9619</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="9619_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3579</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3579_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">6445</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="3637_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW266317333 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW266317333 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Obsessive-Compulsive Disorder (OCD) involves intrusive thoughts (obsessions&lt;/span&gt;&lt;span class="NormalTextRun ContextualSpellingAndGrammarErrorV2Themed SCXW266317333 BCX8" data-ccp-parastyle="Normal (Web)"&gt;)&lt;/span&gt;&lt;span class="NormalTextRun SCXW266317333 BCX8" data-ccp-parastyle="Normal (Web)"&gt; and repetitive behaviors (compulsions) performed to reduce anxiety, which is different from experiencing and worrying about panic attacks.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW266317333 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="9619_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW184290513 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW184290513 BCX8" data-ccp-parastyle="Normal (Web)"&gt; A specific phobia is an intense and irrational fear of a particular object or situation, not the occurrence of unexpected panic attacks or the fear of future attacks.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW184290513 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="3579_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW30085073 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW30085073 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Major Depressive Disorder is a mood disorder characterized by persistent sadness, loss of interest, and other symptoms that affect daily functioning, and it is not defined by panic attacks or &lt;/span&gt;&lt;span class="NormalTextRun ContextualSpellingAndGrammarErrorV2Themed SCXW30085073 BCX8" data-ccp-parastyle="Normal (Web)"&gt;the fear&lt;/span&gt;&lt;span class="NormalTextRun SCXW30085073 BCX8" data-ccp-parastyle="Normal (Web)"&gt; of them.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW30085073 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g8eca8b666585a2393bcf1d3967626d5d" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>6766,2921,8771,7836</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW248410497 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW248410497 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What anxiety disorder is characterized by a significant fear of social situations, such as public speaking or meeting new people?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW248410497 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="6766">
+              <material>
+                <mattext texttype="text/plain">Social anxiety disorder</mattext>
+              </material>
+            </response_label>
+            <response_label ident="2921">
+              <material>
+                <mattext texttype="text/plain">Agoraphobia</mattext>
+              </material>
+            </response_label>
+            <response_label ident="8771">
+              <material>
+                <mattext texttype="text/plain">Separation Anxiety Disorder</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7836">
+              <material>
+                <mattext texttype="text/plain">Selective Mutism</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">2921</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="2921_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">8771</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="8771_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">7836</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="7836_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">6766</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="2921_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW207037051 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW207037051 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Agoraphobia is a fear of situations where escape might be difficult or embarrassing, often linked to a fear of having panic attacks in those places, rather than a primary fear of social interaction itself.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW207037051 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="8771_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW250448018 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW250448018 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Separation Anxiety Disorder involves excessive fear or anxiety concerning separation from attachment figures, not a fear of general social situations.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW250448018 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="7836_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW149871296 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW149871296 BCX8" data-ccp-parastyle="Normal (Web)"&gt; Selective mutism is a consistent failure to speak in specific social situations despite speaking in other situations. While often co-occurring with social &lt;/span&gt;&lt;span class="NormalTextRun SCXW149871296 BCX8" data-ccp-parastyle="Normal (Web)"&gt;anxiety, social anxiety disorder is the broader condition encompassing the fear of social situations.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW149871296 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="gd92694f5b3e6f8c6cbde5b03f3005181" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>4403,5356,5685,1319</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW206454967 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW206454967 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Approximately what&lt;/span&gt;&lt;span class="NormalTextRun SCXW206454967 BCX8" data-ccp-parastyle="Normal (Web)"&gt; percentage of adults globally suffer from depression?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW206454967 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="4403">
+              <material>
+                <mattext texttype="text/plain">5%</mattext>
+              </material>
+            </response_label>
+            <response_label ident="5356">
+              <material>
+                <mattext texttype="text/plain">1%</mattext>
+              </material>
+            </response_label>
+            <response_label ident="5685">
+              <material>
+                <mattext texttype="text/plain">10%</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1319">
+              <material>
+                <mattext texttype="text/plain">25%</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">5356</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="5356_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">5685</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="5685_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1319</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1319_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">4403</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="5356_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW123350626 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW123350626 BCX8" data-ccp-parastyle="Normal (Web)"&gt;The global prevalence of depression is significantly higher than 1%; depression affects a substantial &lt;/span&gt;&lt;span class="NormalTextRun SCXW123350626 BCX8" data-ccp-parastyle="Normal (Web)"&gt;portion&lt;/span&gt;&lt;span class="NormalTextRun SCXW123350626 BCX8" data-ccp-parastyle="Normal (Web)"&gt; of the world's adult population.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW123350626 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="5685_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW21636145 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW21636145 BCX8" data-ccp-parastyle="Normal (Web)"&gt;While depression is widespread, the specific statistic provided in the course material for the global adult population suffering from depression is 5%.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW21636145 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="1319_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW108619158 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW108619158 BCX8" data-ccp-parastyle="Normal (Web)"&gt;A quarter of the global adult population (25%) is too high for the prevalence of depression; this figure would suggest a much larger number than reported by health organizations.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW108619158 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g7288553992dbc2c5b1822955d833bf41" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>5822,1043,9071,6812</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW107764022 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW107764022 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Which gender is more &lt;/span&gt;&lt;span class="NormalTextRun SCXW107764022 BCX8" data-ccp-parastyle="Normal (Web)"&gt;frequently&lt;/span&gt;&lt;span class="NormalTextRun SCXW107764022 BCX8" data-ccp-parastyle="Normal (Web)"&gt; diagnosed with depression?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW107764022 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="5822">
+              <material>
+                <mattext texttype="text/plain">Females</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1043">
+              <material>
+                <mattext texttype="text/plain">Males</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9071">
+              <material>
+                <mattext texttype="text/plain">Both equally</mattext>
+              </material>
+            </response_label>
+            <response_label ident="6812">
+              <material>
+                <mattext texttype="text/plain">Children</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1043</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1043_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">9071</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="9071_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">6812</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="6812_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">5822</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="1043_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW115826902 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW115826902 BCX8" data-ccp-parastyle="Normal (Web)"&gt;While males do experience depression, studies and statistics show that females are diagnosed with depression more &lt;/span&gt;&lt;span class="NormalTextRun SCXW115826902 BCX8" data-ccp-parastyle="Normal (Web)"&gt;frequently&lt;/span&gt;&lt;span class="NormalTextRun SCXW115826902 BCX8" data-ccp-parastyle="Normal (Web)"&gt; than males.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW115826902 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="9071_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW255837091 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW255837091 BCX8" data-ccp-parastyle="Normal (Web)"&gt;The prevalence rates for depression are not equal between genders, with a higher diagnostic rate &lt;/span&gt;&lt;span class="NormalTextRun SCXW255837091 BCX8" data-ccp-parastyle="Normal (Web)"&gt;observed&lt;/span&gt;&lt;span class="NormalTextRun SCXW255837091 BCX8" data-ccp-parastyle="Normal (Web)"&gt; in females.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW255837091 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="6812_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW17786174 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW17786174 BCX8" data-ccp-parastyle="Normal (Web)"&gt;While depression can affect children, the question specifically refers to a gender-based prevalence which is a more notable distinction in adult populations.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW17786174 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="gf3c33dffc77a7230ac3ecb925a7c0cf7" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>6170,3687,2044,2328</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW111637829 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW111637829 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Which of the following is a common symptom of depression?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW111637829 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="6170">
+              <material>
+                <mattext texttype="text/plain">Persistent sadness</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3687">
+              <material>
+                <mattext texttype="text/plain">Increased energy levels</mattext>
+              </material>
+            </response_label>
+            <response_label ident="2044">
+              <material>
+                <mattext texttype="text/plain">Extreme euphoria</mattext>
+              </material>
+            </response_label>
+            <response_label ident="2328">
+              <material>
+                <mattext texttype="text/plain">Heightened focus</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3687</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3687_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">2044</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="2044_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">2328</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="2328_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">6170</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="3687_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW144771266 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW144771266 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Depression typically causes a significant decrease in energy, leading to fatigue and lethargy, rather than increased energy levels.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW144771266 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="2044_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW125873142 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW125873142 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Extreme euphoria, or an abnormally elevated mood, is a symptom associated with mania in bipolar disorder, not typical depression.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW125873142 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="2328_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW14031963 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW14031963 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Depression often impairs cognitive functions, leading to difficulty concentrating, impaired memory, and a general lack of focus, rather than heightened focus.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW14031963 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g2dd11a2dbf91d504d960e37fe4c61912" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>373,6730,801,4924</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW263179833 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW263179833 BCX8" data-ccp-parastyle="Normal (Web)"&gt;According to mental health guidelines, what is the effect of directly asking someone if they are thinking about suicide?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW263179833 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="373">
+              <material>
+                <mattext texttype="text/plain">It does not put the idea in their head, but instead can open a path for discussion and help.</mattext>
+              </material>
+            </response_label>
+            <response_label ident="6730">
+              <material>
+                <mattext texttype="text/plain">It will immediately cause them to attempt suicide</mattext>
+              </material>
+            </response_label>
+            <response_label ident="801">
+              <material>
+                <mattext texttype="text/plain">It makes them angry and resentful</mattext>
+              </material>
+            </response_label>
+            <response_label ident="4924">
+              <material>
+                <mattext texttype="text/plain">It is considered disrespectful and invasive</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">6730</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="6730_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">801</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="801_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">4924</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="4924_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">373</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="6730_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW257329722 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW257329722 BCX8" data-ccp-parastyle="Normal (Web)"&gt;This is a dangerous misconception. Directly asking about suicidal thoughts is a critical step in suicide prevention and can provide relief and an opportunity for the individual to seek help.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW257329722 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="801_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW156843483 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW156843483 BCX8" data-ccp-parastyle="Normal (Web)"&gt;While some individuals might react with &lt;/span&gt;&lt;span class="NormalTextRun SCXW156843483 BCX8" data-ccp-parastyle="Normal (Web)"&gt;initial&lt;/span&gt;&lt;span class="NormalTextRun SCXW156843483 BCX8" data-ccp-parastyle="Normal (Web)"&gt; discomfort, for many who are struggling, being directly asked about suicide can bring a sense of relief that someone cares and is willing to talk about a difficult topic.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW156843483 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="4924_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW14887827 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW14887827 BCX8" data-ccp-parastyle="Normal (Web)"&gt;While it is a very personal question, in the context of mental health crisis or concern for someone's well-being, directly asking about suicide is considered a compassionate and necessary intervention, not disrespectful.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW14887827 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g3d8c8284c5651e32430a1a8641e77358" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>2448,2891,9864,4789</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW233070767 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW233070767 BCX8" data-ccp-parastyle="Normal (Web)"&gt;What is defined as a persistent dependence on a harmful behavior or substance?&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="2448">
+              <material>
+                <mattext texttype="text/plain">Addiction</mattext>
+              </material>
+            </response_label>
+            <response_label ident="2891">
+              <material>
+                <mattext texttype="text/plain">Habit</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9864">
+              <material>
+                <mattext texttype="text/plain">Obsession</mattext>
+              </material>
+            </response_label>
+            <response_label ident="4789">
+              <material>
+                <mattext texttype="text/plain">Craving</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">2891</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="2891_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">9864</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="9864_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">4789</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="4789_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">2448</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="2891_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW181044803 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW181044803 BCX8" data-ccp-parastyle="Normal (Web)"&gt;A habit is a routine behavior often performed unconsciously, but it does not necessarily involve the compulsive, harmful &lt;/span&gt;&lt;span class="NormalTextRun SCXW181044803 BCX8" data-ccp-parastyle="Normal (Web)"&gt;dependence&lt;/span&gt;&lt;span class="NormalTextRun SCXW181044803 BCX8" data-ccp-parastyle="Normal (Web)"&gt; and loss of control characteristic of an addiction.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW181044803 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="9864_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW150122343 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW150122343 BCX8" data-ccp-parastyle="Normal (Web)"&gt;An obsession is an unwanted, intrusive thought or image, often associated with obsessive-compulsive disorder, which is distinct from a persistent dependence on a behavior or substance.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW150122343 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="4789_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW28159680 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW28159680 BCX8" data-ccp-parastyle="Normal (Web)"&gt;A craving is an intense desire for a substance or behavior, which is a symptom or &lt;/span&gt;&lt;span class="NormalTextRun SCXW28159680 BCX8" data-ccp-parastyle="Normal (Web)"&gt;component&lt;/span&gt;&lt;span class="NormalTextRun SCXW28159680 BCX8" data-ccp-parastyle="Normal (Web)"&gt; of addiction, but it is not the definition of addiction itself.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW28159680 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g45f0732443994a365f3d26b86f6039f5" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>7229,6558,9955,3591</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW148590585 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW148590585 BCX8" data-ccp-parastyle="Normal (Web)"&gt;According to Elder M. Russell Ballard, what does "any kind of addiction" involve?&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW148590585 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="7229">
+              <material>
+                <mattext texttype="text/plain">Surrendering to something and relinquishing agency.</mattext>
+              </material>
+            </response_label>
+            <response_label ident="6558">
+              <material>
+                <mattext texttype="text/plain">Gaining valuable insights</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9955">
+              <material>
+                <mattext texttype="text/plain">Enhancing personal freedom</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3591">
+              <material>
+                <mattext texttype="text/plain">Building stronger relationships</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">6558</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="6558_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">9955</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="9955_fb"/>
+        </respcondition>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">3591</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="3591_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">7229</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="6558_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW235025370 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW235025370 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Addiction leads to a loss of control and can cause significant negative consequences, which prevents individuals from gaining valuable insights or personal growth.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW235025370 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="9955_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW218995672 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW218995672 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Addiction fundamentally limits personal freedom and choice by creating a compulsive dependence on a substance or behavior, rather than enhancing it.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW218995672 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+      <itemfeedback ident="3591_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW81209573 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW81209573 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Addiction often leads to deceit, broken trust, and failure to fulfill obligations, which typically damages relationships rather than building stronger ones.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW81209573 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="gf41c1ec2aba490dd7710fff51c583ed1" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>987,6295</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW53515029 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW53515029 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Video gaming and technology use can be considered types of addiction. &lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW53515029 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="987">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="6295">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">6295</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="6295_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">987</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="6295_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="NormalTextRun SCXW89945393 BCX8" data-ccp-parastyle="Normal (Web)"&gt;This statement is true. &lt;/span&gt;&lt;span class="NormalTextRun SCXW89945393 BCX8" data-ccp-parastyle="Normal (Web)"&gt;V&lt;/span&gt;&lt;span class="NormalTextRun SCXW89945393 BCX8" data-ccp-parastyle="Normal (Web)"&gt;ideo gaming and technology use &lt;/span&gt;&lt;span class="NormalTextRun SCXW89945393 BCX8" data-ccp-parastyle="Normal (Web)"&gt;can be &lt;/span&gt;&lt;span class="NormalTextRun SCXW89945393 BCX8" data-ccp-parastyle="Normal (Web)"&gt;an &lt;/span&gt;&lt;span class="NormalTextRun ContextualSpellingAndGrammarErrorV2Themed SCXW89945393 BCX8" data-ccp-parastyle="Normal (Web)"&gt;addiction.&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="ge90adc9838f016ca0d030689a6d49418" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>4184,291</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW74087535 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW74087535 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Addictions primarily lead to enhanced personal freedom.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW74087535 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="4184">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="291">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">4184</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="4184_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">291</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="4184_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW257254796 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW257254796 BCX8" data-ccp-parastyle="Normal (Web)"&gt;This statement is false. Addictions do not enhance personal freedom. Instead, they result in surrendering one's agency, leading to a state of dependence where the individual's choices become dictated by &lt;/span&gt;&lt;span class="NormalTextRun ContextualSpellingAndGrammarErrorV2Themed SCXW257254796 BCX8" data-ccp-parastyle="Normal (Web)"&gt;the addiction&lt;/span&gt;&lt;span class="NormalTextRun SCXW257254796 BCX8" data-ccp-parastyle="Normal (Web)"&gt;.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW257254796 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g66ffcf88c854c1e784f2b57346132b2d" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>100,6921</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW46586143 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW46586143 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Overcoming addictions usually involves a quick and effortless process.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW46586143 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="100">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="6921">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">100</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="100_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">6921</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="100_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW113563162 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW113563162 BCX8" data-ccp-parastyle="Normal (Web)"&gt;This statement is false. &lt;/span&gt;&lt;span class="NormalTextRun SCXW113563162 BCX8" data-ccp-parastyle="Normal (Web)"&gt;O&lt;/span&gt;&lt;span class="NormalTextRun SCXW113563162 BCX8" data-ccp-parastyle="Normal (Web)"&gt;vercoming addictions requires &lt;/span&gt;&lt;span class="NormalTextRun SCXW113563162 BCX8" data-ccp-parastyle="Normal (Web)"&gt;significant time&lt;/span&gt;&lt;span class="NormalTextRun SCXW113563162 BCX8" data-ccp-parastyle="Normal (Web)"&gt; and &lt;/span&gt;&lt;span class="NormalTextRun SCXW113563162 BCX8" data-ccp-parastyle="Normal (Web)"&gt;great effort&lt;/span&gt;&lt;span class="NormalTextRun SCXW113563162 BCX8" data-ccp-parastyle="Normal (Web)"&gt;, and it is rarely a quick or effortless process.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW113563162 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="g003684128018c7fc5f159973a9908253" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>9464,1244</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span class="TextRun SCXW263413463 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW263413463 BCX8" data-ccp-parastyle="Normal (Web)"&gt;Statement: According to Elder M. Russell Ballard, there is hope for the addicted through the Atonement of the Lord Jesus Christ.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW263413463 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="9464">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1244">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="Yes">
+          <conditionvar>
+            <varequal respident="response1">1244</varequal>
+          </conditionvar>
+          <displayfeedback feedbacktype="Response" linkrefid="1244_fb"/>
+        </respcondition>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">9464</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+      <itemfeedback ident="1244_fb">
+        <flow_mat>
+          <material>
+            <mattext texttype="text/html">&lt;span class="TextRun SCXW159345417 BCX8" lang="EN-US" data-contrast="auto"&gt;&lt;span class="NormalTextRun SCXW159345417 BCX8" data-ccp-parastyle="Normal (Web)"&gt;This statement is true. &lt;/span&gt;&lt;span class="NormalTextRun SCXW159345417 BCX8" data-ccp-parastyle="Normal (Web)"&gt;T&lt;/span&gt;&lt;span class="NormalTextRun SCXW159345417 BCX8" data-ccp-parastyle="Normal (Web)"&gt;he Atonement of Jesus Christ &lt;/span&gt;&lt;span class="NormalTextRun SCXW159345417 BCX8" data-ccp-parastyle="Normal (Web)"&gt;is a&lt;/span&gt;&lt;span class="NormalTextRun SCXW159345417 BCX8" data-ccp-parastyle="Normal (Web)"&gt; source of hope for individuals struggling with addiction.&lt;/span&gt;&lt;/span&gt;&lt;span class="EOP SCXW159345417 BCX8" data-ccp-props="{&amp;quot;134233117&amp;quot;:true,&amp;quot;134233118&amp;quot;:true,&amp;quot;201341983&amp;quot;:0,&amp;quot;335559740&amp;quot;:240}"&gt;&amp;nbsp;&lt;/span&gt;</mattext>
+          </material>
+        </flow_mat>
+      </itemfeedback>
+    </item>
+    <item ident="gfd462206f242f3c2c6a53eade7f78496" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>2.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>54868,96947,70767,48792</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;div class="byui hs132"&gt;
+&lt;p&gt;The following statements about sleep are true &lt;strong&gt;except&lt;/strong&gt;&amp;nbsp;&lt;span style="text-decoration: underline;"&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="54868">
+              <material>
+                <mattext texttype="text/plain">most adults need at least 7–9 hours of sleep a night</mattext>
+              </material>
+            </response_label>
+            <response_label ident="96947">
+              <material>
+                <mattext texttype="text/plain">the temperature of your bedroom does not matter</mattext>
+              </material>
+            </response_label>
+            <response_label ident="70767">
+              <material>
+                <mattext texttype="text/plain">blue light from electronics can delay sleep onset</mattext>
+              </material>
+            </response_label>
+            <response_label ident="48792">
+              <material>
+                <mattext texttype="text/plain">regular exercise can improve your sleep patterns</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">96947</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="g19f9ad3720a5ee000492a792675ed678" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>2.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>69942,24101,12521,90640</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;div class="byui hs132"&gt;
+&lt;p&gt;Distress refers to the&amp;nbsp;&lt;span style="text-decoration: underline;"&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="69942">
+              <material>
+                <mattext texttype="text/plain">good stressors that occur in life</mattext>
+              </material>
+            </response_label>
+            <response_label ident="24101">
+              <material>
+                <mattext texttype="text/plain">negative effects of stress</mattext>
+              </material>
+            </response_label>
+            <response_label ident="12521">
+              <material>
+                <mattext texttype="text/plain">finding creative solutions to our problems</mattext>
+              </material>
+            </response_label>
+            <response_label ident="90640">
+              <material>
+                <mattext texttype="text/html">building barriers to hide the stressors we don't want to deal with</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">24101</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="g7588b31dc7c20ac7a8ef5d339854a29f" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>2.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>27139,4188,55357,98333</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;div class="byui hs132"&gt;
+&lt;p&gt;Chronic stress increases your risk for chronic diseases due to physiologic changes such as&amp;nbsp;&lt;span style="text-decoration: underline;"&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="27139">
+              <material>
+                <mattext texttype="text/plain">elevated heart rate</mattext>
+              </material>
+            </response_label>
+            <response_label ident="4188">
+              <material>
+                <mattext texttype="text/plain">elevated blood pressure</mattext>
+              </material>
+            </response_label>
+            <response_label ident="55357">
+              <material>
+                <mattext texttype="text/plain">elevated levels of cortisol</mattext>
+              </material>
+            </response_label>
+            <response_label ident="98333">
+              <material>
+                <mattext texttype="text/plain">all of the above</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">98333</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="gecbcd3fa7840d4beb9746c9f6fff4035" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>2.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>57276,28327,44362,65839</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;div class="byui hs132"&gt;
+&lt;p&gt;Circumstantial stressors include all the following &lt;strong&gt;except&amp;nbsp;&lt;/strong&gt;&lt;span style="text-decoration: underline;"&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="57276">
+              <material>
+                <mattext texttype="text/plain">guilt</mattext>
+              </material>
+            </response_label>
+            <response_label ident="28327">
+              <material>
+                <mattext texttype="text/plain">death</mattext>
+              </material>
+            </response_label>
+            <response_label ident="44362">
+              <material>
+                <mattext texttype="text/plain">divorce</mattext>
+              </material>
+            </response_label>
+            <response_label ident="65839">
+              <material>
+                <mattext texttype="text/plain">job loss</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">57276</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="g7dd4e33a3d1886fa4b715f58b2bf80ab" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>2.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>10215,24672,12281,96745</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;div class="byui hs132"&gt;
+&lt;p&gt;What are techniques that can be used to reduce stress?&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="10215">
+              <material>
+                <mattext texttype="text/plain">deep breathing exercises</mattext>
+              </material>
+            </response_label>
+            <response_label ident="24672">
+              <material>
+                <mattext texttype="text/plain">refocusing to a positive image</mattext>
+              </material>
+            </response_label>
+            <response_label ident="12281">
+              <material>
+                <mattext texttype="text/plain">participating in exercise</mattext>
+              </material>
+            </response_label>
+            <response_label ident="96745">
+              <material>
+                <mattext texttype="text/plain">all of the above</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">96745</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="g435144681e911b31e77c30b201a77b77" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>4256,3584</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;Men experience lifetime major depression almost twice as frequently as women.&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="4256">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3584">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">3584</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="ga35c191a1462c3aaa59a181f21965d92" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>158,6870,9164,8624,2215,1967</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;Common signs of suicide risk include all of the following, &lt;strong&gt;except &lt;/strong&gt;&lt;span style="text-decoration: underline;"&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;.&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="158">
+              <material>
+                <mattext texttype="text/plain">talking about being a burden to others</mattext>
+              </material>
+            </response_label>
+            <response_label ident="6870">
+              <material>
+                <mattext texttype="text/plain">looking for a way to kill themselves, such as searching online or buying a gun</mattext>
+              </material>
+            </response_label>
+            <response_label ident="9164">
+              <material>
+                <mattext texttype="text/plain">talking about feeling hopeless or having no reason to live</mattext>
+              </material>
+            </response_label>
+            <response_label ident="8624">
+              <material>
+                <mattext texttype="text/plain">sleeping too little or too much</mattext>
+              </material>
+            </response_label>
+            <response_label ident="2215">
+              <material>
+                <mattext texttype="text/plain">withdrawing or isolating themselves</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1967">
+              <material>
+                <mattext texttype="text/plain">feeling sad about a new problem in their lives</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">1967</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="gee4cd1a9fb8a9aa9bc29c65356127a52" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>5843,1408</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span&gt;Asking someone if they are thinking about suicide is a dangerous thing because it might "put the idea in their head."&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="5843">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1408">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">1408</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="g2a91b4f017a237e76b07d9d064e69458" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>5205,592</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span&gt;Depression is a mood disorder that is characterized by depressed or sad mood, diminished interest in activities which used to be pleasurable, weight gain or loss, psychomotor agitation or retardation, fatigue, inappropriate guilt, difficulties concentrating, as well as recurrent thoughts of death.&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="5205">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="592">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">5205</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="g2143b826c8b1501ed8d92b77cd55f011" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>multiple_choice_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>9851,2299,4399,3372,7222</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span&gt;Which of the following is associated with depression?&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="9851">
+              <material>
+                <mattext texttype="text/plain">smoking</mattext>
+              </material>
+            </response_label>
+            <response_label ident="2299">
+              <material>
+                <mattext texttype="text/plain">alcohol consumption</mattext>
+              </material>
+            </response_label>
+            <response_label ident="4399">
+              <material>
+                <mattext texttype="text/plain">sleep disturbances</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3372">
+              <material>
+                <mattext texttype="text/plain">physical inactivity</mattext>
+              </material>
+            </response_label>
+            <response_label ident="7222">
+              <material>
+                <mattext texttype="text/plain">all are associated with depression</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">7222</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="g7d86e5eb36a68737795844604a7b2f5d" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>8720,1818</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span&gt;It is easy to overcome addiction. Individuals just need to choose to overcome their addiction, and then they will be able to stop "cold turkey." Professional help is rarely needed to treat addictions.&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="8720">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="1818">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">1818</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+    <item ident="g1176ab7945dcc0284412777487ac57dc" title="Question">
+      <itemmetadata>
+        <qtimetadata>
+          <qtimetadatafield>
+            <fieldlabel>question_type</fieldlabel>
+            <fieldentry>true_false_question</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>points_possible</fieldlabel>
+            <fieldentry>1.0</fieldentry>
+          </qtimetadatafield>
+          <qtimetadatafield>
+            <fieldlabel>original_answer_ids</fieldlabel>
+            <fieldentry>3782,3929</fieldentry>
+          </qtimetadatafield>
+        </qtimetadata>
+      </itemmetadata>
+      <presentation>
+        <material>
+          <mattext texttype="text/html">&lt;div&gt;&lt;span&gt;Physical health can be maintained through adequate amounts of sleep, regular exercise, and eating healthy meals.&amp;nbsp;&lt;/span&gt;&lt;span&gt;It's important for emotional health to maintain your physical health.&lt;/span&gt;&lt;/div&gt;</mattext>
+        </material>
+        <response_lid ident="response1" rcardinality="Single">
+          <render_choice>
+            <response_label ident="3782">
+              <material>
+                <mattext texttype="text/plain">True</mattext>
+              </material>
+            </response_label>
+            <response_label ident="3929">
+              <material>
+                <mattext texttype="text/plain">False</mattext>
+              </material>
+            </response_label>
+          </render_choice>
+        </response_lid>
+      </presentation>
+      <resprocessing>
+        <outcomes>
+          <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+        </outcomes>
+        <respcondition continue="No">
+          <conditionvar>
+            <varequal respident="response1">3782</varequal>
+          </conditionvar>
+          <setvar action="Set" varname="SCORE">100</setvar>
+        </respcondition>
+      </resprocessing>
+    </item>
+  </objectbank>
+</questestinterop>

@@ -22,7 +22,7 @@ def generate_html_report(year_week: str, courses_data: list):
                 total_changes_by_category[k] += len(v)
                 
     category_titles = {
-        "manifest": "Manifest (Modules)",
+        "manifest": "Modules page",
         "assignments": "Assignments",
         "pages": "Pages",
         "quizzes_banks": "Quizzes & Question Banks",
@@ -74,12 +74,13 @@ def generate_html_report(year_week: str, courses_data: list):
                 labels_html = "".join([f"<span class='label label-{l.lower().replace('/', '-').replace(' ', '-')}'>{l}</span>" for l in item["labels"]])
                 
                 # Make the header clickable
+                display_title = item.get('file_title', item['file_path'])
                 logs_html += f"""
                 <div class="file-item">
                     <div class="file-header" onclick="toggleFile(this)" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: rgba(255,255,255,0.02); border-radius: 4px;">
                         <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
                             <span class="status status-{item['status'].split(' ')[0].lower()}">{item['status']}</span>
-                            <span class="file-path">{item['file_path']}</span>
+                            <span class="file-path">{display_title}</span>
                             {labels_html}
                         </div>
                         <span class="file-icon" style="color: var(--text-muted); font-size: 0.8rem;">▼</span>
@@ -93,26 +94,8 @@ def generate_html_report(year_week: str, courses_data: list):
                     # Default to display: none for a compact list
                     logs_html += f"<div class='diff-views-container' style='display: none; padding-top: 1rem;'>{ai_html}"
                     
-                    # Rendered View
-                    logs_html += "<div class='rendered-diff'>"
-                    for line in item["diff_lines"]:
-                        line_safe = line.replace('<', '&lt;').replace('>', '&gt;')
-                        if line.startswith('+++') or line.startswith('---') or line.startswith('@@'):
-                            continue
-                        elif line.startswith('+'):
-                            logs_html += f"<div class='rendered-add'>{line_safe[1:]}</div>"
-                        elif line.startswith('-'):
-                            logs_html += f"<div class='rendered-remove'>{line_safe[1:]}</div>"
-                        else:
-                            content = line_safe[1:] if line else ""
-                            if not content.strip():
-                                logs_html += "<br/>"
-                            else:
-                                logs_html += f"<div class='rendered-context'>{content}</div>"
-                    logs_html += "</div>"
-                    
-                    # Raw View
-                    logs_html += "<pre class='diff-block' style='display: none;'>"
+                    # Single Unified Diff View
+                    logs_html += "<pre class='diff-block'>"
                     for line in item["diff_lines"]:
                         line_safe = line.replace('<', '&lt;').replace('>', '&gt;')
                         if line.startswith('+++') or line.startswith('---'):
@@ -208,17 +191,7 @@ def generate_html_report(year_week: str, courses_data: list):
     
     .label { font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 12px; border: 1px solid var(--text-muted); color: var(--text-muted); background: rgba(255,255,255,0.05); }
     
-    /* Rendered View */
-    .rendered-diff {
-        background: var(--surface); padding: 1.5rem; border-radius: 6px;
-        font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.6;
-        border: 1px solid var(--border);
-    }
-    .rendered-add { background: var(--add-bg); color: var(--add-text); padding: 0.2rem 0.5rem; border-radius: 4px; margin: 0.2rem 0; }
-    .rendered-remove { background: var(--rem-bg); color: var(--rem-text); padding: 0.2rem 0.5rem; border-radius: 4px; text-decoration: line-through; margin: 0.2rem 0; }
-    .rendered-context { color: var(--text); padding: 0.2rem 0.5rem; }
-
-    /* Raw View */
+    /* Diff View */
     .diff-block {
         background: #000; padding: 1rem; border-radius: 6px; overflow-x: auto;
         font-family: monospace; font-size: 0.85rem; line-height: 1.4; margin: 0;
@@ -261,12 +234,6 @@ def generate_html_report(year_week: str, courses_data: list):
             if (icon) icon.textContent = '▲';
         }
     }
-    function toggleDiffView(btn) {
-        const isRaw = btn.textContent === "See Rendered View";
-        btn.textContent = isRaw ? "See Raw Changes" : "See Rendered View";
-        document.querySelectorAll('.rendered-diff').forEach(el => el.style.display = isRaw ? 'block' : 'none');
-        document.querySelectorAll('.diff-block').forEach(el => el.style.display = isRaw ? 'none' : 'block');
-    }
     """
     
     # Dashboard HTML
@@ -293,6 +260,24 @@ def generate_html_report(year_week: str, courses_data: list):
         val = total_changes_by_category.get(k, 0)
         dashboard_html += f"<div class='cat-row'><span>{title}</span><strong>{val}</strong></div>"
     dashboard_html += "</div>"
+    
+    # Course Insights Section
+    insights_html = ""
+    for c in courses_data:
+        if c.get("has_changes") and c.get("course_ai_summary"):
+            impact = c.get("course_ai_impact", "Medium")
+            impact_color = {"Low": "#4caf50", "Medium": "#ffb74d", "High": "#e57373"}.get(impact, "#ffb74d")
+            
+            insights_html += f"""
+            <div style="background: var(--surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1rem; position: relative;">
+                <h3 style="margin-top: 0; color: var(--accent); width: 80%;">{c['course_name']}</h3>
+                <span style="position: absolute; top: 1.5rem; right: 1.5rem; background: {impact_color}22; color: {impact_color}; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: bold; font-size: 0.85rem; border: 1px solid {impact_color};">Impact: {impact}</span>
+                <p style="margin-bottom: 0; line-height: 1.6;">{c['course_ai_summary']}</p>
+            </div>
+            """
+            
+    if insights_html:
+        dashboard_html += "<h2 style='margin-top: 3rem;'>Course Insights</h2>" + insights_html
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -311,9 +296,6 @@ def generate_html_report(year_week: str, courses_data: list):
                 <button class="active" onclick="switchTab('dashboard')">Dashboard</button>
                 <button onclick="switchTab('logs')">Raw Logs</button>
             </div>
-        </div>
-        <div class="nav-actions">
-            <button onclick="toggleDiffView(this)" id="view-toggle-btn">See Raw Changes</button>
         </div>
     </nav>
     <div class="container">

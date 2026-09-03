@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules xmlns="http://canvas.instructure.com/xsd/cccv1p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://canvas.instructure.com/xsd/cccv1p0 https://canvas.instructure.com/xsd/cccv1p0.xsd">
+  <module identifier="gcc9991f8a3a64b62bc60ccd8d9f496f2">
+    <title>Course Resources (Do NOT Publish)</title>
+    <workflow_state>unpublished</workflow_state>
+    <position>1</position>
+    <require_sequential_progress>false</require_sequential_progress>
+    <locked>false</locked>
+    <items>
+      <item identifier="g2dff4650af9dc8461c2322004e2185b4">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>unpublished</workflow_state>
+        <title>IMS</title>
+        <identifierref>g2dff4650af9dc8461c2322004e2185b4</identifierref>
+        <url>https://instructor.byupathway.edu/</url>
+        <position>1</position>
+        <new_tab>true</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g5043a8fe334d6f24d75817dc21c8322e">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>unpublished</workflow_state>
+        <title>Course Maintenance Form (Suggest a Fix or Improvement)</title>
+        <identifierref>g5043a8fe334d6f24d75817dc21c8322e</identifierref>
+        <url>https://content.byui.edu/integ/gen/2db77d0e-9c2e-4395-becc-3b376b9be105/0/?.vi=file&amp;attachment.uuid=483cb0fb-2e44-4479-b186-5179759b2e26</url>
+        <position>2</position>
+        <new_tab>true</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gebeb2f0a149c2ba6ef954abc38467d57">
+        <content_type>WikiPage</content_type>
+        <workflow_state>unpublished</workflow_state>
+        <title>Teaching Notes and Student Outreach</title>
+        <identifierref>g6e14266fd07a35dd05e45fb62fc1beef</identifierref>
+        <position>3</position>
+        <new_tab/>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gfc5f4ddb19fd91e029f5aea513cda0e6">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>unpublished</workflow_state>
+        <title>Grader Notes</title>
+        <identifierref>gfc5f4ddb19fd91e029f5aea513cda0e6</identifierref>
+        <url>https://docs.google.com/document/d/1J4sSqajwkV8ep-_CXgYRyUgVJ8WXbM7f6Nx5N0pEdFE/edit?tab=t.0#heading=h.m5et1gan613g</url>
+        <position>4</position>
+        <new_tab>true</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g738c642941ccd76260bdbdd550e39137">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>unpublished</workflow_state>
+        <title>Feedback Library</title>
+        <identifierref>g738c642941ccd76260bdbdd550e39137</identifierref>
+        <url>https://docs.google.com/spreadsheets/d/1PUo0VYWU4rDQuC4SsB2wq64S5vZaXYMD4ABjIr9PKe8/edit?gid=1070164197#gid=1070164197</url>
+        <position>5</position>
+        <new_tab>true</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+  </module>
+  <module identifier="g66d17efd76639a8ecd14b2c1b9be1b91">
+    <title>Textbook Information</title>
+    <workflow_state>active</workflow_state>
+    <position>2</position>
+    <require_sequential_progress>false</require_sequential_progress>
+    <locked>false</locked>
+    <items>
+      <item identifier="gd11197ab2f66f5cbc5f0de89594b13fe">
+        <content_type>WikiPage</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Textbook Information </title>
+        <identifierref>gd6a9a563f0b57a8a2747df9427fded1f</identifierref>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+  </module>
+  <module identifier="ga11c5ce9a7f44bfe29b345272ecd60e1">
+    <title>Week 01: Preparation</title>
+    <workflow_state>active</workflow_state>
+    <position>3</position>
+    <require_sequential_progress>false</require_sequential_progress>
+    <locked>false</locked>
+    <items>
+      <item identifier="g8f04f9fce31e1dc618812ff2c7d6dda6">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Middle of the Week</title>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g90bad44bd27a410e94955cbee5723965">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W01 Quiz: Course Overview</title>
+        <identifierref>g5de982fa85e63d290d461a629e925c17</identifierref>
+        <position>2</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="ga438e00d312b84012169091c35f8d2ae">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W01 Quiz: WhatsApp </title>
+        <identifierref>g501f7ea50eb181726b22d970a94376fa</identifierref>
+        <position>3</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+    <completionRequirements>
+      <completionRequirement type="min_score">
+        <min_score>8.0</min_score>
+        <identifierref>g90bad44bd27a410e94955cbee5723965</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>ga438e00d312b84012169091c35f8d2ae</identifierref>
+      </completionRequirement>
+    </completionRequirements>
+  </module>
+  <module identifier="g34d81e359da0564e9fa3bca5493f8f47">
+    <title>Week 01: 7 Dimensions of Wellness and Physical Fitness</title>
+    <workflow_state>active</workflow_state>
+    <position>4</position>
+    <require_sequential_progress>false</require_sequential_progress>
+    <locked>false</locked>
+    <prerequisites>
+      <prerequisite type="context_module">
+        <title>Week 01: Preparation</title>
+        <identifierref>ga11c5ce9a7f44bfe29b345272ecd60e1</identifierref>
+      </prerequisite>
+    </prerequisites>
+    <items>
+      <item identifier="geac3bbfce62a8c6e09c523f7757a7c37">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>End of the Week</title>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gcb3ce8ab5ce297fa5ba100ca38e591ed">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>How to be Successful in Online Courses</title>
+        <identifierref>gcb3ce8ab5ce297fa5ba100ca38e591ed</identifierref>
+        <url>https://docs.google.com/document/d/e/2PACX-1vTPWx5FJRdLrVGAtW-yELTBl93zAEhByUIUleGHy1bF7sNapsDopwVjoMfpiNSq5KtLxsTMH5pYUW6W/pub</url>
+        <position>2</position>
+        <new_tab>true</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g2062f04b57854f2680e1a168ed7095dd">
+        <content_type>WikiPage</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Attention: Messaging Instructors and Graders</title>
+        <identifierref>g7122f2f1262dcdeb6ad49a8069dfdabe</identifierref>
+        <position>3</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g7406f3e136e83fc47e72866d127ed740">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W01 Activity: Behavior Change</title>
+        <identifierref>g5c0c121f2145a17c02d97b9b290990b8</identifierref>
+        <position>4</position>
+        <new_tab/>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gde5bcbd9d13561780ed2339220299c00">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W01 Quiz: Knowledge Check</title>
+        <identifierref>g1aadd0c77dbc9e9508ecf03cba661554</identifierref>
+        <position>6</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="ge2e4108f4d87990652b2dd4da96c593a">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W01 Activity: Workout Plan</title>
+        <identifierref>g8182f5606ee1bccc30df07ee89b17da9</identifierref>
+        <position>7</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+    <completionRequirements>
+      <completionRequirement type="must_view">
+        <identifierref>gcb3ce8ab5ce297fa5ba100ca38e591ed</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_view">
+        <identifierref>g2062f04b57854f2680e1a168ed7095dd</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>gde5bcbd9d13561780ed2339220299c00</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>ge2e4108f4d87990652b2dd4da96c593a</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g7406f3e136e83fc47e72866d127ed740</identifierref>
+      </completionRequirement>
+    </completionRequirements>
+  </module>
+  <module identifier="g3f651ddcb9672cf8e7eb3865f3d46427">
+    <title>Week 02: Nutrition and Chronic Disease</title>
+    <workflow_state>active</workflow_state>
+    <position>5</position>
+    <unlock_at>2026-09-05T00:00:00</unlock_at>
+    <require_sequential_progress>false</require_sequential_progress>
+    <requirement_count>1</requirement_count>
+    <locked>false</locked>
+    <prerequisites>
+      <prerequisite type="context_module">
+        <title>Week 01: Preparation</title>
+        <identifierref>ga11c5ce9a7f44bfe29b345272ecd60e1</identifierref>
+      </prerequisite>
+    </prerequisites>
+    <items>
+      <item identifier="g14dabc482d2a1eb9ea9a351ecbd1407d">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>unpublished</workflow_state>
+        <title>Middle of the Week</title>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gc1bdc48e4393ceecbb83244d9526be67">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W02 Quiz: Knowledge Check</title>
+        <identifierref>g0271f01a97f3577b3e4409797e0ba42f</identifierref>
+        <position>2</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g838f38bcf5941ad07ad6cc11bf42431e">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>End of the Week</title>
+        <position>4</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g248bb94fec4d8328d8e292dd8c616b20">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W02 Video: Nutrition Goal</title>
+        <identifierref>g1c7d69da24c4b55db31ffdad9d5b94cb</identifierref>
+        <position>5</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gdd0d8ad7b2a29a03a0887471e8e5368f">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W02 Activity: Disease Risk</title>
+        <identifierref>g698ffa7d2fc3fbc7786c3cb120fcf5df</identifierref>
+        <position>6</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g8ab44f5419c35e652d7662f4a594a65d">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W02 Quiz: Exercise Report</title>
+        <identifierref>g3cc126508a5f8e407c7d20c2c9613e79</identifierref>
+        <position>7</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+    <completionRequirements>
+      <completionRequirement type="must_submit">
+        <identifierref>g248bb94fec4d8328d8e292dd8c616b20</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>gc1bdc48e4393ceecbb83244d9526be67</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>gdd0d8ad7b2a29a03a0887471e8e5368f</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g8ab44f5419c35e652d7662f4a594a65d</identifierref>
+      </completionRequirement>
+    </completionRequirements>
+  </module>
+  <module identifier="gdbff40b0dfc19ba990a0bdc1e0dd487e">
+    <title>Week 03: Emotional and Mental Wellness</title>
+    <workflow_state>active</workflow_state>
+    <position>6</position>
+    <unlock_at>2026-09-12T00:00:00</unlock_at>
+    <require_sequential_progress>false</require_sequential_progress>
+    <requirement_count>1</requirement_count>
+    <locked>false</locked>
+    <prerequisites>
+      <prerequisite type="context_module">
+        <title>Week 01: Preparation</title>
+        <identifierref>ga11c5ce9a7f44bfe29b345272ecd60e1</identifierref>
+      </prerequisite>
+    </prerequisites>
+    <items>
+      <item identifier="g235e57e2456dba38b9b299305f2ed9f3">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Middle of the Week</title>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gc8eff823c2b24a3151ec7fdb4f6906f8">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W03 Quiz: Knowledge Check</title>
+        <identifierref>gbd7a603afeb5a76334770d909f63c4d5</identifierref>
+        <position>2</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g08b8d6c17e85a032080a374ab319fb39">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>End of the Week</title>
+        <position>3</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g99233de29a14687bd677aa836d2b98fb">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W03 Video: Reflect and Apply</title>
+        <identifierref>g8ed1ef0844c58b71e63126eb9f59922c</identifierref>
+        <position>4</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gc6a7783f18d623fa652cfeb6c1dde348">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W03 Activity: Stress and Relaxation</title>
+        <identifierref>g7fe21dd8511a395288c61c212ce74dce</identifierref>
+        <position>5</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g00c51caeb5f4b86c677699bd230c4b78">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W03 Quiz: Exercise Report</title>
+        <identifierref>ge970d92a0a36c3d06cf727baa99c88de</identifierref>
+        <position>6</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+    <completionRequirements>
+      <completionRequirement type="must_submit">
+        <identifierref>gc8eff823c2b24a3151ec7fdb4f6906f8</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g99233de29a14687bd677aa836d2b98fb</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>gc6a7783f18d623fa652cfeb6c1dde348</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g00c51caeb5f4b86c677699bd230c4b78</identifierref>
+      </completionRequirement>
+    </completionRequirements>
+  </module>
+  <module identifier="g22de8ebc41d56226440f569a98f77b47">
+    <title>Week 04: Social Wellness</title>
+    <workflow_state>active</workflow_state>
+    <position>7</position>
+    <unlock_at>2026-09-19T00:00:00</unlock_at>
+    <require_sequential_progress>false</require_sequential_progress>
+    <requirement_count>1</requirement_count>
+    <locked>false</locked>
+    <prerequisites>
+      <prerequisite type="context_module">
+        <title>Week 01: Preparation</title>
+        <identifierref>ga11c5ce9a7f44bfe29b345272ecd60e1</identifierref>
+      </prerequisite>
+    </prerequisites>
+    <items>
+      <item identifier="g3f93c1d012dd5ab170db204b7e299a8d">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Middle of the Week</title>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gf1cf256cbb8a05a67babdd72015aff54">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W04 Quiz: Knowledge Check</title>
+        <identifierref>gbbfbce9fd04cb3b3b72bdf69616e4eb4</identifierref>
+        <position>2</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g74b35c974cf65465839acf34ce3b19f9">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>End of the Week</title>
+        <position>3</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g7ba70e4df05be648e0f992be3bb16ddd">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W04 Video: Goal Progress</title>
+        <identifierref>ga3cf92e01dc1908e6c18810abdb60c20</identifierref>
+        <position>4</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g815cdd91cad3cc5779c70ccae53a5265">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W04 Activity: Reflective Listening </title>
+        <identifierref>g5bf2ece1944ac8c31a69ed8541da6e26</identifierref>
+        <position>5</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g522d58339b7b662489491879c8c6fef0">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W04 Quiz: Exercise Report</title>
+        <identifierref>g1df7ea1c48468a4ceaf4dd2b69fa2ff3</identifierref>
+        <position>6</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+    <completionRequirements>
+      <completionRequirement type="must_submit">
+        <identifierref>gf1cf256cbb8a05a67babdd72015aff54</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g7ba70e4df05be648e0f992be3bb16ddd</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g815cdd91cad3cc5779c70ccae53a5265</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g522d58339b7b662489491879c8c6fef0</identifierref>
+      </completionRequirement>
+    </completionRequirements>
+  </module>
+  <module identifier="gf9446f3eac2396e4f53713d4e2ff4e57">
+    <title>Week 05: Spiritual Wellness</title>
+    <workflow_state>active</workflow_state>
+    <position>8</position>
+    <unlock_at>2026-09-26T00:00:00</unlock_at>
+    <require_sequential_progress>false</require_sequential_progress>
+    <requirement_count>1</requirement_count>
+    <locked>false</locked>
+    <prerequisites>
+      <prerequisite type="context_module">
+        <title>Week 01: Preparation</title>
+        <identifierref>ga11c5ce9a7f44bfe29b345272ecd60e1</identifierref>
+      </prerequisite>
+    </prerequisites>
+    <items>
+      <item identifier="gf2d53543d40ee4fe7a9a8da46075d91c">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Middle of the Week</title>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g19e7278237f23453956b2a60df0f7ce8">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W05 Quiz: Knowledge Check</title>
+        <identifierref>gdc4f1e3ec77b2b69e071a79e070ef187</identifierref>
+        <position>2</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g6b1ad0bb83c127657cd8c9bb0a1356e3">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>End of the Week</title>
+        <position>3</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g0af774c691515b6834afc2faeec4b807">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W05 Video: Reflect and Apply</title>
+        <identifierref>gc1f78266f9cd214eaaf6caa42a0168b7</identifierref>
+        <position>4</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g3319add4527eda88658367f1567a6eb7">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W05 Activity: Technology</title>
+        <identifierref>ga17789f1ee7156d8722148ecc1bd15dd</identifierref>
+        <position>5</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="ge01ea929e33b3610b5d5a1c96122f2f8">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W05 Quiz: Exercise Report</title>
+        <identifierref>g3ffaef9fd744abdcf35911184fdeef36</identifierref>
+        <position>6</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+    <completionRequirements>
+      <completionRequirement type="must_submit">
+        <identifierref>g19e7278237f23453956b2a60df0f7ce8</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g0af774c691515b6834afc2faeec4b807</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g3319add4527eda88658367f1567a6eb7</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>ge01ea929e33b3610b5d5a1c96122f2f8</identifierref>
+      </completionRequirement>
+    </completionRequirements>
+  </module>
+  <module identifier="g59a50c8f5b133a80c01c5d4410220af3">
+    <title>Week 06: Intellectual Wellness</title>
+    <workflow_state>active</workflow_state>
+    <position>9</position>
+    <unlock_at>2026-10-03T00:00:00</unlock_at>
+    <require_sequential_progress>false</require_sequential_progress>
+    <requirement_count>1</requirement_count>
+    <locked>false</locked>
+    <prerequisites>
+      <prerequisite type="context_module">
+        <title>Week 01: Preparation</title>
+        <identifierref>ga11c5ce9a7f44bfe29b345272ecd60e1</identifierref>
+      </prerequisite>
+    </prerequisites>
+    <items>
+      <item identifier="g23733e189f5a30045a83bba328182148">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Middle of the Week</title>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g5933ec57c3010423878d0a9c6b9dbf4f">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W06 Quiz: Knowledge Check</title>
+        <identifierref>g6f9e54196613e89f7bab831b315e1208</identifierref>
+        <position>2</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gfb899e306bad4824297ff22195a803fd">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>End of the Week</title>
+        <position>3</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g2bfb3d74878cbe122fea219a10a1174f">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W06 Video: Reflect and Apply </title>
+        <identifierref>g2ec9ec0a1404c5c46c1705ee65f4c337</identifierref>
+        <position>4</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g6d8d87af3641a9c39df3164bea552ca8">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W06 Activity: Lifelong Learning</title>
+        <identifierref>gfaf9c820a459d07b361e5b413ca2b5d3</identifierref>
+        <position>5</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gbf1501bd6ead76aa640c43c1d199a504">
+        <content_type>Quizzes::Quiz</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W06 Quiz: Exercise Report</title>
+        <identifierref>g470cdd577b163f1519f8ab7c4267332e</identifierref>
+        <position>6</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+    <completionRequirements>
+      <completionRequirement type="must_submit">
+        <identifierref>g5933ec57c3010423878d0a9c6b9dbf4f</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g2bfb3d74878cbe122fea219a10a1174f</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>g6d8d87af3641a9c39df3164bea552ca8</identifierref>
+      </completionRequirement>
+      <completionRequirement type="must_submit">
+        <identifierref>gbf1501bd6ead76aa640c43c1d199a504</identifierref>
+      </completionRequirement>
+    </completionRequirements>
+  </module>
+  <module identifier="geccc9160ce344365c1bd950ae958fd19">
+    <title>Week 07: Personal Reflection</title>
+    <workflow_state>active</workflow_state>
+    <position>10</position>
+    <unlock_at>2026-10-10T00:00:00</unlock_at>
+    <require_sequential_progress>false</require_sequential_progress>
+    <requirement_count>1</requirement_count>
+    <locked>false</locked>
+    <prerequisites>
+      <prerequisite type="context_module">
+        <title>Week 01: Preparation</title>
+        <identifierref>ga11c5ce9a7f44bfe29b345272ecd60e1</identifierref>
+      </prerequisite>
+    </prerequisites>
+    <items>
+      <item identifier="g1e08c710c53b53042221aa6d4ff55b75">
+        <content_type>Assignment</content_type>
+        <workflow_state>active</workflow_state>
+        <title>W07 Activity: Personal Reflection</title>
+        <identifierref>g87ce39caba9e091989099ff1db6b223a</identifierref>
+        <position>1</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+    <completionRequirements>
+      <completionRequirement type="must_submit">
+        <identifierref>g1e08c710c53b53042221aa6d4ff55b75</identifierref>
+      </completionRequirement>
+    </completionRequirements>
+  </module>
+  <module identifier="g3b69ee4bb3965840c5c819f212e44e85">
+    <title>Student Resources</title>
+    <workflow_state>active</workflow_state>
+    <position>11</position>
+    <require_sequential_progress>false</require_sequential_progress>
+    <locked>false</locked>
+    <items>
+      <item identifier="gbb002a947fe78fcd391932c680433ed3">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Rubric Basics</title>
+        <identifierref>gbb002a947fe78fcd391932c680433ed3</identifierref>
+        <url>https://docs.google.com/document/d/e/2PACX-1vRhaaEFgxsEsER149MRbUOa7diQxTDp2D8Di8LHPvZJ3nD9SphW0wK4qHH8ttDKi2Xntj6rhkHp5Dwj/pub</url>
+        <position>1</position>
+        <new_tab>true</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g583c224dc6d395ace9941f34693b0057">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Supplemental Resources</title>
+        <position>2</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gfbfab81c84c909ed6803724177ec0f8f">
+        <content_type>ContextModuleSubHeader</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Standard Resources</title>
+        <position>3</position>
+        <new_tab>false</new_tab>
+        <indent>0</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gdc544c20874a043b62aae03ad9b6af47">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Academic and Administrative Grievances and Appeals</title>
+        <identifierref>gdc544c20874a043b62aae03ad9b6af47</identifierref>
+        <url>https://catalog.byupathway.edu/academicpolicies/studentwellness/academic-administrative-grievances-appeals</url>
+        <position>4</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g9aa4f038ac902116d174b9b67a826371">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Adding or Dropping a Course—Go to your student portal</title>
+        <identifierref>g9aa4f038ac902116d174b9b67a826371</identifierref>
+        <url>https://portal.byupathway.edu/cmcportal/</url>
+        <position>5</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gbc410a678eff94d0171cc24f744ce558">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>AI Use and Academic Honesty</title>
+        <identifierref>gbc410a678eff94d0171cc24f744ce558</identifierref>
+        <url>https://catalog.byupathway.edu/academicpolicies/studentwellness/academic-honesty</url>
+        <position>6</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gbd99ad893704ed4e6e30236e7135e142">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Copyright</title>
+        <identifierref>gbd99ad893704ed4e6e30236e7135e142</identifierref>
+        <url>https://catalog.byupathway.edu/academicpolicies/studentlife/copyright-infringement</url>
+        <position>7</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g549d11bc8ea556d46802b3b34eb1cc28">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Course Copyright Information</title>
+        <identifierref>g549d11bc8ea556d46802b3b34eb1cc28</identifierref>
+        <url>https://docs.google.com/spreadsheets/d/e/2PACX-1vRNwaKurL2BUy6dusJ_-Q0jBmoMOIrubkIzLd7LWHcIvu3sNdL_oyLWoTAlrlsALojrDiqPBOg-9dv1/pubhtml</url>
+        <position>8</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g5ff34e897f392ca8cea27ab0713ecf20">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Disabilities</title>
+        <identifierref>g5ff34e897f392ca8cea27ab0713ecf20</identifierref>
+        <url>https://www.byupathway.edu/student-wellness/accessibility</url>
+        <position>9</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g4ee68cc8f78b46a06b3c3361759a7dc6">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Feedback on My Work</title>
+        <identifierref>g4ee68cc8f78b46a06b3c3361759a7dc6</identifierref>
+        <url>https://docs.google.com/document/d/e/2PACX-1vRXt5ChHMC0dfo4izvoInYvdl2bmGECLIksXS9d2CI4HVbj5dcPzg4A9_XRSTuksVLew6sEVK_naSPG/pub</url>
+        <position>10</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g5602d462a5da6a6f2eea501303ed7aa8">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Honor Code</title>
+        <identifierref>g5602d462a5da6a6f2eea501303ed7aa8</identifierref>
+        <url>https://catalog.byupathway.edu/academicpolicies/studentwellness/honor-code</url>
+        <position>11</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="gee5efda7d9c930a49f827dd52c82608b">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Next Class—Go to your student portal</title>
+        <identifierref>gee5efda7d9c930a49f827dd52c82608b</identifierref>
+        <url>https://portal.byupathway.edu/cmcportal/</url>
+        <position>12</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g12dc57a12e8c67cd4c5dca3087816a2f">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Nondiscrimination</title>
+        <identifierref>g12dc57a12e8c67cd4c5dca3087816a2f</identifierref>
+        <url>https://catalog.byupathway.edu/academicpolicies/studentwellness/nondiscrimination</url>
+        <position>13</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g70f34cf599c6e78b0ff98c6db613d60d">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Paying for a Course—Go to your student portal</title>
+        <identifierref>g70f34cf599c6e78b0ff98c6db613d60d</identifierref>
+        <url>https://portal.byupathway.edu/cmcportal/</url>
+        <position>14</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g34e9ba58e85f58f842a24c449f336ec4">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Technology Help—Go to Support in your Student Portal</title>
+        <identifierref>g34e9ba58e85f58f842a24c449f336ec4</identifierref>
+        <url>https://portal.byupathway.edu/cmcportal/</url>
+        <position>15</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+      <item identifier="g69c47fa4cfb0b7f316c2ed3f9d0ab172">
+        <content_type>ExternalUrl</content_type>
+        <workflow_state>active</workflow_state>
+        <title>Other Questions—Contact your instructor or go to Support in your Student Portal</title>
+        <identifierref>g69c47fa4cfb0b7f316c2ed3f9d0ab172</identifierref>
+        <url>https://portal.byupathway.edu/cmcportal/</url>
+        <position>16</position>
+        <new_tab>true</new_tab>
+        <indent>1</indent>
+        <link_settings_json>null</link_settings_json>
+      </item>
+    </items>
+  </module>
+</modules>

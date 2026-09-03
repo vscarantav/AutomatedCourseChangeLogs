@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="gdc4f1e3ec77b2b69e071a79e070ef187" title="W05 Quiz: Knowledge Check">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>2</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+      <section ident="gdf11c784370b2e2bc3083a618118af6c" title="Week 05">
+        <selection_ordering>
+          <selection>
+            <sourcebank_ref>g2ea02fd99dcf17070cfd6d6e3d7d574d</sourcebank_ref>
+            <selection_number>5</selection_number>
+            <selection_extension>
+              <points_per_item>1.0</points_per_item>
+            </selection_extension>
+          </selection>
+        </selection_ordering>
+      </section>
+    </section>
+  </assessment>
+</questestinterop>

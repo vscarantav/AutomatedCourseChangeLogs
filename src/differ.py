@@ -5,13 +5,17 @@ import re
 from bs4 import BeautifulSoup
 
 def _get_xml_text_content(file_path):
-    """Parses XML/HTML and returns stripped text to avoid noisy metadata diffs."""
+    """Parses XML/HTML and returns text. HTML is stripped of tags, XML retains tags for schema readability."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
-            soup = BeautifulSoup(f.read(), 'lxml-xml' if file_path.endswith('.xml') else 'html.parser')
-            for script in soup(["script", "style"]):
-                script.extract()
-            return soup.get_text(separator='\n').splitlines()
+            if file_path.endswith('.xml'):
+                # Return raw lines but stripped of whitespace
+                return [line.strip() for line in f.readlines() if line.strip()]
+            else:
+                soup = BeautifulSoup(f.read(), 'html.parser')
+                for script in soup(["script", "style"]):
+                    script.extract()
+                return soup.get_text(separator='\n').splitlines()
     except Exception:
         with open(file_path, 'r', encoding='utf-8') as f:
             return f.readlines()
@@ -76,6 +80,21 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
     def add_change(file_path, status, diff_lines=None, labels=None, ai_summary=""):
         normalized = file_path.replace('\\', '/')
         
+        file_title = file_path
+        try:
+            target_path = os.path.join(new_dir, file_path)
+            if status == "Deleted":
+                target_path = os.path.join(old_dir, file_path)
+            
+            if os.path.exists(target_path) and target_path.endswith(('.xml', '.html')):
+                with open(target_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    match = re.search(r'<title[^>]*>(.*?)</title>', content, re.IGNORECASE | re.DOTALL)
+                    if match and match.group(1).strip():
+                        file_title = match.group(1).strip()
+        except:
+            pass
+        
         category = "other"
         if normalized == "imsmanifest.xml":
             category = "manifest"
@@ -97,6 +116,7 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
                 
         data["categories"][category].append({
             "file_path": file_path,
+            "file_title": file_title,
             "status": status,
             "labels": labels or [],
             "diff_lines": diff_lines or [],
@@ -124,8 +144,10 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
                 try:
                     def clean_lines(lines):
                         cleaned = []
-                        uuid_pattern = re.compile(r'^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$', re.IGNORECASE)
-                        canvas_id_pattern = re.compile(r'^g[a-f0-9]{32}$', re.IGNORECASE)
+                        # Allow optional XML wrappers around the metadata to effectively filter them out
+                        uuid_pattern = re.compile(r'^(<[^>]+>)?\s*[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\s*(</[^>]+>)?$', re.IGNORECASE)
+                        canvas_id_pattern = re.compile(r'^(<[^>]+>)?\s*g[a-f0-9]{32}\s*(</[^>]+>)?$', re.IGNORECASE)
+                        timestamp_pattern = re.compile(r'^(<[^>]+>)?\s*\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?\s*(</[^>]+>)?$')
                         
                         for l in lines:
                             l = l.strip()
@@ -137,8 +159,7 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
                                 continue
                             if canvas_id_pattern.match(l):
                                 continue
-                            # Ignore lone timestamp lines (e.g. export dates)
-                            if re.match(r'^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?$', l):
+                            if timestamp_pattern.match(l):
                                 continue
                             cleaned.append(l)
                         return cleaned
@@ -180,6 +201,22 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
             process_dircmp(sub_cmp, os.path.join(current_path, sub_dir))
 
     process_dircmp(dcmp)
+    
+    # Generate Course-Level AI Summary
+    all_file_summaries = []
+    for cat_items in data["categories"].values():
+        for item in cat_items:
+            if item.get("ai_summary"):
+                all_file_summaries.append(item["ai_summary"])
+                
+    if all_file_summaries:
+        try:
+            from ai_summarizer import summarize_course_changes
+            course_ai_data = summarize_course_changes(all_file_summaries)
+            data["course_ai_summary"] = course_ai_data.get("summary", "")
+            data["course_ai_impact"] = course_ai_data.get("impact", "N/A")
+        except Exception:
+            pass
     
     # State tracking
     export_base = os.path.dirname(os.path.dirname(new_dir))
@@ -224,7 +261,7 @@ def generate_diff(old_dir: str, new_dir: str, course_id: str):
     md_lines = [f"## Course {course_id}\n"]
     
     category_titles = {
-        "manifest": "Manifest (Modules)",
+        "manifest": "Modules page",
         "assignments": "Assignments",
         "pages": "Pages",
         "quizzes_banks": "Quizzes & Question Banks",
