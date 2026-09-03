@@ -116,47 +116,55 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
             labels = []
             status = "Modified (Binary/Metadata)"
             
-            if name.endswith(('.xml', '.html', '.txt', '.qti')):
+            if name.endswith(('.xml', '.html', '.txt', '.qti', '.json')):
                 old_file = os.path.join(cmp_obj.left, name)
                 new_file = os.path.join(cmp_obj.right, name)
                 
                 try:
-                    lines1 = _get_xml_text_content(old_file)
-                    lines2 = _get_xml_text_content(new_file)
+                    def clean_lines(lines):
+                        cleaned = []
+                        uuid_pattern = re.compile(r'^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$', re.IGNORECASE)
+                        canvas_id_pattern = re.compile(r'^g[a-f0-9]{32}$', re.IGNORECASE)
+                        
+                        for l in lines:
+                            l = l.strip()
+                            if not l:
+                                continue
+                            if 'require_lockdown_browser' in l:
+                                continue
+                            if uuid_pattern.match(l):
+                                continue
+                            if canvas_id_pattern.match(l):
+                                continue
+                            # Ignore lone timestamp lines (e.g. export dates)
+                            if re.match(r'^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?$', l):
+                                continue
+                            cleaned.append(l)
+                        return cleaned
+                        
+                    lines1 = clean_lines(_get_xml_text_content(old_file))
+                    lines2 = clean_lines(_get_xml_text_content(new_file))
                     
                     diff = list(difflib.unified_diff(
-                        [l.strip() for l in lines1 if l.strip()],
-                        [l.strip() for l in lines2 if l.strip()],
+                        lines1,
+                        lines2,
                         fromfile='Previous',
                         tofile='Current',
                         n=2,
                         lineterm=''
                     ))
                     
-                    def is_diff_meaningful(d_lines, f_name):
-                        if f_name.endswith('imsmanifest.xml'):
-                            for line in d_lines:
-                                if line.startswith('+') or line.startswith('-'):
-                                    if line.startswith('+++') or line.startswith('---'):
-                                        continue
-                                    text = line[1:].strip()
-                                    if not re.match(r'^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?$', text):
-                                        return True
-                            return False
-                        return True
-                    
-                    if diff:
-                        if not is_diff_meaningful(diff, name):
-                            continue
-                            
-                        labels = get_semantic_labels(diff)
-                        # Trim extremely long diffs for display
-                        if len(diff) > 30:
-                            diff_lines = diff[:30]
-                            diff_lines.append("... (diff truncated)")
-                        else:
-                            diff_lines = diff
-                        status = "Modified"
+                    if not diff:
+                        continue
+                        
+                    labels = get_semantic_labels(diff)
+                    # Trim extremely long diffs for display
+                    if len(diff) > 30:
+                        diff_lines = diff[:30]
+                        diff_lines.append("... (diff truncated)")
+                    else:
+                        diff_lines = diff
+                    status = "Modified"
                 except Exception:
                     pass
             
