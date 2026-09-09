@@ -2,7 +2,26 @@ import smtplib
 from email.message import EmailMessage
 import os
 
-def send_report(subject: str, html_content: str, report_path: str, config: dict, recipient_email: str = None):
+
+def build_email_body(designer_name):
+    greeting_name = str(designer_name).strip() if designer_name else "Course Designer"
+    return (
+        f"Hi {greeting_name},\n\n"
+        "The Canvas course change logs for the week are attached for your review. "
+        "Please reach out if you have any questions.\n\n"
+        "Best,\n"
+        "Vinicius Tavares"
+    )
+
+
+def send_report(
+    subject: str,
+    html_content: str,
+    report_path: str,
+    config: dict,
+    recipient_email: str = None,
+    designer_name: str = None,
+):
     """
     Sends the HTML report via SMTP as an attachment, with a brief summary in the body.
     """
@@ -24,8 +43,7 @@ def send_report(subject: str, html_content: str, report_path: str, config: dict,
     msg['From'] = sender_email
     msg['To'] = ", ".join(recipients)
     
-    body = f"Hello,\n\nThe Canvas course change logs for the week are attached. Please download and open the attached HTML file in your web browser to view the interactive dashboard and detailed diffs.\n\nBest,\nVinicius Tavares"
-    msg.set_content(body)
+    msg.set_content(build_email_body(designer_name))
     
     # Zip and attach the HTML file to bypass strict enterprise email filters
     if os.path.exists(report_path):

@@ -1,74 +1,258 @@
 {
   "projectName": "Automated Course Change Logs",
-  "description": "An automated system to track weekly changes in Canvas courses by downloading IMSCC exports, comparing them against previous versions, and emailing an interactive HTML diff report to stakeholders.",
+  "description": "A Python-based batch system that retrieves Canvas Common Cartridge (IMSCC) exports, compares the two newest course snapshots, uses standard Canvas APIs and IMSCC metadata to attribute content changes when reliable editor evidence exists, uses Gemini to summarize substantive changes, generates interactive HTML reports, and emails personalized report archives to course designers.",
   "appArchitecture": {
+    "runtime": {
+      "language": "Python",
+      "executionModel": "Command-line batch scripts with optional Windows Task Scheduler execution",
+      "primaryPlatform": "Windows"
+    },
+    "entryPoints": [
+      {
+        "path": "scripts/fetch_exports.py",
+        "purpose": "Current-export acquisition",
+        "description": "Reads the course catalog, reuses a matching same-day Common Cartridge export when Canvas already has one, otherwise starts a new export through the Canvas REST API, downloads completed IMSCC files as soon as they are available, polls remaining jobs, and removes already-extracted snapshots beyond the five newest at download time."
+      },
+      {
+        "path": "scripts/fetch_past_exports.py",
+        "purpose": "History bootstrap",
+        "description": "Finds and downloads at most one completed Canvas export older than seven days for each configured course so an initial comparison can be performed."
+      },
+      {
+        "path": "src/main.py",
+        "purpose": "Comparison, reporting, and delivery",
+        "description": "Extracts downloaded IMSCC files, compares the two newest extracted snapshots for each course, attaches the compared snapshot dates and configured live Canvas URL to the course report data, attributes content changes through the strongest reliable standard Canvas API available, marks unsupported attribution as Editor Unavailable, generates a master report and designer-filtered reports, and sends the designer reports by email."
+      }
+    ],
     "modules": [
       {
-        "name": "Controller (main.py)",
+        "name": "Controller",
+        "path": "src/main.py",
         "role": "Orchestrator",
-        "description": "Reads the configuration, delegates tasks to workers sequentially, and handles overall error logging and task flow."
+        "status": "Active",
+        "description": "Loads configuration and course metadata, processes courses sequentially from local history, selects the two newest extracted directories by date-prefixed name, adds their dates and the configured live course URL to each course result, requests conservative resource-specific Canvas attribution for every reported change, generates reports, and invokes email delivery. It does not initiate Canvas exports."
       },
       {
-        "name": "Configuration Manager (config_loader.py)",
+        "name": "Configuration Manager",
+        "path": "src/config_loader.py",
         "role": "Utility",
-        "description": "Loads the JSON database of Canvas course links, email lists, and app settings."
+        "status": "Active",
+        "description": "Loads SMTP and test-recipient settings from .env and loads course metadata from data/courses.json."
       },
       {
-        "name": "Canvas Scraper (scraper.py)",
-        "role": "Worker",
-        "description": "Uses Playwright or Selenium to authenticate to Canvas, navigate to course settings, trigger content export, and download the IMSCC file to a designated staging directory."
+        "name": "Canvas API Exporter",
+        "path": "src/canvas_exporter.py",
+        "role": "Canvas integration",
+        "status": "Active",
+        "description": "Uses bearer-token authenticated Canvas REST API requests with bounded timeouts and retries to start Common Cartridge exports, check export status, list past exports, retrieve paginated page revisions, course files and folders, discussion topics, and course audit events, and stream completed IMSCC downloads to disk through an atomic .part file."
       },
       {
-        "name": "IMSCC Processor (imscc_handler.py)",
-        "role": "Worker",
-        "description": "Extracts the downloaded IMSCC (ZIP format) files into course-specific and timestamp-specific directories."
+        "name": "Current Export Fetcher",
+        "path": "scripts/fetch_exports.py",
+        "role": "Acquisition orchestrator",
+        "status": "Active",
+        "description": "Extracts numeric Canvas course IDs from configured URLs, skips courses without a URL, resumes same-day Canvas jobs when available, downloads completed jobs immediately, writes an exact export metadata sidecar, starts missing jobs with a one-second delay between requests, and polls pending jobs every 15 seconds with a bounded consecutive-error limit."
       },
       {
-        "name": "Diff Generator (differ.py)",
-        "role": "Worker",
-        "description": "Compares the current week's extracted files against the previous week's files. Generates a structured dictionary containing categorized diffs (Assignments, Pages, Settings, etc.) and semantic tags (Content Changes, Grading Rules, Dates)."
+        "name": "Past Export Fetcher",
+        "path": "scripts/fetch_past_exports.py",
+        "role": "Bootstrap utility",
+        "status": "Active, manual/on-demand",
+        "description": "Queries Canvas export history and downloads the first completed export older than seven days that can seed a previous snapshot."
       },
       {
-        "name": "HTML Reporter (html_reporter.py)",
-        "role": "Worker",
-        "description": "Consumes the data from differ.py to generate a beautiful, interactive HTML presentation. Includes a Dashboard tab and a Raw Logs tab. The logs feature collapsible categories and individual files, with a toggle to switch between a rich Canvas-like rendered view and a raw code diff view."
+        "name": "IMSCC Processor",
+        "path": "src/imscc_handler.py",
+        "role": "Archive processor",
+        "status": "Active",
+        "description": "Extracts each IMSCC ZIP archive into a sibling directory ending in _extracted, detects a single nested manifest root, and deletes the source IMSCC by default after extraction."
       },
       {
-        "name": "Email Notifier (emailer.py)",
-        "role": "Worker",
-        "description": "Zips the generated personalized HTML reports and emails them as attachments directly to the respective course designers using SMTP. Includes support for a TEST_EMAIL override."
+        "name": "Diff Generator and State Tracker",
+        "path": "src/differ.py",
+        "role": "Comparison engine",
+        "status": "Active",
+        "description": "Recursively compares two extracted directories, produces unified diffs for supported text files, filters selected generated identifiers and timestamps, categorizes changes by Canvas component, assigns semantic labels, invokes AI summarization for modified text files, aggregates course-level AI insights, and updates the zero-change streak state. A legacy Markdown wrapper remains available."
       },
       {
-        "name": "Task Scheduler Setup (scheduler_setup.ps1)",
+        "name": "Canvas Page Revision Attributor",
+        "path": "src/page_attributor.py",
+        "role": "Attribution integration",
+        "status": "Active for changed Canvas Pages",
+        "description": "Maps IMSCC wiki_content filenames to Canvas page URLs, loads exact comparison boundaries from export metadata sidecars, retrieves every page revision in that interval, and attaches editor IDs, display names, timestamps, revision IDs, system/import counts, source, and attribution precision to page diff records. Deleted pages and revisions without Canvas users are explicitly marked unavailable rather than guessed."
+      },
+      {
+        "name": "Canvas Content Attributor",
+        "path": "src/content_attributor.py",
+        "role": "Attribution coordinator",
+        "status": "Active",
+        "description": "Coordinates attribution for every diff item without Canvas Live Events. It delegates Pages to revision history, matches file paths to Canvas Files metadata and uses the uploader or last content editor only when the file modification falls inside the comparison window, identifies the creator of a newly added discussion only when its creation falls inside the window, uses user-backed Course Audit events for supported course-level settings artifacts, and assigns an explicit Editor Unavailable reason to unsupported, deleted, ambiguous, or unmatched changes."
+      },
+      {
+        "name": "Gemini Summarizer",
+        "path": "src/ai_summarizer.py",
+        "role": "AI integration",
+        "status": "Active when GEMINI_API_KEY is configured",
+        "description": "Calls the configured Gemini model for one- or two-sentence file summaries using up to 15,000 characters of current content plus the raw diff, then aggregates file summaries into a course-level summary and Low, Medium, or High impact ranking. Failures are returned as reportable summary text rather than raised."
+      },
+      {
+        "name": "HTML Reporter",
+        "path": "src/html_reporter.py",
+        "role": "Presentation",
+        "status": "Active",
+        "description": "Generates a self-contained interactive HTML report with a dashboard, AI course insights, designer filtering, per-course snapshot comparison dates and validated live Canvas links, raw logs grouped by course, raw logs grouped by category, resource-specific Canvas attribution badges and evidence details, explicit Editor Unavailable badges, collapsible file diffs, category metrics, and zero-change maintenance recommendations after five consecutive weeks. The report loads the Inter font from Google Fonts when viewed."
+      },
+      {
+        "name": "Email Notifier",
+        "path": "src/emailer.py",
+        "role": "Delivery",
+        "status": "Active",
+        "description": "Builds a plain-text message greeting from the course_designer value associated with the personalized report, creates a temporary ZIP containing that HTML report, sends it through Gmail SMTP with STARTTLS, and deletes the temporary ZIP after attaching it."
+      },
+      {
+        "name": "Windows Task Scheduler Setup",
+        "path": "scripts/scheduler_setup.ps1",
         "role": "Infrastructure",
-        "description": "A PowerShell script to configure Windows Task Scheduler to run the Controller script upon the first user logon of the week."
+        "status": "Available",
+        "description": "Registers src/main.py to run at user logon when a network is available."
+      }
+    ],
+    "dataFlow": [
+      {
+        "stage": 1,
+        "name": "Load course catalog",
+        "input": "data/courses.json",
+        "output": "Course code, language, designer, Canvas URL, and designer email records"
+      },
+      {
+        "stage": 2,
+        "name": "Acquire exports",
+        "input": "Course URLs plus CANVAS_API_URL and CANVAS_API_KEY",
+        "output": "all_course_history/{course_code}/{YYYY-MM-DD}.imscc",
+        "notes": "Run scripts/fetch_exports.py separately before src/main.py. The fetcher safely resumes same-day Canvas jobs and writes downloads atomically. Use scripts/fetch_past_exports.py when prior history is missing."
+      },
+      {
+        "stage": 3,
+        "name": "Extract archives",
+        "input": "Unprocessed IMSCC files in each course history directory",
+        "output": "all_course_history/{course_code}/{YYYY-MM-DD}_extracted/",
+        "notes": "The source IMSCC is deleted after successful extraction by default."
+      },
+      {
+        "stage": 4,
+        "name": "Compare snapshots",
+        "input": "The two newest _extracted directories for a course",
+        "output": "Categorized per-file change dictionaries with status, labels, truncated display diffs, optional AI summaries, the two snapshot dates, and the configured live Canvas course URL"
+      },
+      {
+        "stage": 5,
+        "name": "Attribute changed content",
+        "input": "All categorized changes, Canvas course ID, IMSCC paths and metadata, and the exact previous/current export timestamps",
+        "output": "Reliable editor or creator evidence from resource-specific standard Canvas APIs, or an explicit Editor Unavailable reason for every change"
+      },
+      {
+        "stage": 6,
+        "name": "Aggregate insights and state",
+        "input": "File-level AI summaries and whether meaningful changes were detected",
+        "output": "Course summary, impact ranking, and zero-change streak"
+      },
+      {
+        "stage": 7,
+        "name": "Generate reports",
+        "input": "All successfully compared course data",
+        "output": "One dated master HTML report and one dated HTML report per unique designer"
+      },
+      {
+        "stage": 8,
+        "name": "Deliver reports",
+        "input": "Designer reports, SMTP credentials, and required TEST_EMAIL testing recipient",
+        "output": "ZIP attachments sent through Gmail SMTP"
       }
     ],
     "fileSystemStructure": {
       "root": "./",
-      "src": "./src/",
-      "data": "./data/courses.json",
-      "exports": "./exports/{course_id}/{year_week}/",
-      "reports": "./reports/"
-    }
+      "source": "./src/",
+      "scripts": "./scripts/",
+      "courseCatalog": "./data/courses.json",
+      "environmentConfig": "./.env",
+      "courseHistory": "./all_course_history/{course_code}/",
+      "downloadedExport": "./all_course_history/{course_code}/{YYYY-MM-DD}.imscc",
+      "exportMetadata": "./all_course_history/{course_code}/{YYYY-MM-DD}.metadata.json",
+      "extractedSnapshot": "./all_course_history/{course_code}/{YYYY-MM-DD}_extracted/",
+      "zeroChangeState": "./all_course_history/state.json",
+      "reports": "./reports/report_{YYYY-MM-DD}_{Master|designer}.html"
+    },
+    "configuration": {
+      "courseCatalogFields": [
+        "course_code",
+        "language",
+        "course_designer",
+        "course_url",
+        "designer_email"
+      ],
+      "environmentVariables": {
+        "CANVAS_API_KEY": "Bearer token used by the active Canvas REST API exporter.",
+        "CANVAS_API_URL": "Canvas instance base URL; defaults to https://canvas.instructure.com.",
+        "GEMINI_API_KEY": "Enables file-level and course-level AI summaries.",
+        "SMTP_EMAIL": "Sender account used for Gmail SMTP; OUTLOOK_EMAIL is accepted as a fallback name.",
+        "SMTP_PASSWORD": "SMTP credential; OUTLOOK_PASSWORD is accepted as a fallback name.",
+        "SHAREHOLDERS_EMAILS": "Comma-separated fallback recipients when send_report is called without an explicit recipient.",
+        "TEST_EMAIL": "Required testing recipient used for every personalized report; when absent, the controller skips all email delivery rather than falling back to designer addresses."
+      }
+    },
+    "externalServices": [
+      {
+        "name": "Canvas LMS REST API",
+        "usage": "Create, inspect, list, and download Common Cartridge content exports; retrieve paginated Page revision history, file/folder metadata, discussion topic metadata, and Course Audit events for conservative change attribution"
+      },
+      {
+        "name": "Google Gemini API",
+        "usage": "Summarize modified text files and rank the overall impact of course changes"
+      },
+      {
+        "name": "Gmail SMTP",
+        "usage": "Send ZIP-packaged HTML reports over STARTTLS on smtp.gmail.com:587"
+      },
+      {
+        "name": "Google Fonts",
+        "usage": "Load the Inter font when a generated report is opened with internet access"
+      }
+    ]
   },
   "agentInstructions": [
-    "Integrate the Gemini API to analyze the full page context alongside the raw diff to generate human-readable descriptions of the changes.",
-    "Aggregate all file-level AI summaries for a course and prompt the AI to generate a high-level course summary and an impact/significance ranking (Low/Medium/High) evaluating the significance to the designer and the impact on the student. Display this on the Dashboard.",
-    "Ensure strict modularity. Each worker must have clear input and output interfaces and should not depend tightly on other workers.",
-    "Use robust error handling for the web scraping module, as Canvas UI might be slow or change slightly.",
-    "The IMSCC (which is a ZIP format) extraction should handle large files safely.",
-    "The diff generation should compare file hashes and structures. For text-based files (XML/HTML), generate line-by-line diffs if modified.",
-    "The diff generation should categorize changes by Canvas component (Pages, Quizzes, Assignments) and append semantic labels (e.g., [Content Change], [Grading Rule], [Date/Restriction]) based on keywords in the diff lines for future data analysis.",
-    "The system must track the consecutive number of weeks a course has had zero changes via persistent state.",
-    "If a course has had zero changes for 5 or more consecutive weeks, the HTML report must display a prominent recommendation for the designer to check standard pages/resources to help maintain the course.",
-    "All configuration (URLs, emails, credentials, API keys) must be read from environment variables or a secure local configuration file."
+    "Treat scripts/fetch_exports.py and src/main.py as separate operational phases unless a future orchestration change explicitly combines them.",
+    "Preserve the active Canvas REST API acquisition path.",
+    "Keep credentials and API keys in environment variables or another secure local configuration source, never in data/courses.json or generated reports.",
+    "Maintain clear input and output boundaries between acquisition, extraction, comparison, summarization, presentation, and delivery modules.",
+    "When changing snapshot selection or retention, preserve date-sortable names or replace the current lexical sorting with explicit timestamp parsing.",
+    "Preserve each export metadata sidecar with its IMSCC/extracted snapshot because content attribution uses export_created_at as the exact comparison boundary.",
+    "When changing diff logic, preserve Canvas component categorization and semantic labels and continue suppressing non-substantive generated identifiers where appropriate.",
+    "Never infer an editor from a current owner, creator, updater, or timestamp unless the relevant Canvas API evidence can be matched to the changed resource inside the exact snapshot comparison window; otherwise keep Editor Unavailable.",
+    "AI summarization must remain optional: a missing key or failed request must not stop non-AI diff generation and reporting.",
+    "Do not claim weekly execution protection, per-course streak tracking, archive path validation, or first-snapshot reporting until those behaviors are implemented and tested.",
+    "Preserve user data in data/courses.json and existing history/report artifacts when modifying the application."
   ],
   "expectedBehaviors": {
-    "trigger": "Executes on Windows Logon. The main script includes wrapper logic that ensures the heavy lifting only runs if it hasn't run successfully yet for the current calendar week.",
-    "processing": "Iterates through all courses sequentially, downloading and unzipping their IMSCC.",
-    "comparison": "Finds the immediate previous export folder for each course. If none exists, treats all files as 'new'. Otherwise, runs a recursive directory diff.",
-    "reporting": "Consolidates all course diffs into interactive HTML documents. Generates a Master report and personalized, pre-filtered HTML reports for each unique Course Designer.",
-    "delivery": "Zips the personalized HTML documents and sends them as email attachments directly to the course designers, with an optional TEST_EMAIL override for safe testing."
-  }
+    "acquisition": "When scripts/fetch_exports.py is run, it skips courses with an existing same-day IMSCC, reuses a non-failed same-day Common Cartridge job already present in Canvas, or starts a new job when needed. Completed jobs are downloaded immediately through an atomic .part file and receive a metadata sidecar containing the Canvas course/export identifiers and exact export timestamp; unfinished jobs are polled until completion, failure, or the status-error limit. Records without a usable course_url are skipped.",
+    "historyBootstrap": "When scripts/fetch_past_exports.py is run, it downloads at most one completed export older than seven days per eligible course and writes the matching export metadata sidecar.",
+    "processing": "When src/main.py is run, it processes configured courses sequentially, extracts loose IMSCC files found directly inside each course history directory, and skips courses that do not have at least two extracted snapshots.",
+    "comparison": "The controller compares only the two lexically newest date-prefixed extracted directories. The diff engine recursively detects added, deleted, modified text, and changed binary or metadata files, then groups them into Canvas-oriented categories.",
+    "contentAttribution": "Every reported change receives attribution metadata. Added or modified Pages use Page Revisions within the exact export window. Files use exact or uniquely matched Canvas file metadata only when the latest content modification falls inside that window. Newly added discussions may show their Canvas creator only when their creation timestamp falls inside the window. Supported course-level settings artifacts may use user-backed Course Audit update events in the window. All unsupported categories, deleted resources, system/import changes without a user, API failures, ambiguous matches, and out-of-window evidence are labeled Editor Unavailable rather than guessed.",
+    "aiSummarization": "Modified XML, HTML, TXT, QTI, and JSON files with meaningful line diffs are sent to Gemini for file summaries. Available file summaries are then aggregated into a course summary and Low, Medium, or High impact ranking.",
+    "stateTracking": "Each comparison reads and writes a zero-change streak in all_course_history/state.json. This is the current implemented location and is shared across course processing rather than isolated per course.",
+    "reporting": "The app writes a dated master HTML report and a dated, pre-filtered report for every unique configured designer. Each course heading identifies the dated current Canvas version and the older snapshot used as its comparison baseline, and links to the configured live Canvas course when course_url is a valid HTTP or HTTPS URL. Reports also contain dashboard metrics, AI insights when available, designer filters, raw logs by course and category, semantic labels, resource-specific attribution badges and evidence details, explicit Editor Unavailable badges, and collapsible unified diffs.",
+    "delivery": "Each personalized report is temporarily zipped and emailed through Gmail SMTP only to TEST_EMAIL. The intended designer is retained in the report filter, filename, subject, and console message, but no designer address is used for delivery. If TEST_EMAIL is missing, all email delivery is skipped.",
+    "scheduling": "The supplied Task Scheduler setup runs src/main.py at every user logon when the network is available. The current code contains no once-per-week guard and the scheduled action does not run either export-fetch script."
+  },
+  "knownImplementationGaps": [
+    "The scheduled task runs only src/main.py, so it does not acquire a new Canvas export before comparison.",
+    "scheduler_setup.ps1 says the controller prevents repeated weekly work, but src/main.py has no run-state or calendar-week guard.",
+    "The zero-change streak path resolves to all_course_history/state.json, causing every processed course to share and overwrite one streak value instead of maintaining per-course state.",
+    "A course with fewer than two extracted snapshots is skipped; the current controller does not report the first snapshot as entirely new.",
+    "IMSCC extraction uses ZipFile.extractall without validating archive member paths or imposing extraction size limits.",
+    "The email transport is hard-coded to Gmail SMTP even though the configuration loader accepts OUTLOOK_EMAIL and OUTLOOK_PASSWORD as fallback variable names.",
+    "src/ai_summarizer.py imports google.generativeai, but requirements.txt does not declare the corresponding package.",
+    "Without Canvas Live Events, the standard APIs and IMSCC exports do not expose reliable last-editor identities for assignments, quizzes and question banks, module structure and manifest changes, rubrics, most specialized course settings, modified discussions, deleted resources, or ambiguous and unmatched files; these changes are reported as Editor Unavailable.",
+    "Deleted pages generally cannot be queried through the Page Revisions API, and imported or system-generated page revisions may not include an edited_by user."
+  ]
 }

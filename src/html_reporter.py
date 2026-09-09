@@ -1,7 +1,132 @@
+import html
 import json
+from urllib.parse import urlparse
+
+
+def safe_http_url(value):
+    if not value:
+        return None
+
+    candidate = str(value).strip()
+    parsed = urlparse(candidate)
+    if parsed.scheme.lower() not in {"http", "https"} or not parsed.netloc:
+        return None
+    return html.escape(candidate, quote=True)
+
+
+def generate_course_context_html(course):
+    course_name = html.escape(str(course.get("course_name", "Unknown course")))
+    course_url = safe_http_url(course.get("course_url"))
+
+    if course_url:
+        course_title = (
+            f"<a class='course-live-link' href='{course_url}' target='_blank' "
+            "rel='noopener noreferrer' onclick='event.stopPropagation()' "
+            "title='Open live course in Canvas'>"
+            f"{course_name} <span aria-hidden='true'>&#8599;</span></a>"
+        )
+    else:
+        course_title = f"<span class='course-name'>{course_name}</span>"
+
+    comparison = course.get("comparison_period") or {}
+    previous_date = comparison.get("previous_date")
+    current_date = comparison.get("current_date")
+    comparison_html = ""
+    if previous_date and current_date:
+        previous_date = html.escape(str(previous_date))
+        current_date = html.escape(str(current_date))
+        comparison_html = (
+            "<span class='comparison-period'>"
+            f"Compared today's Canvas version ({current_date}) with snapshot "
+            f"from {previous_date}</span>"
+        )
+
+    return (
+        "<div class='course-context'>"
+        f"<div class='course-title-row'>{course_title}</div>"
+        f"{comparison_html}</div>"
+    )
+
+
+def generate_attribution_html(item):
+    attribution = item.get("attribution")
+    if not attribution:
+        return "", ""
+
+    actors = attribution.get("actors", [])
+    unique_names = list(dict.fromkeys(
+        actor.get("name", "Unknown user") for actor in actors
+    ))
+    verb = attribution.get("verb", "Changed by")
+
+    if len(unique_names) == 1:
+        badge_text = f"{verb} {unique_names[0]}"
+        badge_class = "attribution-known"
+    elif len(unique_names) > 1:
+        badge_text = f"{verb} {len(unique_names)} people"
+        badge_class = "attribution-known"
+    elif attribution.get("unattributed_revision_count", 0):
+        badge_text = "Canvas/system change"
+        badge_class = "attribution-system"
+    else:
+        badge_text = "Editor Unavailable"
+        badge_class = "attribution-unavailable"
+
+    badge_html = (
+        f"<span class='label {badge_class}'>"
+        f"{html.escape(badge_text)}</span>"
+    )
+
+    default_source_labels = {
+        "canvas_page_revisions": "Canvas page history",
+        "canvas_files_api": "Canvas file metadata",
+        "canvas_discussions_api": "Canvas discussion metadata",
+        "canvas_course_audit_api": "Canvas course audit log",
+    }
+    source_label = attribution.get("source_label") or default_source_labels.get(
+        attribution.get("source", "canvas_page_revisions"),
+        "Attribution details",
+    )
+    source_label = html.escape(str(source_label))
+    details = [f"<div class='attribution-details'><strong>{source_label}</strong>"]
+    if actors:
+        details.append("<ul>")
+        for actor in actors:
+            name = html.escape(str(actor.get("name", "Unknown user")))
+            changed_at = html.escape(str(actor.get("changed_at", "Unknown time")))
+            profile_url = actor.get("profile_url")
+            if profile_url:
+                safe_url = html.escape(str(profile_url), quote=True)
+                name = (
+                    f"<a href='{safe_url}' target='_blank' rel='noopener noreferrer'>"
+                    f"{name}</a>"
+                )
+            details.append(f"<li>{name} — {changed_at}</li>")
+        details.append("</ul>")
+
+    unattributed_count = attribution.get("unattributed_revision_count", 0)
+    if unattributed_count:
+        details.append(
+            f"<p>{unattributed_count} matching revision(s) had no Canvas user "
+            "and may have been produced by an import or system process.</p>"
+        )
+
+    reason = attribution.get("reason")
+    if reason:
+        details.append(f"<p>{html.escape(str(reason))}</p>")
+
+    if attribution.get("window_precision") == "date_fallback":
+        details.append(
+            "<p><em>Attribution used date-only snapshot boundaries because exact "
+            "export metadata was unavailable.</em></p>"
+        )
+
+    details.append("</div>")
+    return badge_html, "".join(details)
 
 def generate_file_item_html(item):
     labels_html = "".join([f"<span class='label label-{l.lower().replace('/', '-').replace(' ', '-')}'>{l}</span>" for l in item["labels"]])
+    attribution_badge, attribution_details = generate_attribution_html(item)
     display_title = item.get('file_title', item['file_path'])
     
     html = f"""
@@ -11,31 +136,34 @@ def generate_file_item_html(item):
                 <span class="status status-{item['status'].split(' ')[0].lower()}">{item['status']}</span>
                 <span class="file-path">{display_title}</span>
                 {labels_html}
+                {attribution_badge}
             </div>
             <span class="file-icon" style="color: var(--text-muted); font-size: 0.8rem;">▼</span>
         </div>
     """
     
-    if item["diff_lines"]:
+    if item["diff_lines"] or attribution_details:
         ai_html = ""
         if item.get("ai_summary"):
             ai_html = f"<div class='ai-summary' style='background: rgba(187, 134, 252, 0.1); border-left: 3px solid var(--accent); padding: 0.8rem; margin-top: 0.5rem; font-size: 0.9rem; border-radius: 4px;'><strong>AI Summary:</strong> {item['ai_summary']}</div>"
         
-        html += f"<div class='diff-views-container' style='display: none; padding-top: 1rem;'>{ai_html}"
-        html += "<pre class='diff-block'>"
-        for line in item["diff_lines"]:
-            line_safe = line.replace('<', '&lt;').replace('>', '&gt;')
-            if line.startswith('+++') or line.startswith('---'):
-                html += f"<div class='diff-meta'>{line_safe}</div>"
-            elif line.startswith('+'):
-                html += f"<div class='diff-add'>{line_safe}</div>"
-            elif line.startswith('-'):
-                html += f"<div class='diff-remove'>{line_safe}</div>"
-            elif line.startswith('@@'):
-                html += f"<div class='diff-chunk'>{line_safe}</div>"
-            else:
-                html += f"<div class='diff-context'>{line_safe}</div>"
-        html += "</pre></div>"
+        html += f"<div class='diff-views-container' style='display: none; padding-top: 1rem;'>{attribution_details}{ai_html}"
+        if item["diff_lines"]:
+            html += "<pre class='diff-block'>"
+            for line in item["diff_lines"]:
+                line_safe = line.replace('<', '&lt;').replace('>', '&gt;')
+                if line.startswith('+++') or line.startswith('---'):
+                    html += f"<div class='diff-meta'>{line_safe}</div>"
+                elif line.startswith('+'):
+                    html += f"<div class='diff-add'>{line_safe}</div>"
+                elif line.startswith('-'):
+                    html += f"<div class='diff-remove'>{line_safe}</div>"
+                elif line.startswith('@@'):
+                    html += f"<div class='diff-chunk'>{line_safe}</div>"
+                else:
+                    html += f"<div class='diff-context'>{line_safe}</div>"
+            html += "</pre>"
+        html += "</div>"
         
     html += "</div>"
     return html
@@ -76,12 +204,13 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     for c in courses_data:
         designer = c.get("designer", "Unknown")
         course_name = c['course_name']
+        course_context_html = generate_course_context_html(c)
         
         has_changes_str = 'true' if c.get("has_changes", False) else 'false'
         logs_course_html += f"""
         <div class='course-section accordion' data-designer='{designer}' data-course='{course_name}' data-has-changes='{has_changes_str}'>
             <div class="accordion-header course-accordion-header" onclick="toggleAccordion(this)">
-                <span>{course_name}</span>
+                {course_context_html}
                 <span class="icon">▼</span>
             </div>
             <div class="accordion-content">
@@ -148,7 +277,8 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         for c in courses_in_cat:
             designer = c.get("designer", "Unknown")
             items = c["categories"][cat_key]
-            logs_category_html += f"<div class='cat-course-block' data-designer='{designer}'><h3 style='margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;'>{c['course_name']}</h3>"
+            course_context_html = generate_course_context_html(c)
+            logs_category_html += f"<div class='cat-course-block' data-designer='{designer}'><div class='category-course-heading'>{course_context_html}</div>"
             for item in items:
                 logs_category_html += generate_file_item_html(item)
             logs_category_html += "</div>"
@@ -212,6 +342,12 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         background: rgba(255,255,255,0.02); transition: 0.2s; font-weight: 600;
     }
     .course-accordion-header { background: rgba(187, 134, 252, 0.05); font-size: 1.1rem; }
+    .course-context { min-width: 0; }
+    .course-title-row { line-height: 1.3; }
+    .course-live-link { color: var(--accent); text-decoration: none; }
+    .course-live-link:hover { text-decoration: underline; }
+    .comparison-period { display: block; margin-top: 0.25rem; color: var(--text-muted); font-size: 0.78rem; font-weight: 400; }
+    .category-course-heading { margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; font-size: 1.17rem; font-weight: 600; }
     .cat-accordion-header { background: rgba(255, 255, 255, 0.02); }
     .accordion-header:hover { background: var(--surface-hover); }
     .accordion-content { display: none; padding: 1rem; border-top: 1px solid var(--border); }
@@ -225,6 +361,12 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     .status-added { background: #81c784; color: #000; }
     .status-deleted { background: #e57373; color: #000; }
     .label { font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 12px; border: 1px solid var(--text-muted); color: var(--text-muted); background: rgba(255,255,255,0.05); }
+    .attribution-known { border-color: #64b5f6; color: #90caf9; background: rgba(33, 150, 243, 0.12); }
+    .attribution-system { border-color: #ffb74d; color: #ffcc80; background: rgba(255, 152, 0, 0.12); }
+    .attribution-unavailable { border-color: #757575; color: #bdbdbd; }
+    .attribution-details { background: rgba(33, 150, 243, 0.08); border-left: 3px solid #64b5f6; padding: 0.8rem; margin-bottom: 0.8rem; border-radius: 4px; font-size: 0.9rem; }
+    .attribution-details ul { margin: 0.5rem 0 0; padding-left: 1.5rem; }
+    .attribution-details p { margin: 0.5rem 0 0; color: var(--text-muted); }
     
     .diff-block {
         background: #000; padding: 1rem; border-radius: 6px; overflow-x: auto;
@@ -400,10 +542,11 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     for c in insights_courses:
         impact = c.get("course_ai_impact", "Medium")
         impact_color = {"Low": "#4caf50", "Medium": "#ffb74d", "High": "#e57373"}.get(impact, "#ffb74d")
+        course_context_html = generate_course_context_html(c)
         
         insights_html += f"""
         <div class="course-insight" data-designer="{c.get('designer', 'Unknown')}" onclick="openCourse('{c['course_name']}')">
-            <h3 style="margin-top: 0; color: var(--accent); width: 80%;">{c['course_name']}</h3>
+            <div style="margin-top: 0; color: var(--accent); width: 80%; font-size: 1.17rem; font-weight: 600;">{course_context_html}</div>
             <span style="position: absolute; top: 1.5rem; right: 1.5rem; background: {impact_color}22; color: {impact_color}; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: bold; font-size: 0.85rem; border: 1px solid {impact_color};">Impact: {impact}</span>
             <p style="margin-bottom: 0; line-height: 1.6;">{c['course_ai_summary']}</p>
         </div>

@@ -4,8 +4,25 @@ import datetime
 from config_loader import load_config
 from imscc_handler import extract_imscc
 from differ import generate_diff_data
+from content_attributor import attribute_course_changes
+from page_attributor import course_id_from_url
 from html_reporter import generate_html_report
 from emailer import send_report
+
+
+def snapshot_date_from_directory(directory_name):
+    suffix = "_extracted"
+    if directory_name.endswith(suffix):
+        return directory_name[:-len(suffix)]
+    return directory_name
+
+
+def get_test_recipient(config):
+    recipient = config.get("test_email")
+    if not recipient:
+        return None
+    return str(recipient).strip() or None
+
 
 def main():
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -64,6 +81,27 @@ def main():
         print(f"Comparing {extracted_dirs[1]} -> {extracted_dirs[0]}")
         
         course_data = generate_diff_data(previous_extract_dir, current_extract_dir, course_code)
+        course_data["comparison_period"] = {
+            "previous_date": snapshot_date_from_directory(extracted_dirs[1]),
+            "current_date": snapshot_date_from_directory(extracted_dirs[0]),
+        }
+        course_data["course_url"] = course.get("course_url", "")
+        canvas_course_id = course_id_from_url(course.get("course_url"))
+        try:
+            attribution_stats = attribute_course_changes(
+                course_data,
+                canvas_course_id,
+                previous_extract_dir,
+                current_extract_dir,
+            )
+            if attribution_stats["items_checked"]:
+                print(
+                    "Content attribution: "
+                    f"{attribution_stats['items_attributed']}/"
+                    f"{attribution_stats['items_checked']} changes attributed."
+                )
+        except Exception as e:
+            print(f"Content attribution failed for {course_code}: {e}")
         course_data["designer"] = course.get("course_designer", "Unknown")
         courses_data.append(course_data)
         
@@ -95,14 +133,23 @@ def main():
         with open(designer_report_path, 'w', encoding='utf-8') as f:
             f.write(designer_html)
             
-        recipient = config.get("test_email")
-        if designer_name == "Jen H.":
-            recipient = designer_email
-        elif not recipient:
-            recipient = designer_email
-            
+        recipient = get_test_recipient(config)
+        if not recipient:
+            print(
+                "TEST_EMAIL is not configured. Skipping email to prevent "
+                f"delivery to {designer_name}."
+            )
+            continue
+
         print(f"Sending email to {recipient} (Intended for: {designer_name})...")
-        send_report(f"Canvas Course Changes - {report_date} - {designer_name}", designer_html, designer_report_path, config, recipient_email=recipient)
+        send_report(
+            f"Canvas Course Changes - {report_date} - {designer_name}",
+            designer_html,
+            designer_report_path,
+            config,
+            recipient_email=recipient,
+            designer_name=designer_name,
+        )
         
     print("\nDone.")
 

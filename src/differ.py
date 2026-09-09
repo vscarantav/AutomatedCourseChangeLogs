@@ -2,7 +2,41 @@ import os
 import filecmp
 import difflib
 import re
+import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
+
+
+def _manifest_resource_categories(snapshot_dir):
+    """Maps IMSCC resource files to report categories using manifest types."""
+    manifest_path = os.path.join(snapshot_dir, "imsmanifest.xml")
+    if not os.path.exists(manifest_path):
+        return {}
+
+    category_by_type = {
+        "imsdt_xmlv1p1": "discussions",
+        "imsqti_xmlv1p2/imscc_xmlv1p1/assessment": "quizzes_banks",
+        "associatedcontent/imscc_xmlv1p1/learning-application-resource": "assignments",
+        "webcontent": "files_media",
+    }
+    categories = {}
+    try:
+        root = ET.parse(manifest_path).getroot()
+    except (ET.ParseError, OSError):
+        return categories
+
+    for resource in root.iter():
+        if resource.tag.rsplit("}", 1)[-1] != "resource":
+            continue
+        category = category_by_type.get(resource.get("type"))
+        if not category:
+            continue
+        for child in resource.iter():
+            if child.tag.rsplit("}", 1)[-1] != "file":
+                continue
+            href = child.get("href")
+            if href:
+                categories[href.replace("\\", "/")] = category
+    return categories
 
 def _get_xml_text_content(file_path):
     """Parses XML/HTML and returns text. HTML is stripped of tags, XML retains tags for schema readability."""
@@ -37,23 +71,15 @@ def get_semantic_labels(diff_lines):
             if 'points_possible' in text or 'grading_type' in text or 'rubric' in text or 'weight' in text:
                 labels.add("Grading Rule")
                 
-            # Date/Restriction
-            if 'due_at' in text or 'unlock_at' in text or 'lock_at' in text or 'require_lockdown_browser' in text:
-                labels.add("Date/Restriction")
-                
-            # Metadata/System
-            if 'last_modified' in text or 'id="' in text or 'identifier="' in text:
-                labels.add("Metadata/System")
-                
-    if not labels:
-        labels.add("Metadata/System")
-    
     return sorted(list(labels))
 
 def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
     """
     Compares two directories recursively and returns a structured dictionary of differences.
     """
+    resource_categories = _manifest_resource_categories(old_dir)
+    resource_categories.update(_manifest_resource_categories(new_dir))
+
     data = {
         "course_name": course_id,
         "is_new": False,
@@ -110,6 +136,8 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
             category = "discussions"
         elif "web_resources" in normalized:
             category = "files_media"
+        elif normalized in resource_categories:
+            category = resource_categories[normalized]
         else:
             if re.match(r'^[a-f0-9]{32}', normalized) or "assignment" in normalized:
                 category = "assignments"

@@ -1,8 +1,8 @@
 .env
-data/state.json
-exports/
+.DS_Store
 reports/
 __pycache__/
 *.pyc
 
 all_course_history/
+all_courses_history/

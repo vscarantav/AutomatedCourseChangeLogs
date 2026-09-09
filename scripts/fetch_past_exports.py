@@ -8,8 +8,14 @@ from dateutil import parser # We need this to easily parse ISO 8601 strings from
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.join(root_dir, "src"))
 
+# pyrefly: ignore [missing-import]
 from canvas_exporter import get_past_exports, save_download
-from fetch_exports import get_course_id_from_url, cleanup_old_exports
+from fetch_exports import (
+    cleanup_old_exports,
+    get_course_id_from_url,
+    metadata_path_for_export,
+    save_export_metadata,
+)
 
 def main():
     json_path = os.path.join(root_dir, "data", "courses.json")
@@ -60,6 +66,10 @@ def main():
                                 download_url = exp["attachment"]["url"]
                                 save_download(download_url, output_file)
                                 cleanup_old_exports(os.path.dirname(output_file), keep=5)
+
+                            metadata_path = metadata_path_for_export(output_file)
+                            if not os.path.exists(metadata_path):
+                                save_export_metadata(output_file, course_id, code, exp)
                             
                             found_valid_export = True
                             break # Max 1 per course
