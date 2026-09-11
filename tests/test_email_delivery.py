@@ -9,7 +9,7 @@ if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
 from emailer import build_email_body
-from main import get_test_recipient
+from main import get_test_recipient, week_start_date
 
 
 class EmailDeliveryTests(unittest.TestCase):
@@ -27,6 +27,13 @@ class EmailDeliveryTests(unittest.TestCase):
 
         self.assertTrue(body.startswith("Hi Heidi E.,\n\n"))
         self.assertNotIn("{Designer Name}", body)
+
+    def test_week_start_date_is_monday(self):
+        import datetime
+
+        wednesday = datetime.date(2026, 9, 10)
+        self.assertEqual(week_start_date(wednesday), datetime.date(2026, 9, 7))
+        self.assertEqual(week_start_date(datetime.date(2026, 9, 7)), datetime.date(2026, 9, 7))
 
 
 if __name__ == "__main__":

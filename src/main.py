@@ -1,6 +1,7 @@
 import os
 import json
 import datetime
+import tempfile
 from config_loader import load_config
 from imscc_handler import extract_imscc
 from differ import generate_diff_data
@@ -8,6 +9,8 @@ from content_attributor import attribute_course_changes
 from page_attributor import course_id_from_url
 from html_reporter import generate_html_report
 from emailer import send_report
+from link_auditor import find_inaccessible_google_exports
+from parity_comparer import enrich_courses_with_en_pt_parity
 
 
 def snapshot_date_from_directory(directory_name):
@@ -22,6 +25,12 @@ def get_test_recipient(config):
     if not recipient:
         return None
     return str(recipient).strip() or None
+
+
+def week_start_date(day=None):
+    """Monday of the given day's ISO week (the saved weekly report identity)."""
+    day = day or datetime.date.today()
+    return day - datetime.timedelta(days=day.weekday())
 
 
 def main():
@@ -39,8 +48,8 @@ def main():
     courses = data.get("courses", [])
     history_dir = os.path.join(root_dir, "all_course_history")
     
-    report_date = datetime.datetime.now().strftime("%Y-%m-%d")
-    print(f"Starting Automated Course Change Logs for {report_date}")
+    report_date = week_start_date().strftime("%Y-%m-%d")
+    print(f"Starting Automated Course Change Logs for week of {report_date}")
     
     if not courses:
         print("No courses found in JSON.")
@@ -102,20 +111,41 @@ def main():
                 )
         except Exception as e:
             print(f"Content attribution failed for {course_code}: {e}")
+
+        try:
+            link_issues = find_inaccessible_google_exports(current_extract_dir)
+            course_data["inaccessible_google_exports"] = link_issues
+            if link_issues:
+                print(
+                    f"Inaccessible Google export links: {len(link_issues)} "
+                    "flagged for Course Designers."
+                )
+        except Exception as e:
+            print(f"Google link audit failed for {course_code}: {e}")
+            course_data["inaccessible_google_exports"] = []
+
         course_data["designer"] = course.get("course_designer", "Unknown")
         courses_data.append(course_data)
+
+    print("\nRunning EN/PT parity checks (English is canon)...")
+    try:
+        pairs = enrich_courses_with_en_pt_parity(courses_data, history_dir)
+        print(f"EN/PT parity compared {pairs} course pair(s).")
+    except Exception as e:
+        print(f"EN/PT parity enrichment failed: {e}")
         
     full_report_html = generate_html_report(report_date, courses_data, default_designer="all")
     
     reports_dir = os.path.join(root_dir, 'reports')
     os.makedirs(reports_dir, exist_ok=True)
-    master_report_path = os.path.join(reports_dir, f"report_{report_date}_Master.html")
+    # One weekly report only (re-runs in the same week overwrite this file)
+    master_report_path = os.path.join(reports_dir, f"report_{report_date}.html")
     with open(master_report_path, 'w', encoding='utf-8') as f:
         f.write(full_report_html)
         
-    print(f"\nMaster report saved to {master_report_path}")
+    print(f"\nWeekly report saved to {master_report_path}")
     
-    # Send personalized emails to each designer
+    # Send personalized emails to each designer (temp files only; not saved to reports/)
     unique_designers = {}
     for c in courses:
         name = c.get("course_designer")
@@ -127,12 +157,6 @@ def main():
         print(f"\nGenerating personalized report for {designer_name}...")
         designer_html = generate_html_report(report_date, courses_data, default_designer=designer_name)
         
-        safe_name = designer_name.replace(' ', '_').replace('.', '')
-        designer_report_path = os.path.join(reports_dir, f"report_{report_date}_{safe_name}.html")
-        
-        with open(designer_report_path, 'w', encoding='utf-8') as f:
-            f.write(designer_html)
-            
         recipient = get_test_recipient(config)
         if not recipient:
             print(
@@ -141,15 +165,23 @@ def main():
             )
             continue
 
-        print(f"Sending email to {recipient} (Intended for: {designer_name})...")
-        send_report(
-            f"Canvas Course Changes - {report_date} - {designer_name}",
-            designer_html,
-            designer_report_path,
-            config,
-            recipient_email=recipient,
-            designer_name=designer_name,
-        )
+        safe_name = designer_name.replace(' ', '_').replace('.', '')
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            designer_report_path = os.path.join(
+                tmp_dir, f"report_{report_date}_{safe_name}.html"
+            )
+            with open(designer_report_path, 'w', encoding='utf-8') as f:
+                f.write(designer_html)
+
+            print(f"Sending email to {recipient} (Intended for: {designer_name})...")
+            send_report(
+                f"Canvas Course Changes - {report_date} - {designer_name}",
+                designer_html,
+                designer_report_path,
+                config,
+                recipient_email=recipient,
+                designer_name=designer_name,
+            )
         
     print("\nDone.")
 

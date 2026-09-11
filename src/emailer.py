@@ -7,7 +7,7 @@ def build_email_body(designer_name):
     greeting_name = str(designer_name).strip() if designer_name else "Course Designer"
     return (
         f"Hi {greeting_name},\n\n"
-        "The Canvas course change logs for the week are attached for your review. "
+        "The Weekly Course Changes Report is attached for your review. "
         "Please reach out if you have any questions.\n\n"
         "Best,\n"
         "Vinicius Tavares"

@@ -1,5 +1,6 @@
 import html
 import json
+from datetime import datetime
 from urllib.parse import urlparse
 
 
@@ -12,6 +13,25 @@ def safe_http_url(value):
     if parsed.scheme.lower() not in {"http", "https"} or not parsed.netloc:
         return None
     return html.escape(candidate, quote=True)
+
+
+def format_display_date(value):
+    """Format YYYY-MM-DD dates as 'Sep 11, 2026'."""
+    if value is None:
+        return None
+
+    text = str(value).strip()
+    if not text:
+        return None
+
+    try:
+        return (
+            datetime.strptime(text[:10], "%Y-%m-%d")
+            .strftime("%b %d, %Y")
+            .replace(" 0", " ")
+        )
+    except ValueError:
+        return text
 
 
 def generate_course_context_html(course):
@@ -29,12 +49,12 @@ def generate_course_context_html(course):
         course_title = f"<span class='course-name'>{course_name}</span>"
 
     comparison = course.get("comparison_period") or {}
-    previous_date = comparison.get("previous_date")
-    current_date = comparison.get("current_date")
+    previous_date = format_display_date(comparison.get("previous_date"))
+    current_date = format_display_date(comparison.get("current_date"))
     comparison_html = ""
     if previous_date and current_date:
-        previous_date = html.escape(str(previous_date))
-        current_date = html.escape(str(current_date))
+        previous_date = html.escape(previous_date)
+        current_date = html.escape(current_date)
         comparison_html = (
             "<span class='comparison-period'>"
             f"Compared today's Canvas version ({current_date}) with snapshot "
@@ -46,6 +66,89 @@ def generate_course_context_html(course):
         f"<div class='course-title-row'>{course_title}</div>"
         f"{comparison_html}</div>"
     )
+
+
+def link_issue_label(issue):
+    """Prefer Canvas-visible title; fall back to relative path."""
+    title = (issue or {}).get("display_title") or ""
+    title = str(title).strip()
+    if title:
+        return title
+    return (issue or {}).get("relative_path") or "Unknown resource"
+
+
+def generate_impact_badge_html(impact):
+    if impact not in {"Low", "Medium", "High"}:
+        return ""
+    impact_color = {"Low": "#4caf50", "Medium": "#ffb74d", "High": "#e57373"}[impact]
+    return (
+        f"<span class='impact-badge' style='background: {impact_color}22; "
+        f"color: {impact_color}; border: 1px solid {impact_color};'>"
+        f"Impact: {impact}</span>"
+    )
+
+
+def generate_en_pt_parity_html(parity, compact=False):
+    """Render a compact EN-canon vs PT parity block for designers."""
+    if not parity:
+        return ""
+
+    stats = parity.get("stats") or {}
+    actionable = int(stats.get("actionable_findings") or 0)
+    if actionable <= 0 and not parity.get("highlights"):
+        return ""
+
+    en_code = html.escape(str(parity.get("en_code", "")))
+    pt_code = html.escape(str(parity.get("pt_code", "")))
+    high = int(stats.get("high_findings") or 0)
+    medium = int(stats.get("medium_findings") or 0)
+    pages_missing = int(stats.get("pages_missing_in_pt") or 0)
+    quizzes_missing = int(stats.get("quizzes_missing_in_pt") or 0)
+    assignments_missing = int(stats.get("assignments_missing_in_pt") or 0)
+    banks_missing = int(stats.get("banks_missing_in_pt") or 0)
+
+    rows = []
+    for item in parity.get("highlights") or []:
+        severity = html.escape(str(item.get("severity", "")).upper())
+        category = html.escape(str(item.get("category", "")).replace("_", " "))
+        en_title = html.escape(item.get("en_title") or "—")
+        pt_title = html.escape(item.get("pt_title") or "—")
+        message = html.escape(item.get("message") or "")
+        rows.append(
+            "<li style='margin-bottom: 0.45rem;'>"
+            f"<strong>[{severity}]</strong> {category}: "
+            f"EN <code>{en_title}</code> → PT <code>{pt_title}</code> — {message}"
+            "</li>"
+        )
+
+    omitted = int(parity.get("highlights_omitted") or 0)
+    if omitted:
+        rows.append(f"<li><em>+ {omitted} more gap(s) in the full parity details</em></li>")
+
+    list_html = ""
+    if rows:
+        list_html = (
+            "<ul style='margin: 0.75rem 0 0; padding-left: 1.25rem;'>"
+            + "".join(rows)
+            + "</ul>"
+        )
+
+    summary = (
+        f"{actionable} gap(s) where Portuguese may not reflect English "
+        f"(high={high}, medium={medium}). "
+        f"Missing in PT — pages: {pages_missing}, quizzes: {quizzes_missing}, "
+        f"assignments: {assignments_missing}, question banks: {banks_missing}."
+    )
+
+    margin = "margin-bottom: 1rem;" if compact else "margin-bottom: 1.5rem;"
+    return f"""
+    <div class="parity-block" style="background: rgba(100, 181, 246, 0.08); border-left: 4px solid #64b5f6; padding: 1rem; {margin} border-radius: 4px;">
+        <strong style="color: #64b5f6;">EN/PT Parity ({en_code} → {pt_code}):</strong>
+        English is canon. Course Designers should align PT with EN when gaps appear.
+        <p style="margin: 0.5rem 0 0; color: var(--text-muted); font-size: 0.9rem;">{summary}</p>
+        {list_html}
+    </div>
+    """
 
 
 def generate_attribution_html(item):
@@ -127,9 +230,10 @@ def generate_attribution_html(item):
 def generate_file_item_html(item):
     labels_html = "".join([f"<span class='label label-{l.lower().replace('/', '-').replace(' ', '-')}'>{l}</span>" for l in item["labels"]])
     attribution_badge, attribution_details = generate_attribution_html(item)
-    display_title = item.get('file_title', item['file_path'])
+    display_title = html.escape(item.get('file_title', item['file_path']))
+    safe_summary = html.escape(item.get('ai_summary', ''))
     
-    html = f"""
+    out = f"""
     <div class="file-item">
         <div class="file-header" onclick="toggleFile(this)" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: rgba(255,255,255,0.02); border-radius: 4px;">
             <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
@@ -144,35 +248,59 @@ def generate_file_item_html(item):
     
     if item["diff_lines"] or attribution_details:
         ai_html = ""
-        if item.get("ai_summary"):
-            ai_html = f"<div class='ai-summary' style='background: rgba(187, 134, 252, 0.1); border-left: 3px solid var(--accent); padding: 0.8rem; margin-top: 0.5rem; font-size: 0.9rem; border-radius: 4px;'><strong>AI Summary:</strong> {item['ai_summary']}</div>"
+        if safe_summary:
+            ai_html = f"<div class='ai-summary' style='background: rgba(187, 134, 252, 0.1); border-left: 3px solid var(--accent); padding: 0.8rem; margin-top: 0.5rem; font-size: 0.9rem; border-radius: 4px;'><strong>AI Summary:</strong> {safe_summary}</div>"
         
-        html += f"<div class='diff-views-container' style='display: none; padding-top: 1rem;'>{attribution_details}{ai_html}"
+        out += f"<div class='diff-views-container' style='display: none; padding-top: 1rem;'>{attribution_details}{ai_html}"
         if item["diff_lines"]:
-            html += "<pre class='diff-block'>"
+            out += "<pre class='diff-block'>"
             for line in item["diff_lines"]:
                 line_safe = line.replace('<', '&lt;').replace('>', '&gt;')
                 if line.startswith('+++') or line.startswith('---'):
-                    html += f"<div class='diff-meta'>{line_safe}</div>"
+                    out += f"<div class='diff-meta'>{line_safe}</div>"
                 elif line.startswith('+'):
-                    html += f"<div class='diff-add'>{line_safe}</div>"
+                    out += f"<div class='diff-add'>{line_safe}</div>"
                 elif line.startswith('-'):
-                    html += f"<div class='diff-remove'>{line_safe}</div>"
+                    out += f"<div class='diff-remove'>{line_safe}</div>"
                 elif line.startswith('@@'):
-                    html += f"<div class='diff-chunk'>{line_safe}</div>"
+                    out += f"<div class='diff-chunk'>{line_safe}</div>"
                 else:
-                    html += f"<div class='diff-context'>{line_safe}</div>"
-            html += "</pre>"
-        html += "</div>"
+                    out += f"<div class='diff-context'>{line_safe}</div>"
+            out += "</pre>"
+        out += "</div>"
         
-    html += "</div>"
-    return html
+    out += "</div>"
+    return out
 
 def generate_html_report(year_week: str, courses_data: list, default_designer: str = "all"):
     designers = sorted(list(set(c.get("designer", "Unknown") for c in courses_data if c.get("designer"))))
     
     total_courses = len(courses_data)
     courses_with_changes = sum(1 for c in courses_data if c.get("has_changes", False))
+    courses_with_link_issues = sum(
+        1 for c in courses_data if c.get("inaccessible_google_exports")
+    )
+    total_link_issues = sum(
+        len(c.get("inaccessible_google_exports") or []) for c in courses_data
+    )
+    # Count each EN/PT pair once (prefer EN row).
+    parity_pairs = {}
+    for c in courses_data:
+        parity = c.get("en_pt_parity") or {}
+        en_code = parity.get("en_code")
+        if not en_code:
+            continue
+        if en_code not in parity_pairs:
+            parity_pairs[en_code] = parity
+    pairs_with_parity_gaps = sum(
+        1
+        for parity in parity_pairs.values()
+        if int((parity.get("stats") or {}).get("actionable_findings") or 0) > 0
+    )
+    total_parity_gaps = sum(
+        int((parity.get("stats") or {}).get("actionable_findings") or 0)
+        for parity in parity_pairs.values()
+    )
     
     total_changes_by_category = {
         "manifest": 0, "assignments": 0, "pages": 0, "quizzes_banks": 0,
@@ -200,18 +328,51 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     # -----------------------------------------
     # TAB: RAW LOGS BY COURSE
     # -----------------------------------------
+    impact_order = {"High": 0, "Medium": 1, "Low": 2}
+    courses_by_impact = sorted(
+        courses_data,
+        key=lambda c: (
+            impact_order.get(c.get("course_ai_impact"), 3),
+            0 if c.get("has_changes") else 1,
+            str(c.get("course_name", "")),
+        ),
+    )
+
     logs_course_html = ""
-    for c in courses_data:
+    for c in courses_by_impact:
         designer = c.get("designer", "Unknown")
         course_name = c['course_name']
         course_context_html = generate_course_context_html(c)
         
         has_changes_str = 'true' if c.get("has_changes", False) else 'false'
+        has_link_issues = 'true' if c.get("inaccessible_google_exports") else 'false'
+        impact_badge = generate_impact_badge_html(c.get("course_ai_impact", ""))
+        change_total = sum(len(items) for items in c.get("categories", {}).values())
+        change_count_html = (
+            f"<span class='course-change-count'>{change_total} change"
+            f"{'' if change_total == 1 else 's'}</span>"
+        )
+        link_count = len(c.get("inaccessible_google_exports") or [])
+        link_badge = ""
+        if link_count:
+            link_badge = (
+                f"<span class='link-issue-badge'>{link_count} Google export link"
+                f"{'' if link_count == 1 else 's'}</span>"
+            )
+        parity = c.get("en_pt_parity") or {}
+        parity_actionable = int((parity.get("stats") or {}).get("actionable_findings") or 0)
+        parity_badge = ""
+        if parity_actionable:
+            parity_badge = (
+                f"<span class='parity-badge'>{parity_actionable} EN/PT gap"
+                f"{'' if parity_actionable == 1 else 's'}</span>"
+            )
+        has_parity = 'true' if parity_actionable else 'false'
         logs_course_html += f"""
-        <div class='course-section accordion' data-designer='{designer}' data-course='{course_name}' data-has-changes='{has_changes_str}'>
+        <div class='course-section accordion' data-designer='{designer}' data-course='{course_name}' data-has-changes='{has_changes_str}' data-link-issues='{has_link_issues}' data-parity-gaps='{has_parity}'>
             <div class="accordion-header course-accordion-header" onclick="toggleAccordion(this)">
                 {course_context_html}
-                <span class="icon">▼</span>
+                <div class="course-header-meta">{change_count_html}{link_badge}{parity_badge}{impact_badge}<span class="icon">▼</span></div>
             </div>
             <div class="accordion-content">
         """
@@ -220,17 +381,57 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         if streak >= 5:
             logs_course_html += f"""
             <div style="background: rgba(255, 152, 0, 0.1); border-left: 4px solid #ff9800; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px;">
-                <strong style="color: #ff9800;">⚠️ Maintenance Recommendation:</strong> This course has had zero changes for {streak} consecutive weeks. Designers are recommended to check standard pages and resources to ensure course material is being actively maintained.
+                <strong style="color: #ff9800;">⚠️ Maintenance Recommendation:</strong> This course has had zero changes for {streak} consecutive weeks. Course Designers are recommended to check standard pages and resources to ensure course material is being actively maintained.
             </div>
             """
         elif streak > 0:
             logs_course_html += f"<p style='color: var(--text-muted); font-size: 0.9rem; margin-top: -10px;'><em>No changes for {streak} consecutive weeks.</em></p>"
+
+        link_issues = c.get("inaccessible_google_exports") or []
+        if link_issues:
+            logs_course_html += """
+            <div style="background: rgba(229, 115, 115, 0.1); border-left: 4px solid #e57373; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px;">
+                <strong style="color: #e57373;">Student Access Issue:</strong>
+                Google Doc/Sheet links that export as downloadable files (docx/xlsx) instead of published web documents.
+                Students typically cannot open these. Replace them with published links (<code>/pub</code> or <code>/pubhtml</code>).
+                <ul style="margin: 0.75rem 0 0; padding-left: 1.25rem;">
+            """
+            for issue in link_issues[:25]:
+                safe_url = html.escape(issue.get("url", ""), quote=True)
+                safe_title = html.escape(link_issue_label(issue))
+                safe_issue = html.escape(issue.get("issue", ""))
+                logs_course_html += (
+                    f"<li style='margin-bottom: 0.4rem;'><strong>{safe_title}</strong><br>"
+                    f"<a href='{safe_url}' target='_blank' rel='noopener noreferrer' "
+                    f"style='color: var(--accent); word-break: break-all;'>{safe_url}</a><br>"
+                    f"<span style='color: var(--text-muted); font-size: 0.85rem;'>{safe_issue}</span></li>"
+                )
+            if len(link_issues) > 25:
+                logs_course_html += (
+                    f"<li><em>+ {len(link_issues) - 25} more link(s)</em></li>"
+                )
+            logs_course_html += "</ul></div>"
+
+        parity_html = generate_en_pt_parity_html(c.get("en_pt_parity"))
+        if parity_html:
+            # Keep a short pointer in course logs; full detail lives on the EN/PT tab.
+            logs_course_html += (
+                "<div style='background: rgba(100, 181, 246, 0.08); border-left: 4px solid #64b5f6; "
+                "padding: 0.85rem 1rem; margin-bottom: 1.5rem; border-radius: 4px; color: var(--text-muted); font-size: 0.9rem;'>"
+                f"<strong style='color: #64b5f6;'>EN/PT Parity:</strong> {parity_actionable} gap"
+                f"{'' if parity_actionable == 1 else 's'} found. "
+                "See the <em>EN/PT Parity</em> tab for details."
+                "</div>"
+            )
 
         if c.get("is_new"):
             logs_course_html += "<p><em>No previous export found. All files considered new.</em></p></div></div>"
             continue
             
         if not c.get("has_changes"):
+            if not link_issues and not parity_actionable:
+                logs_course_html += "<p><em>No meaningful content changes detected this week.</em></p></div></div>"
+                continue
             logs_course_html += "<p><em>No meaningful content changes detected this week.</em></p></div></div>"
             continue
             
@@ -238,6 +439,16 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
             items = c["categories"].get(cat_key, [])
             if not items:
                 continue
+
+            category_ai_summary = (c.get("category_ai_summaries") or {}).get(cat_key, "")
+            category_ai_html = ""
+            if category_ai_summary:
+                category_ai_html = (
+                    "<div class='ai-summary' style='background: rgba(187, 134, 252, 0.1); "
+                    "border-left: 3px solid var(--accent); padding: 0.8rem; margin-bottom: 1rem; "
+                    "font-size: 0.9rem; border-radius: 4px;'>"
+                    f"<strong>AI Summary:</strong> {category_ai_summary}</div>"
+                )
                 
             logs_course_html += f"""
             <div class="accordion" data-category="{cat_key}">
@@ -246,44 +457,13 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
                     <span class="icon">▼</span>
                 </div>
                 <div class="accordion-content">
+                    {category_ai_html}
             """
             for item in items:
                 logs_course_html += generate_file_item_html(item)
             logs_course_html += "</div></div>"
             
         logs_course_html += "</div></div>"
-
-    # -----------------------------------------
-    # TAB: RAW LOGS BY CATEGORY
-    # -----------------------------------------
-    logs_category_html = ""
-    for cat_key, cat_title in category_titles.items():
-        courses_in_cat = [c for c in courses_data if c.get("has_changes") and not c.get("is_new") and c.get("categories", {}).get(cat_key)]
-        
-        if not courses_in_cat:
-            continue
-            
-        total_cat_changes = sum(len(c["categories"][cat_key]) for c in courses_in_cat)
-        
-        logs_category_html += f"""
-        <div class="category-section accordion" data-category="{cat_key}">
-            <div class="accordion-header course-accordion-header" onclick="toggleAccordion(this)">
-                <span>{cat_title} ({total_cat_changes} changes across {len(courses_in_cat)} courses)</span>
-                <span class="icon">▼</span>
-            </div>
-            <div class="accordion-content">
-        """
-        
-        for c in courses_in_cat:
-            designer = c.get("designer", "Unknown")
-            items = c["categories"][cat_key]
-            course_context_html = generate_course_context_html(c)
-            logs_category_html += f"<div class='cat-course-block' data-designer='{designer}'><div class='category-course-heading'>{course_context_html}</div>"
-            for item in items:
-                logs_category_html += generate_file_item_html(item)
-            logs_category_html += "</div>"
-            
-        logs_category_html += "</div></div>"
 
     # -----------------------------------------
     # CSS & JS
@@ -334,20 +514,24 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     .category-stats { background: var(--surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); }
     .cat-row { display: flex; justify-content: space-between; padding: 0.8rem 0.5rem; border-bottom: 1px solid var(--border); border-radius: 4px; }
     .cat-row:last-child { border-bottom: none; }
-    .cat-row:hover { background: rgba(255, 255, 255, 0.05); cursor: pointer; }
     
     .accordion { margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }
     .accordion-header {
         padding: 1rem; cursor: pointer; display: flex; justify-content: space-between;
+        align-items: center; gap: 1rem;
         background: rgba(255,255,255,0.02); transition: 0.2s; font-weight: 600;
     }
     .course-accordion-header { background: rgba(187, 134, 252, 0.05); font-size: 1.1rem; }
+    .course-header-meta { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+    .course-change-count { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; white-space: nowrap; }
+    .link-issue-badge { background: rgba(229, 115, 115, 0.15); color: #e57373; border: 1px solid #e57373; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: bold; font-size: 0.8rem; white-space: nowrap; }
+    .parity-badge { background: rgba(100, 181, 246, 0.15); color: #64b5f6; border: 1px solid #64b5f6; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: bold; font-size: 0.8rem; white-space: nowrap; }
+    .impact-badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: bold; font-size: 0.85rem; white-space: nowrap; }
     .course-context { min-width: 0; }
     .course-title-row { line-height: 1.3; }
     .course-live-link { color: var(--accent); text-decoration: none; }
     .course-live-link:hover { text-decoration: underline; }
     .comparison-period { display: block; margin-top: 0.25rem; color: var(--text-muted); font-size: 0.78rem; font-weight: 400; }
-    .category-course-heading { margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; font-size: 1.17rem; font-weight: 600; }
     .cat-accordion-header { background: rgba(255, 255, 255, 0.02); }
     .accordion-header:hover { background: var(--surface-hover); }
     .accordion-content { display: none; padding: 1rem; border-top: 1px solid var(--border); }
@@ -417,22 +601,6 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         }
     }
     
-    function openCategory(catKey) {
-        switchTab('logs-category', null);
-        document.querySelectorAll('#logs-category .category-section').forEach(acc => {
-            const content = acc.querySelector('.accordion-content');
-            const icon = acc.querySelector('.icon');
-            if (acc.getAttribute('data-category') === catKey && acc.style.display !== 'none') {
-                content.style.display = 'block';
-                if(icon) icon.textContent = '▲';
-                setTimeout(() => acc.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-            } else {
-                content.style.display = 'none';
-                if(icon) icon.textContent = '▼';
-            }
-        });
-    }
-    
     function openCourse(courseName) {
         switchTab('logs-course', null);
         document.querySelectorAll('#logs-course .course-section').forEach(acc => {
@@ -453,6 +621,7 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         let scanned = 0;
         let changed = 0;
         let totalFiles = 0;
+        const catTotals = {};
         
         document.querySelectorAll('.course-insight').forEach(el => {
             el.style.display = (designer === 'all' || el.getAttribute('data-designer') === designer) ? 'block' : 'none';
@@ -465,7 +634,12 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
                 if (el.getAttribute('data-has-changes') === 'true') {
                     changed++;
                 }
-                totalFiles += el.querySelectorAll('.file-item').length;
+                el.querySelectorAll('[data-category]').forEach(cat => {
+                    const catKey = cat.getAttribute('data-category');
+                    const count = cat.querySelectorAll('.file-item').length;
+                    catTotals[catKey] = (catTotals[catKey] || 0) + count;
+                    totalFiles += count;
+                });
             } else {
                 el.style.display = 'none';
             }
@@ -478,28 +652,9 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         const elModified = document.getElementById('metric-modified');
         if (elModified) elModified.textContent = totalFiles;
         
-        document.querySelectorAll('#logs-category .cat-course-block').forEach(el => {
-            el.style.display = (designer === 'all' || el.getAttribute('data-designer') === designer) ? 'block' : 'none';
-        });
-        
-        document.querySelectorAll('.cat-row strong').forEach(el => el.textContent = '0');
-        
-        // Hide empty categories in 'Raw Logs by Category'
-        document.querySelectorAll('#logs-category .category-section').forEach(cat => {
-            let hasVisible = false;
-            let catKey = cat.getAttribute('data-category');
-            let catTotal = 0;
-            
-            cat.querySelectorAll('.cat-course-block').forEach(block => {
-                if (block.style.display !== 'none') {
-                    hasVisible = true;
-                    catTotal += block.querySelectorAll('.file-item').length;
-                }
-            });
-            cat.style.display = hasVisible ? 'block' : 'none';
-            
-            const catMetricEl = document.getElementById('metric-cat-' + catKey);
-            if (catMetricEl) catMetricEl.textContent = catTotal;
+        document.querySelectorAll('.cat-row strong').forEach(el => {
+            const catKey = el.id.replace('metric-cat-', '');
+            el.textContent = catTotals[catKey] || 0;
         });
     }
     
@@ -535,19 +690,18 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     insights_courses = [c for c in courses_data if c.get("has_changes") and c.get("course_ai_summary")]
     
     # Sort by impact: High -> Medium -> Low
-    impact_order = {"High": 0, "Medium": 1, "Low": 2}
     insights_courses.sort(key=lambda c: impact_order.get(c.get("course_ai_impact", "Medium"), 1))
     
     insights_html = ""
     for c in insights_courses:
         impact = c.get("course_ai_impact", "Medium")
-        impact_color = {"Low": "#4caf50", "Medium": "#ffb74d", "High": "#e57373"}.get(impact, "#ffb74d")
+        impact_badge = generate_impact_badge_html(impact)
         course_context_html = generate_course_context_html(c)
         
         insights_html += f"""
         <div class="course-insight" data-designer="{c.get('designer', 'Unknown')}" onclick="openCourse('{c['course_name']}')">
             <div style="margin-top: 0; color: var(--accent); width: 80%; font-size: 1.17rem; font-weight: 600;">{course_context_html}</div>
-            <span style="position: absolute; top: 1.5rem; right: 1.5rem; background: {impact_color}22; color: {impact_color}; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: bold; font-size: 0.85rem; border: 1px solid {impact_color};">Impact: {impact}</span>
+            <span style="position: absolute; top: 1.5rem; right: 1.5rem;">{impact_badge}</span>
             <p style="margin-bottom: 0; line-height: 1.6;">{c['course_ai_summary']}</p>
         </div>
         """
@@ -555,19 +709,99 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     if insights_html:
         dashboard_html += "<h2>Course Insights</h2><p style='color: var(--text-muted); font-size: 0.9rem;'>Click a course to jump directly to its raw logs.</p>" + insights_html
 
+    link_issue_courses = [
+        c for c in courses_data if c.get("inaccessible_google_exports")
+    ]
+    if link_issue_courses:
+        dashboard_html += (
+            "<h2 style='margin-top: 3rem;'>Google Export Link Issues</h2>"
+            "<p style='color: var(--text-muted); font-size: 0.9rem;'>"
+            f"{total_link_issues} inaccessible Google Doc/Sheet export link(s) across "
+            f"{courses_with_link_issues} course(s). These download as docx/xlsx instead of "
+            "published web documents, so students often cannot open them. "
+            "Use published <code>/pub</code> or <code>/pubhtml</code> links.</p>"
+        )
+        for c in link_issue_courses:
+            issues = c.get("inaccessible_google_exports") or []
+            course_context_html = generate_course_context_html(c)
+            dashboard_html += f"""
+            <div class="course-insight" data-designer="{c.get('designer', 'Unknown')}" onclick="openCourse('{c['course_name']}')">
+                <div style="margin-top: 0; color: var(--accent); width: 80%; font-size: 1.17rem; font-weight: 600;">{course_context_html}</div>
+                <span class="link-issue-badge" style="position: absolute; top: 1.5rem; right: 1.5rem;">{len(issues)} link{'s' if len(issues) != 1 else ''}</span>
+                <ul style="margin: 0.75rem 0 0; padding-left: 1.25rem;">
+            """
+            for issue in issues[:8]:
+                safe_url = html.escape(issue.get("url", ""), quote=True)
+                safe_title = html.escape(link_issue_label(issue))
+                dashboard_html += (
+                    f"<li style='margin-bottom: 0.35rem;'><strong>{safe_title}</strong> — "
+                    f"<a href='{safe_url}' target='_blank' rel='noopener noreferrer' "
+                    f"style='color: var(--accent); word-break: break-all;' "
+                    f"onclick='event.stopPropagation()'>{safe_url}</a></li>"
+                )
+            if len(issues) > 8:
+                dashboard_html += f"<li><em>+ {len(issues) - 8} more</em></li>"
+            dashboard_html += "</ul></div>"
+
+    # EN/PT parity content is rendered in its own tab below.
+    parity_tab_html = ""
+    parity_gap_courses = [
+        c for c in courses_data
+        if int(((c.get("en_pt_parity") or {}).get("stats") or {}).get("actionable_findings") or 0) > 0
+        and not str(c.get("course_name", "")).endswith("-PT")
+    ]
+    if not parity_gap_courses:
+        parity_gap_courses = [
+            c for c in courses_data
+            if int(((c.get("en_pt_parity") or {}).get("stats") or {}).get("actionable_findings") or 0) > 0
+        ]
+        seen_pairs = set()
+        deduped = []
+        for c in parity_gap_courses:
+            en_code = (c.get("en_pt_parity") or {}).get("en_code")
+            if en_code in seen_pairs:
+                continue
+            seen_pairs.add(en_code)
+            deduped.append(c)
+        parity_gap_courses = deduped
+
+    if parity_gap_courses:
+        parity_tab_html = (
+            "<h2>EN/PT Parity Gaps</h2>"
+            "<p style='color: var(--text-muted); font-size: 0.9rem;'>"
+            f"{total_parity_gaps} actionable gap(s) across {pairs_with_parity_gaps} EN/PT pair(s). "
+            "English is canon — Course Designers should mirror EN pages, quizzes, assignments, "
+            "and question/answer coverage in Portuguese.</p>"
+        )
+        for c in parity_gap_courses:
+            parity = c.get("en_pt_parity") or {}
+            course_context_html = generate_course_context_html(c)
+            actionable = int((parity.get("stats") or {}).get("actionable_findings") or 0)
+            parity_tab_html += f"""
+            <div class="course-insight" data-designer="{c.get('designer', 'Unknown')}" onclick="openCourse('{c['course_name']}')">
+                <div style="margin-top: 0; color: var(--accent); width: 75%; font-size: 1.17rem; font-weight: 600;">{course_context_html}</div>
+                <span class="parity-badge" style="position: absolute; top: 1.5rem; right: 1.5rem;">{actionable} gap{'s' if actionable != 1 else ''}</span>
+                {generate_en_pt_parity_html(parity, compact=True)}
+            </div>
+            """
+    else:
+        parity_tab_html = (
+            "<h2>EN/PT Parity Gaps</h2>"
+            "<p style='color: var(--text-muted);'>No EN/PT parity gaps were detected for courses in this report.</p>"
+        )
+
     dashboard_html += """
     <h2 style='margin-top: 3rem;'>Changes by Category</h2>
-    <p style='color: var(--text-muted); font-size: 0.9rem;'>Click a category to view all changes grouped by category.</p>
     <div class="category-stats">
     """
     for k, title in category_titles.items():
         val = total_changes_by_category.get(k, 0)
-        dashboard_html += f"<div class='cat-row' onclick=\"openCategory('{k}')\"><span>{title}</span><strong id='metric-cat-{k}'>{val}</strong></div>"
+        dashboard_html += f"<div class='cat-row'><span>{title}</span><strong id='metric-cat-{k}'>{val}</strong></div>"
     dashboard_html += "</div>"
     
     js = js.replace('{default_designer}', default_designer)
 
-    html = f"""<!DOCTYPE html>
+    report_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -583,12 +817,12 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
             <div class="nav-links">
                 <button class="active" onclick="switchTab('dashboard', this)">Dashboard</button>
                 <button onclick="switchTab('logs-course', this)">Raw Logs by Course</button>
-                <button onclick="switchTab('logs-category', this)">Raw Logs by Category</button>
+                <button onclick="switchTab('parity-tab', this)">EN/PT Parity</button>
             </div>
         </div>
         <div class="nav-actions">
             <select id="designerFilter" onchange="filterDesigner(this.value)" style="padding: 0.5rem; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; outline: none;">
-                <option value="all">Filter by Designer (All)</option>
+                <option value="all">Filter by Course Designer (All)</option>
                 {"".join([f'<option value="{d}">{d}</option>' for d in designers])}
             </select>
         </div>
@@ -600,11 +834,11 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         <div id="logs-course" class="tab-content">
             {logs_course_html}
         </div>
-        <div id="logs-category" class="tab-content">
-            {logs_category_html}
+        <div id="parity-tab" class="tab-content">
+            {parity_tab_html}
         </div>
     </div>
     <script>{js}</script>
 </body>
 </html>"""
-    return html
+    return report_html

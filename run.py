@@ -12,7 +12,9 @@ if src_path not in sys.path:
 if scripts_path not in sys.path:
     sys.path.insert(0, scripts_path)
 
+# pyrefly: ignore [missing-import]
 import fetch_exports
+# pyrefly: ignore [missing-import]
 import main
 
 if __name__ == '__main__':

@@ -230,13 +230,35 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
 
     process_dircmp(dcmp)
     
-    # Generate Course-Level AI Summary
+    # Generate Course-Level and Category-Level AI Summaries
+    category_titles = {
+        "manifest": "Modules page",
+        "assignments": "Assignments",
+        "pages": "Pages",
+        "quizzes_banks": "Quizzes & Question Banks",
+        "course_settings": "Course Settings",
+        "rubrics": "Rubrics",
+        "discussions": "Discussions",
+        "files_media": "Files & Media",
+        "other": "Other Files",
+    }
+
     all_file_summaries = []
-    for cat_items in data["categories"].values():
-        for item in cat_items:
-            if item.get("ai_summary"):
-                all_file_summaries.append(item["ai_summary"])
-                
+    data["category_ai_summaries"] = {}
+    for cat_key, cat_items in data["categories"].items():
+        cat_summaries = [
+            item["ai_summary"] for item in cat_items if item.get("ai_summary")
+        ]
+        all_file_summaries.extend(cat_summaries)
+        if cat_summaries:
+            try:
+                from ai_summarizer import summarize_category_changes
+                data["category_ai_summaries"][cat_key] = summarize_category_changes(
+                    category_titles.get(cat_key, cat_key), cat_summaries
+                )
+            except Exception:
+                pass
+
     if all_file_summaries:
         try:
             from ai_summarizer import summarize_course_changes
@@ -246,35 +268,41 @@ def generate_diff_data(old_dir: str, new_dir: str, course_id: str):
         except Exception:
             pass
     
-    # State tracking
-    export_base = os.path.dirname(os.path.dirname(new_dir))
-    state_file = os.path.join(export_base, 'state.json')
-    
+    # Per-course zero-change streak (counts each distinct weekly snapshot once)
+    course_dir = os.path.dirname(new_dir)
+    state_file = os.path.join(course_dir, 'state.json')
+    current_snapshot = os.path.basename(new_dir)
+
     zero_changes_streak = 0
+    last_current_snapshot = None
     if os.path.exists(state_file):
         try:
             import json
             with open(state_file, 'r') as f:
                 state = json.load(f)
-                zero_changes_streak = state.get('zero_changes_streak', 0)
+                zero_changes_streak = int(state.get('zero_changes_streak', 0) or 0)
+                last_current_snapshot = state.get('last_current_snapshot')
         except Exception:
             pass
-            
+
     if data["has_changes"]:
         zero_changes_streak = 0
-    else:
-        if not data["is_new"]:
-            zero_changes_streak += 1
-            
+    elif last_current_snapshot != current_snapshot:
+        # First time this current snapshot is compared with no changes
+        zero_changes_streak += 1
+
     data["zero_changes_streak"] = zero_changes_streak
-    
+
     try:
         import json
         with open(state_file, 'w') as f:
-            json.dump({'zero_changes_streak': zero_changes_streak}, f)
+            json.dump({
+                'zero_changes_streak': zero_changes_streak,
+                'last_current_snapshot': current_snapshot,
+            }, f)
     except Exception:
         pass
-        
+
     return data
 
 def generate_diff(old_dir: str, new_dir: str, course_id: str):
