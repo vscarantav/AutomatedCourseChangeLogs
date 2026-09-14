@@ -180,6 +180,14 @@ def generate_attribution_html(item):
         f"{html.escape(badge_text)}</span>"
     )
 
+    # Skip the generic "Attribution status / no editor exposed" explainer.
+    if (
+        attribution.get("status") == "unavailable"
+        and not actors
+        and not attribution.get("unattributed_revision_count")
+    ):
+        return badge_html, ""
+
     default_source_labels = {
         "canvas_page_revisions": "Canvas page history",
         "canvas_files_api": "Canvas file metadata",
@@ -283,24 +291,6 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     total_link_issues = sum(
         len(c.get("inaccessible_google_exports") or []) for c in courses_data
     )
-    # Count each EN/PT pair once (prefer EN row).
-    parity_pairs = {}
-    for c in courses_data:
-        parity = c.get("en_pt_parity") or {}
-        en_code = parity.get("en_code")
-        if not en_code:
-            continue
-        if en_code not in parity_pairs:
-            parity_pairs[en_code] = parity
-    pairs_with_parity_gaps = sum(
-        1
-        for parity in parity_pairs.values()
-        if int((parity.get("stats") or {}).get("actionable_findings") or 0) > 0
-    )
-    total_parity_gaps = sum(
-        int((parity.get("stats") or {}).get("actionable_findings") or 0)
-        for parity in parity_pairs.values()
-    )
     
     total_changes_by_category = {
         "manifest": 0, "assignments": 0, "pages": 0, "quizzes_banks": 0,
@@ -359,20 +349,11 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
                 f"<span class='link-issue-badge'>{link_count} Google export link"
                 f"{'' if link_count == 1 else 's'}</span>"
             )
-        parity = c.get("en_pt_parity") or {}
-        parity_actionable = int((parity.get("stats") or {}).get("actionable_findings") or 0)
-        parity_badge = ""
-        if parity_actionable:
-            parity_badge = (
-                f"<span class='parity-badge'>{parity_actionable} EN/PT gap"
-                f"{'' if parity_actionable == 1 else 's'}</span>"
-            )
-        has_parity = 'true' if parity_actionable else 'false'
         logs_course_html += f"""
-        <div class='course-section accordion' data-designer='{designer}' data-course='{course_name}' data-has-changes='{has_changes_str}' data-link-issues='{has_link_issues}' data-parity-gaps='{has_parity}'>
+        <div class='course-section accordion' data-designer='{designer}' data-course='{course_name}' data-has-changes='{has_changes_str}' data-link-issues='{has_link_issues}'>
             <div class="accordion-header course-accordion-header" onclick="toggleAccordion(this)">
                 {course_context_html}
-                <div class="course-header-meta">{change_count_html}{link_badge}{parity_badge}{impact_badge}<span class="icon">▼</span></div>
+                <div class="course-header-meta">{change_count_html}{link_badge}{impact_badge}<span class="icon">▼</span></div>
             </div>
             <div class="accordion-content">
         """
@@ -412,26 +393,11 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
                 )
             logs_course_html += "</ul></div>"
 
-        parity_html = generate_en_pt_parity_html(c.get("en_pt_parity"))
-        if parity_html:
-            # Keep a short pointer in course logs; full detail lives on the EN/PT tab.
-            logs_course_html += (
-                "<div style='background: rgba(100, 181, 246, 0.08); border-left: 4px solid #64b5f6; "
-                "padding: 0.85rem 1rem; margin-bottom: 1.5rem; border-radius: 4px; color: var(--text-muted); font-size: 0.9rem;'>"
-                f"<strong style='color: #64b5f6;'>EN/PT Parity:</strong> {parity_actionable} gap"
-                f"{'' if parity_actionable == 1 else 's'} found. "
-                "See the <em>EN/PT Parity</em> tab for details."
-                "</div>"
-            )
-
         if c.get("is_new"):
             logs_course_html += "<p><em>No previous export found. All files considered new.</em></p></div></div>"
             continue
             
         if not c.get("has_changes"):
-            if not link_issues and not parity_actionable:
-                logs_course_html += "<p><em>No meaningful content changes detected this week.</em></p></div></div>"
-                continue
             logs_course_html += "<p><em>No meaningful content changes detected this week.</em></p></div></div>"
             continue
             
@@ -743,52 +709,55 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
                 dashboard_html += f"<li><em>+ {len(issues) - 8} more</em></li>"
             dashboard_html += "</ul></div>"
 
-    # EN/PT parity content is rendered in its own tab below.
+    # EN/PT parity temporarily disabled — re-enable with enrichment in main.py.
     parity_tab_html = ""
-    parity_gap_courses = [
-        c for c in courses_data
-        if int(((c.get("en_pt_parity") or {}).get("stats") or {}).get("actionable_findings") or 0) > 0
-        and not str(c.get("course_name", "")).endswith("-PT")
-    ]
-    if not parity_gap_courses:
-        parity_gap_courses = [
-            c for c in courses_data
-            if int(((c.get("en_pt_parity") or {}).get("stats") or {}).get("actionable_findings") or 0) > 0
-        ]
-        seen_pairs = set()
-        deduped = []
-        for c in parity_gap_courses:
-            en_code = (c.get("en_pt_parity") or {}).get("en_code")
-            if en_code in seen_pairs:
-                continue
-            seen_pairs.add(en_code)
-            deduped.append(c)
-        parity_gap_courses = deduped
-
-    if parity_gap_courses:
-        parity_tab_html = (
-            "<h2>EN/PT Parity Gaps</h2>"
-            "<p style='color: var(--text-muted); font-size: 0.9rem;'>"
-            f"{total_parity_gaps} actionable gap(s) across {pairs_with_parity_gaps} EN/PT pair(s). "
-            "English is canon — Course Designers should mirror EN pages, quizzes, assignments, "
-            "and question/answer coverage in Portuguese.</p>"
-        )
-        for c in parity_gap_courses:
-            parity = c.get("en_pt_parity") or {}
-            course_context_html = generate_course_context_html(c)
-            actionable = int((parity.get("stats") or {}).get("actionable_findings") or 0)
-            parity_tab_html += f"""
-            <div class="course-insight" data-designer="{c.get('designer', 'Unknown')}" onclick="openCourse('{c['course_name']}')">
-                <div style="margin-top: 0; color: var(--accent); width: 75%; font-size: 1.17rem; font-weight: 600;">{course_context_html}</div>
-                <span class="parity-badge" style="position: absolute; top: 1.5rem; right: 1.5rem;">{actionable} gap{'s' if actionable != 1 else ''}</span>
-                {generate_en_pt_parity_html(parity, compact=True)}
-            </div>
-            """
-    else:
-        parity_tab_html = (
-            "<h2>EN/PT Parity Gaps</h2>"
-            "<p style='color: var(--text-muted);'>No EN/PT parity gaps were detected for courses in this report.</p>"
-        )
+    parity_tab_button = ""
+    parity_tab_panel = ""
+    # parity_gap_courses = [
+    #     c for c in courses_data
+    #     if int(((c.get("en_pt_parity") or {}).get("stats") or {}).get("actionable_findings") or 0) > 0
+    #     and not str(c.get("course_name", "")).endswith("-PT")
+    # ]
+    # if not parity_gap_courses:
+    #     parity_gap_courses = [
+    #         c for c in courses_data
+    #         if int(((c.get("en_pt_parity") or {}).get("stats") or {}).get("actionable_findings") or 0) > 0
+    #     ]
+    #     seen_pairs = set()
+    #     deduped = []
+    #     for c in parity_gap_courses:
+    #         en_code = (c.get("en_pt_parity") or {}).get("en_code")
+    #         if en_code in seen_pairs:
+    #             continue
+    #         seen_pairs.add(en_code)
+    #         deduped.append(c)
+    #     parity_gap_courses = deduped
+    #
+    # if parity_gap_courses:
+    #     parity_tab_html = (
+    #         "<h2>EN/PT Parity Gaps</h2>"
+    #         "<p style='color: var(--text-muted); font-size: 0.9rem;'>"
+    #         "Course Designers should mirror EN pages, quizzes, assignments, "
+    #         "and question/answer coverage in Portuguese.</p>"
+    #     )
+    #     for c in parity_gap_courses:
+    #         parity = c.get("en_pt_parity") or {}
+    #         course_context_html = generate_course_context_html(c)
+    #         actionable = int((parity.get("stats") or {}).get("actionable_findings") or 0)
+    #         parity_tab_html += f"""
+    #         <div class="course-insight" data-designer="{c.get('designer', 'Unknown')}" onclick="openCourse('{c['course_name']}')">
+    #             <div style="margin-top: 0; color: var(--accent); width: 75%; font-size: 1.17rem; font-weight: 600;">{course_context_html}</div>
+    #             <span class="parity-badge" style="position: absolute; top: 1.5rem; right: 1.5rem;">{actionable} gap{'s' if actionable != 1 else ''}</span>
+    #             {generate_en_pt_parity_html(parity, compact=True)}
+    #         </div>
+    #         """
+    # else:
+    #     parity_tab_html = (
+    #         "<h2>EN/PT Parity Gaps</h2>"
+    #         "<p style='color: var(--text-muted);'>No EN/PT parity gaps were detected for courses in this report.</p>"
+    #     )
+    # parity_tab_button = '<button onclick="switchTab(\'parity-tab\', this)">EN/PT Parity</button>'
+    # parity_tab_panel = f'<div id="parity-tab" class="tab-content">{parity_tab_html}</div>'
 
     dashboard_html += """
     <h2 style='margin-top: 3rem;'>Changes by Category</h2>
@@ -817,7 +786,7 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
             <div class="nav-links">
                 <button class="active" onclick="switchTab('dashboard', this)">Dashboard</button>
                 <button onclick="switchTab('logs-course', this)">Raw Logs by Course</button>
-                <button onclick="switchTab('parity-tab', this)">EN/PT Parity</button>
+                {parity_tab_button}
             </div>
         </div>
         <div class="nav-actions">
@@ -834,9 +803,7 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         <div id="logs-course" class="tab-content">
             {logs_course_html}
         </div>
-        <div id="parity-tab" class="tab-content">
-            {parity_tab_html}
-        </div>
+        {parity_tab_panel}
     </div>
     <script>{js}</script>
 </body>

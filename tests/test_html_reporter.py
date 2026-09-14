@@ -89,6 +89,7 @@ class HtmlReporterTests(unittest.TestCase):
         self.assertNotIn('id="metric-parity-gaps"', report)
 
     def test_report_includes_compact_en_pt_parity_section(self):
+        # EN/PT parity tab is temporarily disabled in the HTML report.
         course = make_course(None, "MATH108X", has_changes=False)
         course["en_pt_parity"] = {
             "en_code": "MATH108X",
@@ -114,17 +115,11 @@ class HtmlReporterTests(unittest.TestCase):
             "highlights_omitted": 2,
         }
         report = generate_html_report("2026-09-08", [course])
-        self.assertIn('id="parity-tab"', report)
-        self.assertIn("switchTab('parity-tab'", report)
-        self.assertIn("EN/PT Parity Gaps", report)
-        self.assertIn("EN/PT Parity (MATH108X → MATH108X-PT)", report)
-        self.assertIn("3 EN/PT gaps", report)
-        self.assertIn("Excel Tips", report)
-        self.assertIn("English is canon", report)
-        self.assertNotIn("metric-parity-gaps", report)
-        # Full parity details live on the dedicated tab; course logs only point there.
-        logs_section = report.split('id="logs-course"')[1].split('id="parity-tab"')[0]
-        self.assertIn("See the <em>EN/PT Parity</em> tab for details.", logs_section)
+        self.assertNotIn('id="parity-tab"', report)
+        self.assertNotIn("switchTab('parity-tab'", report)
+        self.assertNotIn("EN/PT Parity Gaps", report)
+        logs_section = report.split('id="logs-course"')[1]
+        self.assertNotIn("EN/PT gap", logs_section)
         self.assertNotIn("Excel Tips", logs_section)
 
     def test_raw_logs_by_course_sorts_by_impact(self):

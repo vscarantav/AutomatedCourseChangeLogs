@@ -10,7 +10,8 @@ from page_attributor import course_id_from_url
 from html_reporter import generate_html_report
 from emailer import send_report
 from link_auditor import find_inaccessible_google_exports
-from parity_comparer import enrich_courses_with_en_pt_parity
+# Temporarily disabled — re-enable for EN/PT language comparisons:
+# from parity_comparer import enrich_courses_with_en_pt_parity
 
 
 def snapshot_date_from_directory(directory_name):
@@ -127,12 +128,13 @@ def main():
         course_data["designer"] = course.get("course_designer", "Unknown")
         courses_data.append(course_data)
 
-    print("\nRunning EN/PT parity checks (English is canon)...")
-    try:
-        pairs = enrich_courses_with_en_pt_parity(courses_data, history_dir)
-        print(f"EN/PT parity compared {pairs} course pair(s).")
-    except Exception as e:
-        print(f"EN/PT parity enrichment failed: {e}")
+    # Temporarily disabled — re-enable for EN/PT language comparisons:
+    # print("\nRunning EN/PT parity checks (English is canon)...")
+    # try:
+    #     pairs = enrich_courses_with_en_pt_parity(courses_data, history_dir)
+    #     print(f"EN/PT parity compared {pairs} course pair(s).")
+    # except Exception as e:
+    #     print(f"EN/PT parity enrichment failed: {e}")
         
     full_report_html = generate_html_report(report_date, courses_data, default_designer="all")
     

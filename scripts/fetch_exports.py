@@ -217,7 +217,7 @@ def main():
                 state = status_obj.get("workflow_state")
                 
                 if state == "exported":
-                    print(f"✅ {code} export finished! Downloading...")
+                    print(f"[OK] {code} export finished! Downloading...")
                     download_url = status_obj["attachment"]["url"]
                     save_download(download_url, out_file)
                     save_export_metadata(out_file, c_id, code, status_obj)
@@ -227,10 +227,10 @@ def main():
                     
                     pending_exports.remove(task)
                 elif state == "failed":
-                    print(f"❌ {code} export failed on Canvas.")
+                    print(f"[FAIL] {code} export failed on Canvas.")
                     pending_exports.remove(task)
                 else:
-                    print(f"⏳ {code} is still '{state}'...")
+                    print(f"[WAIT] {code} is still '{state}'...")
             except Exception as e:
                 task["status_errors"] += 1
                 print(f"Error checking status for {code}: {e}")

@@ -1,5 +1,18 @@
 import os
-import google.generativeai as genai
+from google import genai
+
+
+MODEL_NAME = "gemini-3.8-flash"
+
+
+def _generate_content(api_key: str, prompt: str) -> str:
+    """Generate text with the supported Google Gen AI SDK."""
+    client = genai.Client(api_key=api_key)
+    response = client.models.generate_content(
+        model=MODEL_NAME,
+        contents=prompt,
+    )
+    return (response.text or "").strip()
 
 def summarize_change(page_content: str, diff_lines: list, filename: str) -> str:
     """
@@ -10,10 +23,6 @@ def summarize_change(page_content: str, diff_lines: list, filename: str) -> str:
         return "AI Summarization disabled: GEMINI_API_KEY not found in environment."
         
     try:
-        genai.configure(api_key=api_key)
-        # Using flash for fast, cheap inference
-        model = genai.GenerativeModel('gemini-3.8-flash')
-        
         # We limit page content to avoid massive token usage for huge files
         content_snippet = page_content[:15000] if page_content else "No content available."
         diff_text = "\n".join(diff_lines)
@@ -32,8 +41,7 @@ Diff (Changes):
 
 Provide a very short, direct, and explanatory 1-2 sentence human-readable summary of what changed from the perspective of a teacher or student. Focus only on the substantive change (e.g., "The due date was extended by two days" or "A new paragraph about grading policies was added"). Do not mention UUIDs, HTML tags, or system metadata. Be extremely direct and avoid all conversational filler.
 """
-        response = model.generate_content(prompt)
-        return response.text.strip()
+        return _generate_content(api_key, prompt)
     except Exception as e:
         return f"AI Summarization failed: {e}"
 
@@ -49,9 +57,6 @@ def summarize_course_changes(file_summaries: list) -> dict:
         return {"summary": "No AI summaries available to aggregate.", "impact": "N/A"}
         
     try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-3.8-flash')
-        
         summaries_text = "\n".join([f"- {s}" for s in file_summaries if s and not s.startswith("AI Summarization disabled") and not s.startswith("AI Summarization failed")])
         if not summaries_text.strip():
             return {"summary": "No substantive changes were able to be summarized by the AI.", "impact": "Low"}
@@ -73,8 +78,7 @@ Format your response exactly like this:
 Impact: [Low/Medium/High]
 Summary: [Your 2-4 sentence summary]
 """
-        response = model.generate_content(prompt)
-        text = response.text.strip()
+        text = _generate_content(api_key, prompt)
         
         impact = "Medium"
         summary = text
@@ -115,8 +119,6 @@ def summarize_category_changes(category_title: str, file_summaries: list) -> str
         return usable[0]
 
     try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-3.8-flash')
         summaries_text = "\n".join([f"- {s}" for s in usable])
 
         prompt = f"""
@@ -131,7 +133,6 @@ Focus on the pattern and student/teacher impact. Do not list every file.
 Special guidance: If most or all changes are assignment date updates (due dates, availability, unlock/lock dates), briefly note this is probably due to the beginning of a new semester.
 Be extremely direct and avoid conversational filler.
 """
-        response = model.generate_content(prompt)
-        return response.text.strip()
+        return _generate_content(api_key, prompt)
     except Exception as e:
         return f"AI Summarization failed: {e}"
