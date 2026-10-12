@@ -21,11 +21,12 @@ def snapshot_date_from_directory(directory_name):
     return directory_name
 
 
-def get_test_recipient(config):
-    recipient = config.get("test_email")
-    if not recipient:
+def get_designer_recipient(designer_email):
+    """Resolve a designer's inbox. Returns None so callers skip rather than
+    fall back to another address when the roster has no usable email."""
+    if not designer_email:
         return None
-    return str(recipient).strip() or None
+    return str(designer_email).strip() or None
 
 
 def week_start_date(day=None):
@@ -159,12 +160,9 @@ def main():
         print(f"\nGenerating personalized report for {designer_name}...")
         designer_html = generate_html_report(report_date, courses_data, default_designer=designer_name)
         
-        recipient = get_test_recipient(config)
+        recipient = get_designer_recipient(designer_email)
         if not recipient:
-            print(
-                "TEST_EMAIL is not configured. Skipping email to prevent "
-                f"delivery to {designer_name}."
-            )
+            print(f"No email on file for {designer_name}. Skipping.")
             continue
 
         safe_name = designer_name.replace(' ', '_').replace('.', '')
@@ -175,9 +173,9 @@ def main():
             with open(designer_report_path, 'w', encoding='utf-8') as f:
                 f.write(designer_html)
 
-            print(f"Sending email to {recipient} (Intended for: {designer_name})...")
+            print(f"Sending email to {designer_name} <{recipient}>...")
             send_report(
-                f"Canvas Course Changes - {report_date} - {designer_name}",
+                f"Canvas Course Changes - {report_date}",
                 designer_html,
                 designer_report_path,
                 config,

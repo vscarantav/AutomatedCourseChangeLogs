@@ -592,6 +592,20 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         document.querySelectorAll('.course-insight').forEach(el => {
             el.style.display = (designer === 'all' || el.getAttribute('data-designer') === designer) ? 'block' : 'none';
         });
+
+        let linkIssueCount = 0;
+        let linkIssueCourses = 0;
+        document.querySelectorAll('.link-issue-insight').forEach(el => {
+            if (el.style.display === 'none') return;
+            linkIssueCount += parseInt(el.getAttribute('data-link-count'), 10) || 0;
+            linkIssueCourses++;
+        });
+        const elLinkIssues = document.getElementById('metric-link-issue-count');
+        if (elLinkIssues) elLinkIssues.textContent = linkIssueCount;
+        const elLinkIssueCourses = document.getElementById('metric-link-issue-courses');
+        if (elLinkIssueCourses) elLinkIssueCourses.textContent = linkIssueCourses;
+        const elLinkIssueHeader = document.getElementById('link-issues-header');
+        if (elLinkIssueHeader) elLinkIssueHeader.style.display = linkIssueCourses ? 'block' : 'none';
         
         document.querySelectorAll('#logs-course .course-section').forEach(el => {
             if (designer === 'all' || el.getAttribute('data-designer') === designer) {
@@ -680,18 +694,22 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     ]
     if link_issue_courses:
         dashboard_html += (
+            "<div id='link-issues-header'>"
             "<h2 style='margin-top: 3rem;'>Google Export Link Issues</h2>"
             "<p style='color: var(--text-muted); font-size: 0.9rem;'>"
-            f"{total_link_issues} inaccessible Google Doc/Sheet export link(s) across "
-            f"{courses_with_link_issues} course(s). These download as docx/xlsx instead of "
+            f"<span id='metric-link-issue-count'>{total_link_issues}</span> inaccessible "
+            "Google Doc/Sheet export link(s) across "
+            f"<span id='metric-link-issue-courses'>{courses_with_link_issues}</span> course(s). "
+            "These download as docx/xlsx instead of "
             "published web documents, so students often cannot open them. "
             "Use published <code>/pub</code> or <code>/pubhtml</code> links.</p>"
+            "</div>"
         )
         for c in link_issue_courses:
             issues = c.get("inaccessible_google_exports") or []
             course_context_html = generate_course_context_html(c)
             dashboard_html += f"""
-            <div class="course-insight" data-designer="{c.get('designer', 'Unknown')}" onclick="openCourse('{c['course_name']}')">
+            <div class="course-insight link-issue-insight" data-designer="{c.get('designer', 'Unknown')}" data-link-count="{len(issues)}" onclick="openCourse('{c['course_name']}')">
                 <div style="margin-top: 0; color: var(--accent); width: 80%; font-size: 1.17rem; font-weight: 600;">{course_context_html}</div>
                 <span class="link-issue-badge" style="position: absolute; top: 1.5rem; right: 1.5rem;">{len(issues)} link{'s' if len(issues) != 1 else ''}</span>
                 <ul style="margin: 0.75rem 0 0; padding-left: 1.25rem;">

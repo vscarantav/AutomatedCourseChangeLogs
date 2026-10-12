@@ -9,18 +9,16 @@ if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
 from emailer import build_email_body
-from main import get_test_recipient, week_start_date
+from main import get_designer_recipient, week_start_date
 
 
 class EmailDeliveryTests(unittest.TestCase):
-    def test_all_testing_delivery_uses_configured_test_recipient(self):
-        config = {"test_email": "tav20001@byui.edu"}
+    def test_delivery_uses_the_designers_own_address(self):
+        self.assertEqual(get_designer_recipient(" heidi@byui.edu "), "heidi@byui.edu")
 
-        self.assertEqual(get_test_recipient(config), "tav20001@byui.edu")
-
-    def test_missing_test_recipient_fails_closed(self):
-        self.assertIsNone(get_test_recipient({}))
-        self.assertIsNone(get_test_recipient({"test_email": "  "}))
+    def test_missing_designer_email_fails_closed(self):
+        self.assertIsNone(get_designer_recipient(None))
+        self.assertIsNone(get_designer_recipient("  "))
 
     def test_email_greeting_uses_course_designer_name(self):
         body = build_email_body("Heidi E.")

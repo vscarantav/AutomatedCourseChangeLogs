@@ -87,6 +87,10 @@ class HtmlReporterTests(unittest.TestCase):
         self.assertNotIn("wiki_content/page.html", report)
         self.assertNotIn('id="metric-link-issues"', report)
         self.assertNotIn('id="metric-parity-gaps"', report)
+        # Counts are recalculated for the selected designer by filterDesigner().
+        self.assertIn("id='metric-link-issue-count'", report)
+        self.assertIn("id='metric-link-issue-courses'", report)
+        self.assertIn('data-link-count="1"', report)
 
     def test_report_includes_compact_en_pt_parity_section(self):
         # EN/PT parity tab is temporarily disabled in the HTML report.
