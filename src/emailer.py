@@ -25,6 +25,10 @@ def send_report(
     """
     Sends the HTML report via SMTP as an attachment, with a brief summary in the body.
     """
+    if not config.get("email_delivery_enabled", False):
+        print("Designer email delivery is disabled. Skipping email notification.")
+        return False
+
     sender_email = config.get("smtp_email")
     sender_password = config.get("smtp_password")
     
@@ -36,7 +40,7 @@ def send_report(
     
     if not sender_email or not sender_password or not recipients:
         print("Email configuration is incomplete. Skipping email notification.")
-        return
+        return False
         
     msg = EmailMessage()
     msg['Subject'] = subject
@@ -71,5 +75,7 @@ def send_report(
             server.login(sender_email, sender_password)
             server.send_message(msg)
         print("Email sent successfully.")
+        return True
     except Exception as e:
         print(f"Failed to send email: {e}")
+        return False
