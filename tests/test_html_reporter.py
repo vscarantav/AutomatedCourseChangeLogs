@@ -32,7 +32,7 @@ def make_course(course_url, course_name="TEST101", impact=None, has_changes=Fals
 
 
 class HtmlReporterTests(unittest.TestCase):
-    def test_course_report_shows_comparison_dates_and_live_course_link(self):
+    def test_course_report_uses_approved_visual_shell_and_live_course_link(self):
         course = make_course("https://canvas.example.edu/courses/123")
         course["has_changes"] = True
         course["course_ai_summary"] = "A page changed."
@@ -54,15 +54,26 @@ class HtmlReporterTests(unittest.TestCase):
             [course],
         )
 
-        comparison_text = (
-            "Compared today's Canvas version (Sep 8, 2026) with snapshot "
-            "from Sep 1, 2026"
-        )
+        comparison_text = "Compared Snapshots from Sep 8, 2026 with Sep 1, 2026"
         course_link = "href='https://canvas.example.edu/courses/123'"
-        self.assertEqual(report.count(comparison_text), 2)
+        self.assertEqual(report.count(comparison_text), 1)
+        self.assertNotIn("Compared today's Canvas version", report)
         self.assertEqual(report.count(course_link), 2)
         self.assertIn("title='Open live course in Canvas'", report)
         self.assertIn("target='_blank'", report)
+        self.assertIn('<header class="audit-hero">', report)
+        self.assertIn('datetime="2026-09-08">September 8, 2026</time>', report)
+        self.assertIn("Weekly Course Changes Report", report)
+        self.assertIn(">Summary</button>", report)
+        self.assertIn(">Detailed Changes</button>", report)
+        self.assertIn('<option value="all">Select Designer</option>', report)
+        self.assertIn('src="data:image/png;base64,', report)
+        self.assertIn("--audit-navy: #102a43", report)
+        self.assertNotIn("fonts.googleapis.com", report)
+        self.assertIn("&#9660;", report)
+        self.assertIn("icon.textContent = '\\u25BC';", report)
+        self.assertIn("icon.textContent = '\\u25B2';", report)
+        self.assertNotIn("â–", report)
         self.assertIn("Impact: Low", report)
         self.assertEqual(report.count("Impact: Low"), 2)
         self.assertIn("1 change", report)
@@ -75,15 +86,18 @@ class HtmlReporterTests(unittest.TestCase):
         course["inaccessible_google_exports"] = [{
             "url": "https://docs.google.com/document/d/abc/export?format=docx",
             "relative_path": "wiki_content/page.html",
-            "display_title": "W02 Case Study Worksheet",
-            "issue": "Google Doc export link (docx).",
+            "display_title": "InformaÃƒÂ§ÃƒÂµes sobre Direitos Autorais",
+            "issue": "Responda \u00c3\u00a0s perguntas.",
         }]
         report = generate_html_report("2026-09-08", [course])
         self.assertIn("Google Export Link Issues", report)
         self.assertIn("export?format=docx", report)
         self.assertIn("1 Google export link", report)
         self.assertIn("Student Access Issue", report)
-        self.assertIn("W02 Case Study Worksheet", report)
+        self.assertIn("Informações sobre Direitos Autorais", report)
+        self.assertIn("Responda às perguntas.", report)
+        self.assertNotIn("InformaÃ§Ãµes", report)
+        self.assertNotIn("InformaÃƒÂ§ÃƒÂµes", report)
         self.assertNotIn("wiki_content/page.html", report)
         self.assertNotIn('id="metric-link-issues"', report)
         self.assertNotIn('id="metric-parity-gaps"', report)
