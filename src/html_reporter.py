@@ -1,7 +1,21 @@
+import base64
 import html
 import json
 from datetime import datetime
+from pathlib import Path
 from urllib.parse import urlparse
+
+
+ASSETS_DIR = Path(__file__).with_name("assets")
+
+
+def load_report_asset_text(filename):
+    return (ASSETS_DIR / filename).read_text(encoding="utf-8-sig")
+
+
+def load_report_asset_data_uri(filename, mime_type):
+    encoded = base64.b64encode((ASSETS_DIR / filename).read_bytes()).decode("ascii")
+    return f"data:{mime_type};base64,{encoded}"
 
 
 def safe_http_url(value):
@@ -34,6 +48,36 @@ def format_display_date(value):
         return text
 
 
+def format_full_display_date(value):
+    """Format YYYY-MM-DD dates as 'September 11, 2026'."""
+    if value is None:
+        return None
+
+    text = str(value).strip()
+    if not text:
+        return None
+
+    try:
+        return (
+            datetime.strptime(text[:10], "%Y-%m-%d")
+            .strftime("%B %d, %Y")
+            .replace(" 0", " ")
+        )
+    except ValueError:
+        return text
+
+
+def find_report_comparison_period(courses_data):
+    """Return the first complete comparison period shared by the report data."""
+    for course in courses_data:
+        comparison = course.get("comparison_period") or {}
+        current_date = format_display_date(comparison.get("current_date"))
+        previous_date = format_display_date(comparison.get("previous_date"))
+        if current_date and previous_date:
+            return current_date, previous_date
+    return None, None
+
+
 def generate_course_context_html(course):
     course_name = html.escape(str(course.get("course_name", "Unknown course")))
     course_url = safe_http_url(course.get("course_url"))
@@ -48,23 +92,10 @@ def generate_course_context_html(course):
     else:
         course_title = f"<span class='course-name'>{course_name}</span>"
 
-    comparison = course.get("comparison_period") or {}
-    previous_date = format_display_date(comparison.get("previous_date"))
-    current_date = format_display_date(comparison.get("current_date"))
-    comparison_html = ""
-    if previous_date and current_date:
-        previous_date = html.escape(previous_date)
-        current_date = html.escape(current_date)
-        comparison_html = (
-            "<span class='comparison-period'>"
-            f"Compared today's Canvas version ({current_date}) with snapshot "
-            f"from {previous_date}</span>"
-        )
-
     return (
         "<div class='course-context'>"
         f"<div class='course-title-row'>{course_title}</div>"
-        f"{comparison_html}</div>"
+        "</div>"
     )
 
 
@@ -282,6 +313,19 @@ def generate_file_item_html(item):
 
 def generate_html_report(year_week: str, courses_data: list, default_designer: str = "all"):
     designers = sorted(list(set(c.get("designer", "Unknown") for c in courses_data if c.get("designer"))))
+    report_date_iso = str(year_week)[:10]
+    report_date_display = format_full_display_date(year_week) or str(year_week)
+    comparison_current_date, comparison_previous_date = find_report_comparison_period(courses_data)
+    comparison_subtitle = ""
+    if comparison_current_date and comparison_previous_date:
+        comparison_subtitle = (
+            '<span class="comparison-heading-subtitle">Compared Snapshots from '
+            f"{html.escape(comparison_current_date)} with "
+            f"{html.escape(comparison_previous_date)}</span>"
+        )
+
+    visual_css = load_report_asset_text("report_visual.css")
+    viking_watermark_uri = load_report_asset_data_uri("viking-watermark.png", "image/png")
     
     total_courses = len(courses_data)
     courses_with_changes = sum(1 for c in courses_data if c.get("has_changes", False))
@@ -528,6 +572,7 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     .diff-chunk { color: #4ec9b0; }
     .diff-context { color: #cccccc; }
     """
+    css += "\n" + visual_css
     
     js = """
     function switchTab(tabId, el) {
@@ -650,22 +695,10 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     # -----------------------------------------
     # DASHBOARD HTML
     # -----------------------------------------
-    dashboard_html = f"""
-    <div class="metric-grid">
-        <div class="metric-card">
-            <div class="metric-value" id="metric-scanned">{{total_courses}}</div>
-            <div class="metric-label">Courses Scanned</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value" id="metric-changed">{{courses_with_changes}}</div>
-            <div class="metric-label">Courses w/ Changes</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-value" id="metric-modified">{{sum(total_changes_by_category.values())}}</div>
-            <div class="metric-label">Total Pages Modified</div>
-        </div>
-    </div>
-    """
+    dashboard_html = (
+        '<h2 class="course-changes-heading">Course Changes'
+        f"{comparison_subtitle}</h2>"
+    )
     
     insights_courses = [c for c in courses_data if c.get("has_changes") and c.get("course_ai_summary")]
     
@@ -687,7 +720,7 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         """
             
     if insights_html:
-        dashboard_html += "<h2>Course Insights</h2><p style='color: var(--text-muted); font-size: 0.9rem;'>Click a course to jump directly to its raw logs.</p>" + insights_html
+        dashboard_html += insights_html
 
     link_issue_courses = [
         c for c in courses_data if c.get("inaccessible_google_exports")
@@ -793,25 +826,40 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Change Logs - {year_week}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>Weekly Course Changes Report - {year_week}</title>
     <style>{css}</style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-left">
-            <h1>Canvas Change Logs</h1>
-            <div class="nav-links">
-                <button class="active" onclick="switchTab('dashboard', this)">Dashboard</button>
-                <button onclick="switchTab('logs-course', this)">Raw Logs by Course</button>
-                {parity_tab_button}
-            </div>
+    <header class="audit-hero">
+        <img class="viking-watermark" alt="" aria-hidden="true" src="{viking_watermark_uri}">
+        <div class="audit-hero-inner">
+            <time class="audit-report-date" datetime="{html.escape(report_date_iso, quote=True)}">{html.escape(report_date_display)}</time>
+            <h1>Weekly Course Changes Report</h1>
+            <p class="audit-hero-copy">
+                See what changed across your courses this week, what matters most,
+                and what may need your attention.
+            </p>
         </div>
-        <div class="nav-actions">
-            <select id="designerFilter" onchange="filterDesigner(this.value)" style="padding: 0.5rem; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; outline: none;">
-                <option value="all">Filter by Course Designer (All)</option>
-                {"".join([f'<option value="{d}">{d}</option>' for d in designers])}
-            </select>
+    </header>
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <div class="nav-links">
+                    <button class="active" onclick="switchTab('dashboard', this)">Summary</button>
+                    <button onclick="switchTab('logs-course', this)">Detailed Changes</button>
+                    {parity_tab_button}
+                </div>
+            </div>
+            <div class="nav-stats" aria-label="Report summary metrics">
+                <div class="nav-stat"><strong id="metric-changed">{courses_with_changes}</strong><span>Courses w/ Changes</span></div>
+                <div class="nav-stat"><strong id="metric-modified">{sum(total_changes_by_category.values())}</strong><span>Total Pages Modified</span></div>
+            </div>
+            <div class="nav-actions">
+                <select id="designerFilter" onchange="filterDesigner(this.value)" style="padding: 0.5rem; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; outline: none;">
+                    <option value="all">Select Designer</option>
+                    {"".join([f'<option value="{html.escape(d, quote=True)}">{html.escape(d)}</option>' for d in designers])}
+                </select>
+            </div>
         </div>
     </nav>
     <div class="container">
@@ -824,6 +872,7 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         {parity_tab_panel}
     </div>
     <script>{js}</script>
+    <footer class="audit-footer">Generated from the {html.escape(report_date_display)} Canvas course comparison report.</footer>
 </body>
 </html>"""
     return report_html
