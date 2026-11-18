@@ -86,15 +86,18 @@ class HtmlReporterTests(unittest.TestCase):
         course["inaccessible_google_exports"] = [{
             "url": "https://docs.google.com/document/d/abc/export?format=docx",
             "relative_path": "wiki_content/page.html",
-            "display_title": "W02 Case Study Worksheet",
-            "issue": "Google Doc export link (docx).",
+            "display_title": "InformaÃƒÂ§ÃƒÂµes sobre Direitos Autorais",
+            "issue": "Responda \u00c3\u00a0s perguntas.",
         }]
         report = generate_html_report("2026-09-08", [course])
         self.assertIn("Google Export Link Issues", report)
         self.assertIn("export?format=docx", report)
         self.assertIn("1 Google export link", report)
         self.assertIn("Student Access Issue", report)
-        self.assertIn("W02 Case Study Worksheet", report)
+        self.assertIn("Informações sobre Direitos Autorais", report)
+        self.assertIn("Responda às perguntas.", report)
+        self.assertNotIn("InformaÃ§Ãµes", report)
+        self.assertNotIn("InformaÃƒÂ§ÃƒÂµes", report)
         self.assertNotIn("wiki_content/page.html", report)
         self.assertNotIn('id="metric-link-issues"', report)
         self.assertNotIn('id="metric-parity-gaps"', report)

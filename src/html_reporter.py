@@ -1,12 +1,19 @@
 import base64
 import html
 import json
+import re
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
 
 ASSETS_DIR = Path(__file__).with_name("assets")
+MOJIBAKE_MARKERS = ("Ã", "Â", "â", "ï", "ð")
+MOJIBAKE_SEQUENCE_RE = re.compile(
+    r"(?:Ã(?=[\x80-\xBFƒÂ])|â(?=[\x80-\xBF€ž™œ])|"
+    r"Â(?=[\x80-\xBF])|ï(?=[\x80-\xBF])|ð(?=[\x80-\xBF]))"
+)
+REPORT_TOKEN_RE = re.compile(r"[^<>\x20\t\r\n\f\v]+")
 
 
 def load_report_asset_text(filename):
@@ -16,6 +23,39 @@ def load_report_asset_text(filename):
 def load_report_asset_data_uri(filename, mime_type):
     encoded = base64.b64encode((ASSETS_DIR / filename).read_bytes()).decode("ascii")
     return f"data:{mime_type};base64,{encoded}"
+
+
+def mojibake_score(value):
+    return len(MOJIBAKE_SEQUENCE_RE.findall(value)) + value.count("�") * 4
+
+
+def repair_mojibake_fragment(value):
+    """Repair UTF-8 text that was accidentally decoded as a legacy code page."""
+    best = value
+    for _ in range(3):
+        repaired = best
+        for encoding in ("cp1252", "latin-1"):
+            try:
+                candidate = best.encode(encoding).decode("utf-8")
+            except (UnicodeEncodeError, UnicodeDecodeError):
+                continue
+            if mojibake_score(candidate) < mojibake_score(repaired):
+                repaired = candidate
+        if repaired == best:
+            break
+        best = repaired
+    return best
+
+
+def repair_report_mojibake(value):
+    """Repair only suspicious fragments, leaving correctly encoded text untouched."""
+    def repair_token(match):
+        token = match.group(0)
+        if not any(marker in token for marker in MOJIBAKE_MARKERS):
+            return token
+        return repair_mojibake_fragment(token)
+
+    return REPORT_TOKEN_RE.sub(repair_token, value)
 
 
 def safe_http_url(value):
@@ -875,4 +915,4 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
     <footer class="audit-footer">Generated from the {html.escape(report_date_display)} Canvas course comparison report.</footer>
 </body>
 </html>"""
-    return report_html
+    return repair_report_mojibake(report_html)
