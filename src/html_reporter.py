@@ -281,7 +281,7 @@ def generate_file_item_html(item):
                 {labels_html}
                 {attribution_badge}
             </div>
-            <span class="file-icon" style="color: var(--text-muted); font-size: 0.8rem;">▼</span>
+            <span class="file-icon" style="color: var(--text-muted); font-size: 0.8rem;">&#9660;</span>
         </div>
     """
     
@@ -397,7 +397,7 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         <div class='course-section accordion' data-designer='{designer}' data-course='{course_name}' data-has-changes='{has_changes_str}' data-link-issues='{has_link_issues}'>
             <div class="accordion-header course-accordion-header" onclick="toggleAccordion(this)">
                 {course_context_html}
-                <div class="course-header-meta">{change_count_html}{link_badge}{impact_badge}<span class="icon">▼</span></div>
+                <div class="course-header-meta">{change_count_html}{link_badge}{impact_badge}<span class="icon">&#9660;</span></div>
             </div>
             <div class="accordion-content">
         """
@@ -464,7 +464,7 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
             <div class="accordion" data-category="{cat_key}">
                 <div class="accordion-header cat-accordion-header" onclick="toggleAccordion(this)">
                     <span>{cat_title} ({len(items)} changes)</span>
-                    <span class="icon">▼</span>
+                    <span class="icon">&#9660;</span>
                 </div>
                 <div class="accordion-content">
                     {category_ai_html}
@@ -591,10 +591,10 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         const icon = header.querySelector('.icon');
         if (content.style.display === 'block') {
             content.style.display = 'none';
-            if(icon) icon.textContent = '▼';
+            if(icon) icon.textContent = '\\u25BC';
         } else {
             content.style.display = 'block';
-            if(icon) icon.textContent = '▲';
+            if(icon) icon.textContent = '\\u25B2';
         }
     }
     
@@ -605,10 +605,10 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
         const icon = header.querySelector('.file-icon');
         if (content.style.display === 'block') {
             content.style.display = 'none';
-            if (icon) icon.textContent = '▼';
+            if (icon) icon.textContent = '\\u25BC';
         } else {
             content.style.display = 'block';
-            if (icon) icon.textContent = '▲';
+            if (icon) icon.textContent = '\\u25B2';
         }
     }
     
@@ -619,11 +619,11 @@ def generate_html_report(year_week: str, courses_data: list, default_designer: s
             const icon = acc.querySelector('.icon');
             if (acc.getAttribute('data-course') === courseName && acc.style.display !== 'none') {
                 content.style.display = 'block';
-                if(icon) icon.textContent = '▲';
+                if(icon) icon.textContent = '\\u25B2';
                 setTimeout(() => acc.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
             } else {
                 content.style.display = 'none';
-                if(icon) icon.textContent = '▼';
+                if(icon) icon.textContent = '\\u25BC';
             }
         });
     }
